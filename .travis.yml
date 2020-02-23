@@ -17,6 +17,6 @@ before_script:
   - "yarn global add firebase-tools"
   - "yarn global add gatsby"
 script:
-  - "gatsby build --prefix-paths && gh-pages -d public"
+  - "gatsby build --prefix-paths"
 after_success:
   - "firebase deploy --token=${FIREBASE_API_TOKEN}"
