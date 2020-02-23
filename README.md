@@ -1,0 +1,1 @@
+https://travis-ci.com/simplestaking/tezedge-docs.svg?token=HTPzADJ3W6zMMkLaJimf&branch=master
