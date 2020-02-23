@@ -1,0 +1,47 @@
+[{
+        "entry": "Docs",
+        "name": "Docs",
+        "child_entries": [
+            "Get Started",
+            "Introduction",
+            "TezEdge"
+        ]
+    },
+    {
+        "entry": "Get Started",
+        "name": "Get Started",
+        "items": [
+            "get-started/quick-start"
+        ]
+    },
+    {
+        "entry": "Introduction",
+        "name": "Introduction",
+        "items": [
+            "introduction/money",
+            "introduction/cryptocurrency",
+            "introduction/proof-of-work",
+            "introduction/forking",
+            "introduction/tezos"
+        ]
+    },
+    {
+        "entry": "TezEdge",
+        "name": "TezEdge",
+        "items": [
+            "tezedge/diversity",
+            "tezedge/synchronization",
+            "tezedge/network",
+            "tezedge/endpoints",
+            "tezedge/explorer",
+            "tezedge/contribution"
+        ]
+    },
+    {
+        "entry": "Blog",
+        "name": "Blog",
+        "items": [
+            "blog/first-blog"
+        ]
+    }
+]

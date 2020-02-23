@@ -1,0 +1,11 @@
+{
+    "hosting": {
+      "site": "tezedge-documentation",
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    }
+  }
