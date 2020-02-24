@@ -25,7 +25,7 @@ In Tezos, synchronization describes the process of a node downloading operations
 
 The protocol is a set of rules that processes operations with the previous state of the blockchain, resulting in the next state. The protocol keeps processing operations and states until it reaches the latest block of operations, resulting in the latest state.
 
-![Image](../../static/images/synchronization_1.gif "Image")
+![Image](../../static/images/synchronization_1.gif "Applying a valid operation")
 
 In Tezos, the latest state is sometimes referred to as the context. We will provide a more detailed explanation of state in a future article.
 
@@ -43,7 +43,7 @@ After Alice has downloaded all of the blocks of operations from her peers, her n
 
 Some operations may be invalidated by the protocol. For instance, in the animation below, there is a transaction in which Alice sends 20 Tezos to Bob. However, the protocol checks the latest state, which reveals that Alice does not have enough in her balance to make the transaction, and thus the protocol invalidates the transaction.
 
-<animation 2>
+![Image](../../static/images/synchronization_2.gif "Attempting to apply an invalid operation")
 
 The synchronization process can be susceptible to errors and interruptions. In our approach to the synchronization process, our primary goal is to improve stability as much as possible. We applied various methods of improving network resiliency to common errors such as incorrect data, network timeouts, downtime and other network issues in general.
 
@@ -58,7 +58,8 @@ You have three options for trying out the synchronization process:
 The most straightforward method is to view it through your internet browser at this address: node.tezedge.com
 Since this is a demo mode, you do not need to run your own node as it is already running. The node is regularly restarted in order to demonstrate the synchronization process.
 
-<animation 3>
+![Image](../../static/images/synchronization_3.gif "Demo of the node's bootstrapping process")
+
 
 **B) Bootstrap your own node via Docker**
 1. Download the repo
