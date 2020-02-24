@@ -32,7 +32,7 @@ This tool is of particular use for developers and security researchers as it all
 
 _In its current early alpha version, users can search by blocks and addresses._
 
-![Image](../../static/images/Explorer1.gif "Image")
+![Image](../../static/images/Explorer1.gif "Searching by blocks and addresses")
 
 _This animation demonstrates searching by smart contract address. It will filter out the actions that are associated with a particular smart contract. The actions are grouped into blocks._
 
@@ -42,7 +42,7 @@ _This search does not contain all actions relevant to a smart contract. To see a
 
 _With each block, you can find out what actions were performed during its application to the protocol. As you can see, there are many different actions occurring within the block. We also record the time needed to execute each action, allowing you to find out if an action (reading or writing) is slow or fast, therefore figuring out whether the performance is good or not._
 
-![Image](../../static/images/Explorer2.gif "Image")
+![Image](../../static/images/Explorer2.gif "Looking inside the block")
 
 _This animation demonstrates searching by block. In this particular case, the block contained a smart contract._
 
