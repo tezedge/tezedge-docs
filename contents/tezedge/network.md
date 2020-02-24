@@ -18,6 +18,7 @@ Let’s say Alice wants to participate in the Tezos network. She’s interested 
 
 1. **Generating a peer’s identity**
 
+![Image](../../static/images/Network1.svg "Generating peer identity")
 
 First, before she can even connect to the P2P layer, Tezos requires new peers to complete a minor proof of work task through which they create an identity for their node. This proof of work task is a countermeasure against adversaries that could otherwise flood the Tezos network with thousands of fake peers (known as a Sybil attack). The proof of work involves the finding of a nonce. This proof of work task is similar (but much less difficult) to what Bitcoin miners solve when they mine new blocks. Once this nonce is discovered, the peer is awarded with a proof_of_work_stamp. Your node’s identity is based on this nonce.
 
@@ -33,7 +34,7 @@ Peers generate the following four types of information after solving the proof o
 
 **2.** **Requesting a list of peers from the DNS**
 
-
+![Image](../../static/images/Network2.svg "Requesting a list of peers")
 
 Alice now connects into the Tezos P2P network. Now she’ll need to figure out which peers to connect to. She requests a list of peers from a DNS server, which then delivers a peer list that contains the IP addresses of peers to whom Alice can connect. Although there can potentially be millions of peers in the Tezos network, she only connects to a few at a time. If necessary, Alice can later expand her peer list by requesting other peers for their peer lists.
 
@@ -41,8 +42,7 @@ Now having figured who she will connect to, Alice must establish a trusted conne
 
 **3. The handshake**
 
-
-
+![Image](../../static/images/Network3.svg "Handshaking")
 
 Let’s say Alice wants to handshake Bob. Before the handshake starts, Alice generates a nonce (unrelated to the nonce from step 1) that serves as a counter for messages sent to Bob. Similarly, Bob generates a nonce that counts messages he sends to Alice. Then Alice and Bob exchange their proof of work stamps, public keys, nonces, listener ports and lists of versions.
 
@@ -66,6 +66,7 @@ Now they exchange the first encrypted message that contains metadata. After that
 
 If Alice receives Ack from Bob and vice versa, the handshake is successful and now they are ready to start exchanging encrypted messages.
 
+![Image](../../static/images/Network4.svg "Creating a network of trusted peers")
 
 Alice repeats this process with other peers until she has established a trusted connection with a sufficient number of peers. Although she has a trusted connection with only a certain amount of peers, she is indirectly connected to the entire Tezos distributed network, as pictured in the animation above.
 
@@ -87,7 +88,7 @@ When the channel is formed, the peers exchange other types of messages, includin
 1. **Requesting and downloading the headers**
 
 
-
+![Image](../../static/images/Network5.svg "Downloading the headers")
 
 
 
@@ -116,6 +117,7 @@ Consider the fact that Alice doesn’t know which block is the latest. This mean
 **2. Downloading operations and completing the blocks**
 
 
+![Image](../../static/images/Network6.svg "Downloading the block contents")
 
 
 
