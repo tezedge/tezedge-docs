@@ -46,7 +46,7 @@ _With each block, you can find out what actions were performed during its applic
 
 _This animation demonstrates searching by block. In this particular case, the block contained a smart contract._
 
-_Of particular interest is how the smart contract interacts with _BigMaps_. The BigMap container is a special map whose storage is only read or written per key on demand. They can be used as storage for addresses and their balances in smart contracts that operate in security token offerings (STOs)._
+_Of particular interest is how the smart contract interacts with BigMaps. The BigMap container is a special map whose storage is only read or written per key on demand. They can be used as storage for addresses and their balances in smart contracts that operate in security token offerings (STOs)._
 
 _In the future, we will add more search categories. In later articles, we will cover more types of actions that are performed within the block._
 
