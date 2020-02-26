@@ -7,8 +7,8 @@ showTitle: false
 Quick Start
 ===========
 
-The purpose of this project is to implement a secure, trustworthy, open-source Tezos node in Rust.
-In addition to implementing a new node, the project seeks to maintain and improve the Tezos node wherever possible. 
+The purpose of the TezEdge project is to create a secure, trustworthy, open-source Tezos node written in Rust.
+In addition to creating a new node, TezEdge also seeks to maintain and improve the Tezos node wherever possible. 
 
 Docker  
 ------------
@@ -49,7 +49,7 @@ sudo apt install clang libclang-dev llvm llvm-dev linux-kernel-headers libev-dev
 
 **4. Supported Linux distributions**
 
-We are linking rust code with pre-compiled Tezos shared library. For your convenience we have created pre-compiled binary files
+We are linking rust code with pre-compiled Tezos shared library. For your convenience, we have created pre-compiled binary files
 for most of the popular linux distributions:
 
 supported linux distributions:
@@ -58,12 +58,12 @@ supported linux distributions:
 * OpenSUSE ( 15.1, 15.2 ) 
 * CentOS ( 6, 7, 8 )
     
-If you are missing support for your favorite linux distribution on a poll request at [tezos-opam-builder](https://github.com/simplestaking/tezos-opam-builder) project.
+If you are missing support for your favorite linux distribution, submit a on a poll request at [tezos-opam-builder](https://github.com/simplestaking/tezos-opam-builder) project.
 
 Running the node
 ------------
 
-**5. Running Tezedge node manually** 
+**5. Running the TezEdge node manually** 
 
 The node can built through the `cargo build` or `cargo build --release`, be aware, release build can take 
 much longer to compile. environment variable `SODIUM_USE_PKG_CONFIG=1` mus be set. Put together, node can be build, for example, like this:
@@ -87,10 +87,10 @@ Full description of all arguments is in the light_node [README](light_node/READM
 
 
 
-**6. Running Tezedge node using run.sh script** 
+**6. Running the TezEdge node using run.sh script** 
 
-On linux systems, we prepared convenience script to run the node. It will automatically set all necessary environmnent variables, build and run tezedge node. 
-All arguments can be provided to the `run.sh` script in the same manner as described in the previous section - Running Tezedge node manually.
+On linux systems, we prepared convenience script to run the node. It will automatically set all necessary environmnent variables, build and run the TezEdge node. 
+All arguments can be provided to the `run.sh` script in the same manner as described in the previous section - Running the TezEdge node manually.
 
 The following command will execute node in debug node:
 
