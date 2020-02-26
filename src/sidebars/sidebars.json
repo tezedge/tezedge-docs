@@ -30,6 +30,7 @@
         "name": "TezEdge",
         "items": [
             "tezedge/diversity",
+            "tezedge/architecture",
             "tezedge/synchronization",
             "tezedge/network",
             "tezedge/endpoints",

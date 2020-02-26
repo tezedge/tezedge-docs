@@ -74,7 +74,13 @@ module.exports = {
               ignoreFileExtensions: [],
             },
           },
-
+          {
+            resolve: 'gatsby-remark-mermaid',
+            options: {
+                language: 'mermaid',
+                theme: 'neutral'
+            }
+         }
         ],
       },
     },
