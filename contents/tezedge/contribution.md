@@ -22,7 +22,7 @@ Additionally, there will be certain financial rewards (bounties) for all types o
 
 To get a grasp of what our project is about, visit our GitHub repository where you can view the Tezos onboarding document as well as a readme file about our project. We will be expanding these sections as we progress. 
 
-We do not require all contributors to be expert coders in Rust, but everyone who wishes to participate should first read the Readme.md for an introduction to our project and the Contribution.md (this document) to understand what assistance we are looking for.
+We do not require all contributors to be expert coders in Rust, but everyone who wishes to participate should first read the README.md for an introduction to our project and the contribution.md (this document) to understand what assistance we are looking for.
 
 
 
