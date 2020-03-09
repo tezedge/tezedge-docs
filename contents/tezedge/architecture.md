@@ -6,8 +6,6 @@ showTitle: false
 
 # Architecture
 
-This document describes the high level architecture of the TezEdge node.
-
 Increasing the complexity of software will always increase the likelihood of an error occurring. This holds true not just for coding, but also in a general sense—complex systems have a great number of moving parts, many of which also need communicate with one another. A fault in any part, or in the connection between them, may cause an error. If such an error is not contained, it may spread and lead to a system-wide failure.
 
 Diligent coding and regular revisions can only get you so far. Even the best software will eventually run into an error. A Swiss train can similarly be dilligently prepared to run on schedule, but an unforeseen circumstance may cause it to be delayed. However, the question isn’t whether we can *always* prevent an error or a delay—we know it is impossible. Rather, the questions are: what can we do to contain the problem and minimize its effects on the service that is provided? 
@@ -50,7 +48,9 @@ When an actor receives a message, it can do the following actions:
 
 # The shell and its actors
 
-The TezEdge shell consists of several actors working together.
+This section of the document describes the high level architecture of the TezEdge node.
+
+The TezEdge shell consists of several actors working together:
 
 **Peer Manager**
 
