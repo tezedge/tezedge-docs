@@ -48,7 +48,7 @@ When an actor receives a message, it can do the following actions:
 * Send messages to other actors
 * Determine what to do with the next message
 
-# Actors in the TezEdge shell
+# The shell and its actors
 
 The TezEdge shell consists of several actors working together.
 
