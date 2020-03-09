@@ -100,3 +100,26 @@ sequenceDiagram
   Protocol runner->>+Chain manager: Block applied
   Protocol runner-->>-Context listener: Context events
 ```
+
+**RPC**
+ 
+The RPC is relatively simple more or less standardized. We currently have the same number of functional endpoints as the original Tezos node. 
+ 
+The REST endpoint is a technically standardized method of calling various web operations.
+It is exposed (for instance, ```chains/main/blocks/{block_id}``` where ```{block_id}``` is the parameter of the endpoint). 
+ 
+The user can call the endpoint from their application or browser by adding the endpoint address. For instance, if the node is running locally and the RPC is at ```port  18732```, the user can all this RPC by entering the entire address as such: ```localhost:18732/chains/main/blocks/head```
+ 
+The node first sparses the endpoint, checking whether it is valid or not. It then extracts the arguments from it (this is known as routing). This launches a mapped function within the node. We recognize two categories of endpoints:
+
+**1. Endpoints that read data**
+
+Based on the arguments, the endpoint figures out which part of the database it is supposed to read from. The data is read, then serialized into a JSON format and returned as the result of the function. 
+ 
+For instance with ```chains/main/blocks/head```, we know that the user is requesting the database for data about blocks, therefore we know where to read from and we also know that the block head is a special value for the block at the highest level.
+
+**2. Endpoints that interact with the system**
+
+Since these endpoints interact with the system itself, we expect them to influence the node.
+ 
+For instance, the endpoint ```/network/peers/<peer_id>/ban``` informs the node that it should disconnect from a peer and cease connecting to them. Since the node is operating on the actor model, it is necessary to use ask pattern which is a method of communicating with the external actors. In this case, the network manager (an actor in charge of peer connections) is requested to disconnect a peer with the specified id and place them on a blacklist. Note that we are currently working on implementing these endpoints. 
