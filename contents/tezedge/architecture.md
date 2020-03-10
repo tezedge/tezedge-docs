@@ -6,13 +6,17 @@ showTitle: false
 
 # Architecture
 
+**Introduction**
+
+This section of the document describes the values of the TezEdge node's architecture.
+
 Increasing the complexity of software will always increase the likelihood of an error occurring. This holds true not just for coding, but also in a general sense—complex systems have a great number of moving parts, many of which also need communicate with one another. A fault in any part, or in the connection between them, may cause an error. If such an error is not contained, it may spread and lead to a system-wide failure.
 
-Diligent coding and regular revisions can only get you so far. Even the best software will eventually run into an error. A Swiss train can similarly be dilligently prepared to run on schedule, but an unforeseen circumstance may cause it to be delayed. However, the question isn’t whether we can *always* prevent an error or a delay—we know it is impossible. Rather, the questions are: what can we do to contain the problem and minimize its effects on the service that is provided? 
+Diligent coding and regular revisions can only get you so far. Even the best software will eventually run into an error. A Swiss train can similarly be painstakingly prepared to run on schedule, but a single unforeseen circumstance may cause it to be delayed. However, the question isn’t whether we can *always* prevent an error or a delay—the innate randomness of the external world makes this impossible. Rather, the question is: what can we do to contain the problem and minimize its effects on the service that is provided? 
 
 **Fault tolerance**
 
-A fault-tolerant system behaves in a reasonable manner in the presence of errors. The advantage of a fault-tolerant system is that the service will continue to be provided even when it runs into an error. 
+A fault-tolerant system behaves in a reasonable manner in the presence of errors. The advantage of a fault-tolerant system is that the service will continue to be provided even when it runs into a problem. 
 
 This is achieved by establishing a hierarchy of tasks:
 
