@@ -72,6 +72,18 @@ start to accept messages from the connected remote peer. The same peer is also u
 
 Messages from peer manager are cryptographically validated and then sent up to the shell.
 
+
+**P2P layer**
+
+This layer is used for communication between two nodes on the network. The communication begins with both nodes sending a bootstrapping message to the other, therefore exchanging information such as their keys, cryptographic nonces and the version of the P2P protocol.
+
+This part of communication is still unencrypted. Encryption of messages starts from the moment both nodes have received and accepted the bootstrap messages.
+
+In case one node does not accept the bootstrap node sent to it by the other node, it will send a 'Nack' message and the communication will end.
+
+Once communication is encrypted, the nodes begin sending messages containing blocks and their operations. The chain is synchronized via these messages. A node that does not have a fully synced chain requests information from other nodes in the network, but it can also provide blocks and operations it already has to the other nodes in the network.
+
+
 **Chain Manager**
 
 The chain manager is responsible for chain synchronization.
@@ -123,13 +135,3 @@ For instance with ```chains/main/blocks/head```, we know that the user is reques
 Since these endpoints interact with the system itself, we expect them to influence the node.
  
 For instance, the endpoint ```/network/peers/<peer_id>/ban``` informs the node that it should disconnect from a peer and cease connecting to them. Since the node is operating on the actor model, it is necessary to use ask pattern which is a method of communicating with the external actors. In this case, the network manager (an actor in charge of peer connections) is requested to disconnect a peer with the specified id and place them on a blacklist. Note that we are currently working on implementing these endpoints. 
-
-**P2P layer**
-
-This layer is used for communication between two nodes on the network. The communication begins with both nodes sending a bootstrapping message to the other, therefore exchanging information such as their keys, cryptographic nonces and the version of the P2P protocol.
-
-This part of communication is still unencrypted. Encryption of messages starts from the moment both nodes have received and accepted the bootstrap messages.
-
-In case one node does not accept the bootstrap node sent to it by the other node, it will send a 'Nack' message and the communication will end.
-
-Once communication is encrypted, the nodes begin sending messages containing blocks and their operations. The chain is synchronized via these messages. A node that does not have a fully synced chain requests information from other nodes in the network, but it can also provide blocks and operations it already has to the other nodes in the network.
