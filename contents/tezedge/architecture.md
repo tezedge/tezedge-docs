@@ -33,7 +33,7 @@ Fault-tolerance is achieved by establishing a hierarchy of tasks:
 
 Unlike C and C++, Rust does not allow a program to be run if its code will cause unpredictable actions, also known as undefined behavior. The Rust compiler detects code that causes undefined behavior and prevents the program from being launched. 
 
-The only exception to this prevention of undefined behavior happens the code is tagged unsafe. Since the Rust-based TezEdge node communicates with the native OCaml Tezos node, there are areas in which undefined behavior will happen.
+The only exception to this prevention of undefined behavior happens the code is tagged ```unsafe```. Since the Rust-based TezEdge node communicates with the native OCaml Tezos node, there are areas where we had to use unsafe code to implement FFI calls between Rust and OCaml. To avoid possible memory related errors we are passing all data into FFI functions by value, not by reference. That way, we don’t have to deal with cross FFI lifetimes.
 
 **Unwinding**
 
