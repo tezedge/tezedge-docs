@@ -18,10 +18,33 @@ Diligent coding and regular revisions can only get you so far. Even the best sof
 
 A fault-tolerant system behaves in a reasonable manner in the presence of errors. The advantage of a fault-tolerant system is that the service will continue to be provided even when it runs into a problem. 
 
-This is achieved by establishing a hierarchy of tasks:
+TezEdge must be a fault-tolerant system because, as a node shell, it provides an essential service to users with a stake in the Tezos blockchain. 
+
+Since there are significant finances at stake, security is paramount to our interests. We primarily seek to minimize the software’s vulnerability, specifically, to prevent malicious parties from exploiting errors to hack the system, e.g. validate false transactions.
+
+As the TezEdge node provides an essential service to users with a stake in the Tezos blockchain, our secondary objective is to maintain the service and continue providing it even if the node runs into problems. However, the provision of service should never be prioritized over the node’s security.
+
+Fault-tolerance is achieved by establishing a hierarchy of tasks:
 
 * Upper level tasks maintain the system, without them, the application will not run. 
 * Lower level tasks are done to improve performance, which means that even if they are not performed, the system will continue working, although service may be limited.
+
+**Undefined behavior**
+
+Unlike C and C++, Rust does not allow a program to be run if its code will cause unpredictable actions, also known as undefined behavior. The Rust compiler detects code that causes undefined behavior and prevents the program from being launched. 
+
+The only exception to this prevention of undefined behavior happens the code is tagged unsafe. Since the Rust-based TezEdge node communicates with the native OCaml Tezos node, there are areas in which undefined behavior will happen.
+
+**Unwinding**
+
+The process by which Rust handles errors is known as unwinding. In case a Rust program runs into an error, it has a tiered set of solutions:
+
+**1. Option** is used in case there is a reasonable absence of a value or information.
+**2. Result** is used if something goes wrong, but can be reasonably handled.
+**3. Panic** is used if the the problem cannot be reasonably handled.
+**4. Abort** is used if something catastrophic happens and the program must terminate immediately.
+
+This set of solutions is aimed at preventing, handling and containing errors. When errors do happen, Rust will first figure out how serious they are and then apply a solution. This helps maintain the service even in the presence of some errors, but will ultimately abort the program if there is a catastrophic fault. 
 
 If an error is detected when trying to achieve a goal, we make an attempt to correct the error. If we cannot correct the error we immediately abort the current task and start performing a simpler task.
 
