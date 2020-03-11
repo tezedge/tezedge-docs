@@ -6,9 +6,17 @@ showTitle: false
 
 # Architecture
 
-**Introduction**
-
 This section of the document describes the values of the TezEdge node's architecture.
+
+**Security and reliability**
+
+The TezEdge node must constitute a security and reliable system as it provides an essential service to the global community of Tezos stakeholders.
+
+Since there are significant finances at stake, security is paramount to our interests. We primarily seek to minimize the node’s vulnerability, specifically, to prevent malicious parties from exploiting errors to hack the system, e.g. validate false transactions.
+
+As the TezEdge node provides an essential service for Tezos stakeholders, our secondary objective is to maintain the service and continue providing it even if the node runs into problems. However, the provision of service should never be prioritized over the node’s security.
+
+**Increasing complexity**
 
 Increasing the complexity of software will always increase the likelihood of an error occurring. This holds true not just for coding, but also in a general sense—complex systems have a great number of moving parts, many of which also need communicate with one another. A fault in any part, or in the connection between them, may cause an error. If such an error is not contained, it may spread and lead to a system-wide failure.
 
@@ -17,12 +25,6 @@ Diligent coding and regular revisions can only get you so far. Even the best sof
 **Fault tolerance**
 
 A fault-tolerant system behaves in a reasonable manner in the presence of errors. The advantage of a fault-tolerant system is that the service will continue to be provided even when it runs into a problem. 
-
-TezEdge must be a fault-tolerant system because, as a node shell, it provides an essential service to users with a stake in the Tezos blockchain. 
-
-Since there are significant finances at stake, security is paramount to our interests. We primarily seek to minimize the software’s vulnerability, specifically, to prevent malicious parties from exploiting errors to hack the system, e.g. validate false transactions.
-
-As the TezEdge node provides an essential service to users with a stake in the Tezos blockchain, our secondary objective is to maintain the service and continue providing it even if the node runs into problems. However, the provision of service should never be prioritized over the node’s security.
 
 Fault-tolerance is achieved by establishing a hierarchy of tasks:
 
