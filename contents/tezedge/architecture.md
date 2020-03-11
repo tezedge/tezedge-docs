@@ -12,7 +12,7 @@ This section of the document describes the values of the TezEdge node's architec
 
 Increasing the complexity of software will always increase the likelihood of an error occurring. This holds true not just for coding, but also in a general sense—complex systems have a great number of moving parts, many of which also need communicate with one another. A fault in any part, or in the connection between them, may cause an error. If such an error is not contained, it may spread and lead to a system-wide failure.
 
-Diligent coding and regular revisions can only get you so far. Even the best software will eventually run into an error. A Swiss train can similarly be painstakingly prepared to run on schedule, but a single unforeseen circumstance may cause it to be delayed. However, the question isn’t whether we can *always* prevent an error or a delay—the innate randomness of the external world makes this impossible. Rather, the question is: what can we do to contain the problem and minimize its effects on the service that is provided? 
+Diligent coding and regular revisions can only get you so far. Even the best software will eventually run into an error. However, the question isn’t whether we can *always* prevent an error—the innate randomness of the external world makes this impossible. Rather, the question is: what can we do to contain the problem and minimize its effects on the service that is provided? 
 
 **Fault tolerance**
 
