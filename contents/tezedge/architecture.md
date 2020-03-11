@@ -40,8 +40,11 @@ The only exception to this prevention of undefined behavior happens the code is 
 The process by which Rust handles errors is known as unwinding. In case a Rust program runs into an error, it has a tiered set of solutions:
 
 **1. Option** is used in case there is a reasonable absence of a value or information.
+
 **2. Result** is used if something goes wrong, but can be reasonably handled.
+
 **3. Panic** is used if the the problem cannot be reasonably handled.
+
 **4. Abort** is used if something catastrophic happens and the program must terminate immediately.
 
 This set of solutions is aimed at preventing, handling and containing errors. When errors do happen, Rust will first figure out how serious they are and then apply a solution. This helps maintain the service even in the presence of some errors, but will ultimately abort the program if there is a catastrophic fault. 
