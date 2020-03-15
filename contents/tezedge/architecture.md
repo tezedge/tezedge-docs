@@ -16,7 +16,7 @@ Since there are significant finances at stake, security is paramount to our inte
 
 As the TezEdge node provides an essential service for Tezos stakeholders, our secondary objective is to maintain the service and continue providing it even if the node runs into problems. However, the provision of service should never be prioritized over the node’s security.
 
-**Handling errors**
+**Dealing with errors**
 
 Increasing the complexity of software will always increase the likelihood of an error occurring. This holds true not just for coding, but also in a general sense—complex systems have a great number of moving parts, many of which also need communicate with one another. A fault in any part, or in the connection between them, may cause an error. If such an error is not contained, it may spread and lead to a system-wide failure.
 
