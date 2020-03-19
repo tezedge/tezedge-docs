@@ -9,7 +9,9 @@ Quick start
 
 **Pre-requisites**
 
-* Download the GitHub repository 
+* Our GitHub repository 
+
+* Docker
 
 ```cd docker```
 
