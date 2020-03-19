@@ -7,6 +7,12 @@ showTitle: false
 Quick start
 ------------
 
+**Pre-requisites**
+
+* Download the GitHub repository 
+
+```cd docker```
+
 **1. Download and install Docker and Docker Compose**
 
 Open shell and type this code into the command line and then press Enter:
