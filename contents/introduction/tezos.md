@@ -49,7 +49,8 @@ Tezos allows token holders to transfer (“delegate”) validation rights to oth
 *   Another baker comes in and creates a block, repeated until the end of the cycle
 *   For robustness, once a baker create a block they will want to prove that they created it, malicious players do not want to claim the creation of a block.
 *   32 stakeholders are randomly selected (select 32 token values and look up who owns them), these are going to get endorsement rights and are known as endorsers.
-*   Whenever a baker creates a block, there are endorsers waiting to see who made the block and approve it. They sign the block (submit signatures), creating a new block and the process is repeated.
+*   Whenever a baker creates a block, there are endorsers waiting to see who made the block and approve it. Once the block is created by the bakers, the endorsers sign the block (submit signatures), and the process is repeated.
+*   A baker receives a reward that is proportional to the amount of endorsements included in the created block.
 
 **Generating randomness** 
 
@@ -63,7 +64,7 @@ Tezos uses a *commit reveal scheme* to generate entropy. Different people commit
 
 Baker and endorsers have to place safety deposits. This is done in order to discourage equivocation (when someone creates two blocks at the same height), since Tezos wants people to commit to one version.
 
-Before a baker creates a block, they make a deposit. Then the baker creates the block and if anyone (particularly endorsers) see that they created two blocks at the same height, they can report this and the baker will lose their deposit. 
+Bakers have to pay a deposit when creating a block. Once the baker creates a block, other users can see whether they created two blocks at the same height. Users can report this, and if the accusations are true, the baker will lose their deposit. Accusers must check all chains and look out for double bakings or double endorsements.
 
 The safety deposits ensure that anyone is who is participating in the system (producing blocks, endorsing) is actually holding tokens and, in some sense, has the network’s best interests at heart. 
 
@@ -91,7 +92,7 @@ The safety deposits ensure that anyone is who is participating in the system (pr
 
 *   **No finality**
 
-    It is impossible to know whether a transaction has been permanently included in the ledger. Perhaps somebody has come up with a longer chain, or a better chain. Statistically, it is likely that a user's version of the chain will change.
+    It is impossible to know whether a transaction has been permanently included in the ledger. It is possible that someone has come up with a longer chain, or a better chain. Statistically, it is likely that a user's version of the chain will change. However, finality may be introduced in a future protocol update.
 
 *   **Synchronicity assumption**
 
@@ -151,7 +152,7 @@ Michelson is the programming language used to write smart contracts on the Tezos
 
 Michelson is a strongly-typed, stack-based language with high level primitives and strict static type checking. The types of Michelson are composable, so complex data can be annotated by one large type. 
 
-Michelson does not contain features such as polymorphism, closures, or named functions. A high-level programming called Liquidity can be written and compiled to the Michelson programming language. Developers can prove properties in their smart contracts through a formal verification process.  A Michelson program is a series of instructions that are run in sequence: each instruction receives the stack resulting of the previous instruction as an input, and then rewrites it for the next instruction. The stack contains both immediate values and heap allocated structures. All values are immutable and garbage collected. 
+Michelson does not contain features such as polymorphism, closures, or named functions. High-level programming languages such as Ligo or SmartPy can be written and compiled to the Michelson programming language. Developers can prove properties in their smart contracts through a formal verification process.  A Michelson program is a series of instructions that are run in sequence: each instruction receives the stack resulting of the previous instruction as an input, and then rewrites it for the next instruction. The stack contains both immediate values and heap allocated structures. All values are immutable and garbage collected. 
 
 A Michelson program receives as input a stack containing a single pair whose first element is an input value and second element the content of a storage space. It must return a stack containing a single pair:
 
@@ -166,4 +167,4 @@ The types of the input, output and storage are fixed and monomorphic, and the pr
 
 This specification gives the complete instruction set, type system and semantics of the language. It is meant as a precise reference manual, not an easy introduction. Even though, some examples are provided at the end of the document and can be read first or at the same time as the specification.
 
-The Michelson programming language is unlike any other and it is almost like a virtual machine’s operation code. Although it is possible to hand-type Michelson, it is not necessary. Instead, simply write in a high-level programming language (such as Liquidity or fi) that compiles into Michelson.
+The Michelson programming language is unlike any other and it is almost like a virtual machine’s operation code. Although it is possible to hand-type Michelson, it is not necessary. Instead, simply write in a high-level programming language (such as Ligo, SmartPy or fi) that compiles into Michelson.
