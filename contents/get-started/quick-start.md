@@ -13,14 +13,13 @@ Quick start
 
 * Docker
 
-**Enter this into the Linux command line:**
+Open shell and type this code into the command line and then press Enter:
 
-```git clone https://github.com/simplestaking/tezedge```
-
-```cd tezedge```
-
-```cd docker```
-
+```
+git clone https://github.com/simplestaking/tezedge
+cd tezedge
+cd docker
+```
 
 **1. Download and install Docker and Docker Compose**
 
