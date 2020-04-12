@@ -21,17 +21,17 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `chain_id`        |  |
-| `block_id`        |  |  
-| `cycle_id`        |  |  
+| `chain_id` *string* | Description |
+| `block_id` *string* | Description |  
+| `cycle_id` *string* | Description |  
 
 
 *Response:*
 
-| Field                |                  Description                           |
-|----------------------|--------------------------------------------------------|
-| `roll_snapshot`      |  A randomly selected snapshot for the requested cycle  |
-| `random_seed`        |  Athe 32 byte seed generated from the committed nonces |  
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `roll_snapshot` *string* |  A randomly selected snapshot for the requested cycle  |
+| `random_seed` *string* |  Athe 32 byte seed generated from the committed nonces |  
 
 &nbsp;
 &nbsp;

@@ -726,3 +726,22 @@ pre tt:after {
     font-size: 100%;
   }
 } */
+
+td code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+    font-size: 1em !important;
+    color: black !important;
+    padding: 5px;
+}
+
+td em { 
+    margin-left: 5px;
+}
+
+code .token.property{
+    color: black !important;
+}
+
+code .token.operator{
+    background: none !important;
+}
