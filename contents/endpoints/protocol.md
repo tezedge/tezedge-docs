@@ -69,14 +69,25 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/bytes/cy
 }
 ```
 
+## Endorsing Rights
 
-*Description:*
+Returns the endorsing rights for a level. The default behavior is to return the rights for the provided block_id.
+
+&nbsp;
+
+*Request:*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)
 ```  
-Returns the endorsing rights for a level. The default behavior is to return the rights for the provided block_id.
- 
+
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `chain_id` *string* | Id of the requested chain |
+| `block_id` *string* | Requested block Id |  
+
+
 *Optional query arguments:*
 
 | Field             |                  Description                           |
@@ -94,5 +105,17 @@ Returns the endorsing rights for a level. The default behavior is to return the 
 | `slots` *int32* | List of all the endorsing slots the delegate is meant to fill | 
 
 
+*Example Request:*
 
 
+```bash
+Example call goes here
+```
+
+*Example Response:*
+
+```JSON
+{
+    "example": "example"
+}
+```
