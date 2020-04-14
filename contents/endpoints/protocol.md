@@ -40,7 +40,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 
 
 ```bash
-curl http://tezedge.com/chains/main/blocks/head/context/raw/json/cycle/10
+curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/bytes/cycle
 ```
 
 *Example Response:*
