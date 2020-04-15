@@ -592,7 +592,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `max_block_header_length` *i31* | 
 | `max_operation_list_length` *i31* |
 | `baker` *string* | Base58Check encoded private key hash of the baker (tz1...). |
-| `level` [*level*](#level) | Structure encapsulating information about the position of the block in the blockchain. |
+| `level` | [Level](#level) |
 | `voting_period_kind` *string* | The voting period the block was baked in. |
 | `nonce_hash` *string* | Base58Check encoded nonce hash. Returns null, if nonce_hash is not present. |
 | `consumed_gas` *BigInt* | Total gas consumed by creating the block and including it in the blockchain. |
@@ -609,7 +609,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `chain_id` *string* | Base58Check encoded chain id of the chain the operation was executed on. |
 | `hash` *string* | Base58Check encoded operation hash. |
 | `branch` *string* | Base58Check encoded block hash of a branch root block. | 
-| `contents` | [Operation content](#operationContents) or [OperationContentsAndResult](#operationContentsAndResult) |
+| `contents` | [Operation contents](#operation-contents) or [Operation Contents And Result](#operation-contents-and-result) |
 | `signature` *string* | Base58Check encoded signature of the operation. |
 
 
@@ -638,6 +638,8 @@ The next fields are dependant on the `status` field.
 | `genesis` *string* | Base58Check encoded block hash of the genesis block on the test chain. |
 
 #### Level
+Structure encapsulating information about the position of the block in the blockchain.
+
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `level` *i32* | Block level. |
@@ -665,11 +667,12 @@ The next fields are dependant on the `kind` field.
 | `delegate  ` *string* | Base58Check encoded private key hash of the delegate whose balance was changed. |
 | `cycle` *i32* | The cycle the balance is frozen for. | <!-- check grammar pls -->
 
-#### OperationContents
+#### Operation Contents
 The contents of the executed operations.
+
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `kind` *string* | The type or “kind” of the operation. |
+| `kind` *string* | The type or kind of the operation. |
 
 The next fields are dependant on the `kind` field.
 
@@ -769,10 +772,10 @@ The next fields are dependant on the *kind* field.
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `branch` *string* | Base58Check encoded block hash of a branch root block. | 
-| `operations` | [EndorsementOperation](#endorsementOperation) |
+| `operations` | [Endorsement Operation](#endorsement-operation) |
 | `signature` |  Base58Check encoded signature of the operation. |
 
-#### EndorsementOperation
+#### Endorsement Operation
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `kind` *string* | The type or “kind” of the operation. |
@@ -780,26 +783,26 @@ The next fields are dependant on the *kind* field.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### OperationContentsAndResult
-The contents and results of the executed operations. Same fields as in OperationContents above with and additional metadata field
+#### Operation Contents And Result
+The contents and results of the executed operations. Same fields as in Operation Contents above with and additional metadata field
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `metadata` | [OperationContentsAndResult Metadata](#operationContentsAndResult-metadata) |
+| `metadata` | [Operation Contents And Result Metadata](#operation-contents-and-result-metadata) |
 
-#### OperationContentsAndResult Metadata
+#### Operation Contents And Result Metadata
 Contains metadata about the operation.
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `balance_updates` (Balance_update) | Updates to the contract’s balance that happened in the operation. |
-| `operation_result` | [RevealResult](#revealResult) or [TransactionResult](#transactionResult) or [OriginationResult](#originationResult) or [DelegationResult](#delegationResult) |
-| `internal_operation_result` | [InternalOperationResult](#internalOperationResult) |
+| `operation_result` | [Reveal Result](#reveal-result) or [Transaction Result](#transaction-result) or [Origination Result]() or [Delegation Result](#delegation-result) |
+| `internal_operation_result` | [Internal Operation Result](#internal-operation-result) |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
 
-#### InternalOperationResult
+#### Internal Operation Result
 
 Result of an internal operation.
 
@@ -815,7 +818,7 @@ The next fields are dependant on the `kind` field.
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `public_key` *string* |  Base58Check encoded public key of the revealing account. |
-| `result` | [RevealResult](#revealResult) |
+| `result` | [Reveal Result](#reveal-result) |
 
 ##### Transaction
 | Field             |                  Description                           |
@@ -823,7 +826,7 @@ The next fields are dependant on the `kind` field.
 | `amount` *BigInt* | The amount of tokens transferred. |
 | `destination` *string* | Base58Check encoded public key hash of the transaction receiver. |
 | `parameters` *PARAM* | Optional parameters for smart contract calls. |
-| `result` | [TransactionResult](#transactionResult) |
+| `result` | [Transaction Result](#transaction-result) |
 
 ##### Origination
 | Field             |                  Description                           |
@@ -831,17 +834,17 @@ The next fields are dependant on the `kind` field.
 | `balance` *BigInt* | Mutez to give the originated account (contract). |
 | `delegate` *string* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
 | `script` *string* |  Hex string encoded michelson script. |
-| `result` | [OriginationResult](#originationResult) |
+| `result` | [Origination Result](#origination-result) |
 
 ##### Delegation
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
-| `result` | [DelegationResult](#delegationResult) |
+| `result` | [Delegation Result](#delegation-result) |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### RevealResult
+#### Reveal Result
 Result of the reveal operation.
 
 | Field             |                  Description                           |
@@ -869,7 +872,7 @@ The next fields are dependant on the *status* field.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### DelegationResult
+#### Delegation Result
 Result of the delegation operation.
 
 | Field             |                  Description                           |
@@ -896,7 +899,7 @@ The next fields are dependant on the *status* field.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### TransactionResult
+#### Transaction Result
 Result of the transaction operation.
 
 | Field             |                  Description                           |
@@ -910,7 +913,7 @@ The next fields are dependant on the *status* field.
 |-------------------|--------------------------------------------------------
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
 | `storage` *string* | Micheline expression. |
-| `big_map_diff` | [BigMapDiff](#bigMapDiff) |
+| `big_map_diff` | [Big Map Diff](#big-map-diff) |
 | `balance_updates` | [Balance update](#balance-update) |
 | `originated_contracts` *string* | Originated contracts. |
 | `consumed_gas` *BigInt* | The amount of gas the operation consumed. |
@@ -929,7 +932,7 @@ The next fields are dependant on the *status* field.
 | `errors` *error* | List of errors. |
 | `consumed_gas` *BigInt* | The amount of gas the operation consumed. |
 | `storage` *string* | Micheline expression. |
-| `big_map_diff` | [BigMapDiff](#bigMapDiff) |
+| `big_map_diff` | [Big Map Diff](#big-map-diff) |
 | `balance_updates` | [Balance update](#balance-update) |
 | `originated_contracts` *string* | Originated contracts. |
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
@@ -939,7 +942,7 @@ The next fields are dependant on the *status* field.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### OriginationResult
+#### Origination Result
 Result of the origination operation.
 
 | Field             |                  Description                           |
@@ -952,7 +955,7 @@ The next fields are dependant on the `status` field.
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `big_map_diff` | [BigMapDiff](#bigMapDiff) |
+| `big_map_diff` | [Big Map Diff](#big-map-diff) |
 | `balance_updates` | [Balance update](#balance-update) |
 | `originated_contracts` *string* | Originated contracts. |
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
@@ -971,7 +974,7 @@ The next fields are dependant on the `status` field.
 |-------------------|--------------------------------------------------------|
 | `errors` *error* | list of errors. |
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `big_map_diff` *BigMapDiff* | Difference in big_map after the applied operation. |
+| `big_map_diff` | [Big Map Diff](#big-map-diff) |
 | `balance_updates` | [Balance update](#balance-update) |
 | `originated_contracts` *string* | Originated contracts. |
 | `consumed_gas` *BigInt* | The amount of gas the operation consumed. |
@@ -980,7 +983,7 @@ The next fields are dependant on the `status` field.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### BigMapDiff
+#### Big Map Diff
 List of the actions executed over the big map
 
 | Field             |                  Description                           |
