@@ -414,6 +414,11 @@ Retrieves the block header for the requested block_id
 GET /chains/<chain_id>/blocks/<block_id>/header
 ```
 
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `chain_id` *string* | Id of the requested chain |
+| `block_id` *string* | Requested block Id |  
+
 *Response*
 
 | Field             |                  Description                           |
@@ -432,6 +437,7 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 | `signature` *string* | Base58Check encoded digital signature of the shell and protocol headers. |
 | `priority` *u16* | The baking priority of the delegate who baked the block. |
 | `proof_of_work_nonce` *i64* | Nonce used to pass a low-difficulty PoW task for the block. |
+
 
 
 *Example Request:*
@@ -528,3 +534,73 @@ curl http://carthage.tezedge.com:18732/monitor/bootstrapped
   "timestamp": "2020-04-15T09:37:59Z"
 }
 ```
+
+## Block
+
+Returns all the information about a block for the supplied block_id
+
+&nbsp;
+
+*Request*
+
+```bash
+GET /chains/<chain_id>/blocks/<block_id>
+```
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `chain_id` *string* | Id of the requested chain |
+| `block_id` *string* | Requested block Id |  
+
+
+*Response*
+<!-- TOP level -->
+### Block
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `hash` *String* | Base58Check encoded block hash. |
+| `chain_id` *string* | Base58Check encoded chain id. |
+| `header` | [Header fields](###Header) |
+| `metadata` | [Metadata fields](###Metadata) |
+| `operations` | [Operations fields](###Operations) |
+
+<!-- TODO: fill in all fields -->
+
+<!-- First level nesting -->
+### Header
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `level` *i32* | Block level. |
+| `proto` *u8* | Base58Check encoded chain id. |
+<!-- TODO: fill in all fields -->
+
+### Metadata
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `protocol` *string* | Base58Check encoded protocol hash of the current protocol. |
+| `next_protocol` *string* | Base58Check encoded chain id. |
+| `test_chain_status` | [Test chain status fields](###Test-chain-status) |
+| `level` | [Level fields](###Level) |
+<!-- TODO: fill in all fields -->
+
+### Operations
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `protocol` *string* | Base58Check encoded protocol hash of the current protocol. |
+| `chain_id` *string* | Base58Check encoded chain id. |
+<!-- TODO: fill in all fields -->
+
+
+
+<!-- Second level nesting -->
+### Test chain status
+
+### Level
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `level` *i32* | Block level. |
+| `chain_id` *string* | Base58Check encoded chain id. |
