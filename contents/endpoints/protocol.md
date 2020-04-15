@@ -13,7 +13,7 @@ Returns info about the cycle
 
 &nbsp;
 
-*Request:*
+### *Request:*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id> 
@@ -25,7 +25,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 | `chain_id` *string* | Description |
 | `cycle_id` *string* | Description |
 
-*Response:*
+### *Response:*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -74,7 +74,7 @@ Returns the endorsing rights for a level. The default behavior is to return the 
 
 &nbsp;
 
-*Request:*
+### *Request:*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)
@@ -87,7 +87,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `chain_id` *string* | Id of the requested chain |
 
 
-*Optional query arguments:*
+### *Optional query arguments:*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -95,7 +95,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `delegate` *int32* | Filters the results, showing only the rights for this delegate. |
 | `level` *int32* | Block level at which the rights will be retrieved. |
 
-*Response fields*
+### *Response*
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | The delegates pkh (private key hash, e.g. tz1..) which will perform the endorsement |
@@ -206,7 +206,7 @@ Returns the baking rights for a level. The default behavior is to return the rig
 
 &nbsp;
 
-*Request:*
+### *Request:*
 
 ```bash
 GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*&[max_priority=<int>]&[all]
@@ -217,7 +217,7 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | `block_id` *string* | Requested block Id |  
 | `chain_id` *string* | Id of the requested chain |
 
-*Optional query arguments:*
+### *Optional query arguments:*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -227,7 +227,7 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | `level` *int32* | Block level at which the rights will be retrieved. |
 | `max_priority` *int32* | The maximum priority to calculate. The default is 64.
 
-*Response*
+### *Response*
 
 Returns a list of objects with the following fields, sorted by priority:
 
@@ -300,7 +300,7 @@ Returns all the constants specified in the protocol
 
 &nbsp;
 
-*Request:*
+### *Request:*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/context/constants
@@ -311,7 +311,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
-*Response:*
+### *Response:*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -408,7 +408,7 @@ Retrieves the block header for the requested block_id
 
 &nbsp;
 
-*Request*
+### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/header
@@ -419,7 +419,7 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
-*Response*
+### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -476,13 +476,13 @@ Returns node build information. Specifically the git commit hash.
 
 &nbsp;
 
-*Request*
+### *Request*
 
 ```bash
 GET /monitor/commit_hash
 ```
 
-*Response*
+### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -507,13 +507,13 @@ Returns bootstrap information.
 
 &nbsp;
 
-*Request*
+### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/header
 ```
 
-*Response*
+### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -541,7 +541,7 @@ Returns all the information about a block for the supplied block_id
 
 &nbsp;
 
-*Request*
+### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>
@@ -553,22 +553,21 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `block_id` *string* | Requested block Id |  
 
 
-*Response*
+### *Response*
 <!-- TOP level -->
-### Block
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `hash` *String* | Base58Check encoded block hash. |
 | `chain_id` *string* | Base58Check encoded chain id. |
-| `header` | [Header fields](###Header) |
-| `metadata` | [Metadata fields](###Metadata) |
-| `operations` | [Operations fields](###Operations) |
-
+| `header` | [Header fields](####Header) |
+| `metadata` | [Metadata fields](####Metadata) |
+| `operations` | [Operations fields](####Operations) |
+| `balance_updates` | List of [Balance update fields](####Balance-update)
 <!-- TODO: fill in all fields -->
 
 <!-- First level nesting -->
-### Header
+#### Header
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -576,7 +575,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `proto` *u8* | Base58Check encoded chain id. |
 <!-- TODO: fill in all fields -->
 
-### Metadata
+#### Metadata
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -586,7 +585,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `level` | [Level fields](###Level) |
 <!-- TODO: fill in all fields -->
 
-### Operations
+#### Operations
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -597,10 +596,49 @@ GET /chains/<chain_id>/blocks/<block_id>
 
 
 <!-- Second level nesting -->
-### Test chain status
+#### Test chain status
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `status` *string* | The status of the test chain. |
 
-### Level
+The next fields are dependant on the *status* field.
+
+##### forking
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `protocol` *string* | Base58Check encoded protocol hash of the activated protocol on the test chain. |
+| `expiration ` *i32* | Expiration of the test chain, in seconds. |
+
+##### running
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `protocol` *string* | Base58Check encoded protocol hash of the activated protocol on the test chain. |
+| `expiration ` *i32* | Expiration of the test chain, in seconds. |
+| `chain_id` *string* | Base58Check encoded chain id of the running test chain. |
+| `genesis` *string* | Base58Check encoded block hash of the genesis block on the test chain. |
+
+#### Level
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `level` *i32* | Block level. |
 | `chain_id` *string* | Base58Check encoded chain id. |
+
+#### Balance update
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `kind` *string* | The type or “kind” of the balance update. |
+| `change` *BigInt* | The difference in balance after the operation. |
+
+The next fields are dependant on the *kind* field.
+
+##### contract
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `contract` *string* | Base58Check encoded private key hash of the contract whose balance was changed. | <!-- check grammar pls --> 
+
+##### freezer
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `category` *string* | The category of the frozen balance. |
+| `delegate  ` *string* | Base58Check encoded private key hash of the delegate whose balance was changed. |
+| `cycle` *i32* | The cycle the balance is frozen for. | <!-- check grammar pls --> 
