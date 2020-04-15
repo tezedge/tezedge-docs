@@ -560,10 +560,9 @@ GET /chains/<chain_id>/blocks/<block_id>
 |-------------------|--------------------------------------------------------|
 | `hash` *String* | Base58Check encoded block hash. |
 | `chain_id` *string* | Base58Check encoded chain id. |
-| `header` | [Header fields](####Header) |
-| `metadata` | [Metadata fields](####Metadata) |
-| `operations` | [Operations fields](####Operations) |
-| `balance_updates` | List of [Balance update fields](####Balance-update)
+| `header` | [Header fields](#Header) |
+| `metadata` | [Metadata fields](#Metadata) |
+| `operations` | [Operations fields](#Operations) |
 <!-- TODO: fill in all fields -->
 
 <!-- First level nesting -->
@@ -581,8 +580,9 @@ GET /chains/<chain_id>/blocks/<block_id>
 |-------------------|--------------------------------------------------------|
 | `protocol` *string* | Base58Check encoded protocol hash of the current protocol. |
 | `next_protocol` *string* | Base58Check encoded chain id. |
-| `test_chain_status` | [Test chain status fields](###Test-chain-status) |
-| `level` | [Level fields](###Level) |
+| `test_chain_status` | [Test chain status fields](#Test-chain-status) |
+| `level` | [Level fields](#Level) |
+| `balance_updates` | List of [Balance update fields](#Balance-update) |
 <!-- TODO: fill in all fields -->
 
 #### Operations
@@ -592,8 +592,6 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `protocol` *string* | Base58Check encoded protocol hash of the current protocol. |
 | `chain_id` *string* | Base58Check encoded chain id. |
 <!-- TODO: fill in all fields -->
-
-
 
 <!-- Second level nesting -->
 #### Test chain status
