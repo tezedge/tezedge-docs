@@ -91,7 +91,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `cycle` *int32* | Retrieve the rights for entire current cycle. |
+| `cycle` *int32* | Retrieve the rights for the entire current cycle. |
 | `delegate` *int32* | Filters the results, showing only the rights for this delegate. |
 | `level` *int32* | Block level at which the rights will be retrieved. |
 
@@ -341,7 +341,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `proof_of_work_nonce_size` *u8* | Size (in bytes) of the lightweight proof-of-work nonce. |
 | `proof_of_work_threshold` *i64* | The threshold of a hash generated in a lightweight proof of work (PoW) task. |
 | `quorum_max` (int32) | Maximum value a quorum can reach expressed in percentage multiplied by 100. |
-| `quorum_min` *int32* | Minimal quorum for a voting period to be successful, expressed in percentage multiplied by 100. |
+| `quorum_min` *int32* | Minimum quorum for a voting period to be successful, expressed in percentage multiplied by 100. |
 | `seed_nonce_revelation_tip` *BigInt* | The amount of mutez awarded for including a nonce reveal operation |
 | `test_chain_duration` *i64* | Lifetime of the testchain in seconds. |
 | `time_between_blocks` *i64* | Used for calculating estimated timestamps. |
@@ -628,7 +628,7 @@ Structure indicating the status of a forked test chain.
 |-------------------|--------------------------------------------------------|
 | `status` *string* | The status of the test chain. |
 
-The next fields are dependant on the `status` field.
+The next fields are dependent on the `status` field.
 
 ##### forking
 | Field             |                  Description                           |
@@ -665,7 +665,7 @@ Structure representing information about the various balance changes that happen
 | `kind` *string* | The type or “kind” of the balance update. |
 | `change` *BigInt* | The difference in balance after the operation. |
 
-The next fields are dependant on the `kind` field.
+The next fields are dependent on the `kind` field.
 
 ##### contract
 | Field             |                  Description                           |
@@ -686,7 +686,7 @@ The contents of the executed operations.
 |-------------------|--------------------------------------------------------|
 | `kind` *string* | The type or kind of the operation. |
 
-The next fields are dependant on the `kind` field.
+The next fields are dependent on the `kind` field.
 
 ##### endorsement
 | Field             |                  Description                           |
@@ -705,7 +705,7 @@ The next fields are dependant on the `kind` field.
 | `op1` | [Inlined Endorsement](#inlined-endorsement) |
 | `op2` | [Inlined Endorsement](#inlined-endorsement) |
 
-The next fields are dependant on the *kind* field.
+The next fields are dependent on the *kind* field.
 
 ##### Double Baking Evidence 
 | Field             |                  Description                           |
@@ -810,7 +810,7 @@ Optional parameters for smart contract calls
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `int` *BigInt* | Experssion value. |
+| `int` *BigInt* | Expression value. |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -818,7 +818,7 @@ Optional parameters for smart contract calls
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `string` *string* | Experssion value. |
+| `string` *string* | Expression value. |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -826,7 +826,7 @@ Optional parameters for smart contract calls
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `bytes` *string* | Experssion value. Bytes in string format.  |
+| `bytes` *string* | Expression value. Bytes in string format.  |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -870,7 +870,7 @@ Result of an internal operation.
 | `source` *string* | Base58Check encoded public key hash of the account initializing the operation. |
 | `nonce` *positive i16* | //TODO  |
 
-The next fields are dependant on the `kind` field.
+The next fields are dependent on the `kind` field.
 
 ##### Reveal
 | Field             |                  Description                           |
@@ -909,7 +909,7 @@ Result of the reveal operation.
 |-------------------|--------------------------------------------------------|
 | `status` *string* | The operation result status. |
 
-The next fields are dependant on the *status* field.
+The next fields are dependent on the *status* field.
 
 ##### Applied
 | Field             |                  Description                           |
@@ -937,7 +937,7 @@ Result of the delegation operation.
 |-------------------|--------------------------------------------------------|
 | `status` *string* | The operation result status. |
 
-The next fields are dependant on the *status* field.
+The next fields are dependent on the *status* field.
 
 ##### Applied
 | Field             |                  Description                           |
@@ -964,7 +964,7 @@ Result of the transaction operation.
 |-------------------|--------------------------------------------------------|
 | `status` *string* | The operation result status: applied / failed / skipped / backtracked. |
 
-The next fields are dependant on the *status* field.
+The next fields are dependent on the *status* field.
 
 ##### Applied
 | Field             |                  Description                           |
@@ -1007,7 +1007,7 @@ Result of the origination operation.
 |-------------------|--------------------------------------------------------|
 | `status` *string* | The operation result status. |
 
-The next fields are dependant on the `status` field.
+The next fields are dependent on the `status` field.
 
 ##### Applied
 | Field             |                  Description                           |
@@ -1048,7 +1048,7 @@ List of the actions executed over the big map
 |-------------------|--------------------------------------------------------|
 | `action` *string* | The action applied to the BigMap (update | remove | copy | alloc). |
 
-The next fields are dependant on the `action` field.
+The next fields are dependent on the `action` field.
 
 ##### Update
 | Field             |                  Description                           |
@@ -1075,5 +1075,6 @@ The next fields are dependant on the `action` field.
 | `big_map` *BigInt* | Bigmap ID. |
 | `key_type` *string* | Micheline expression for the allocated key type. |
 | `value_type` *string* | Micheline expression for the allocated value type. |
+
 
 
