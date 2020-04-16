@@ -754,7 +754,7 @@ The next fields are dependant on the *kind* field.
 | `storage_limit` *BigInt* | The set storage limit. |
 | `amount` *BigInt* | The amount of tokens transferred. |
 | `destination` *string* | Base58Check encoded public key hash of the transaction recipient. |
-| `parameters` *(optional)* | Optional parameters for smart contract calls. |
+| `parameters` *(optional)* | [Transaction paramaters](#transaction-parameters) |
 
 ##### Origination
 | Field             |                  Description                           |
@@ -794,6 +794,50 @@ Inlined endorsement operation
 |-------------------|--------------------------------------------------------|
 | `kind` *string* | The type or “kind” of the operation. |
 | `level` *i32* | Level (height) of endorsed block. |
+
+---------------------------------------------------------------------------------------------------------------------------
+#### Transaction parameters
+Optional parameters for smart contract calls
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `entrypoint` *string* | Named entrypoint to a Michelson smart contract. |
+| `value` | One of the following michelson expressions: [Michelson int](#michelson-integer-expression), [Michelson string](#michelson-string-expression), [Michelson bytes](#michelson-bytes-expression), [Michelson generic prim](#michelson-generic-prim-expression). |
+
+---------------------------------------------------------------------------------------------------------------------------
+
+#### Michelson integer expression
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `int` *BigInt* | Experssion value. |
+
+---------------------------------------------------------------------------------------------------------------------------
+
+#### Michelson string expression
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `string` *string* | Experssion value. |
+
+---------------------------------------------------------------------------------------------------------------------------
+
+#### Michelson bytes expression
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `bytes` *string* | Experssion value. Bytes in string format.  |
+
+---------------------------------------------------------------------------------------------------------------------------
+
+#### Michelson generic prim expression
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `prim` *string* | Michelson primitive. |
+| `args` *(optional)* | List containing a variation of the following michelson expressions: [Michelson int](#michelson-integer-expression), [Michelson string](#michelson-string-expression), [Michelson bytes](#michelson-bytes-expression), [Michelson generic prim](#michelson-generic-prim-expression). |
+| `annots` *(optional) [string]* | List of annotations. |
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -839,7 +883,7 @@ The next fields are dependant on the `kind` field.
 |-------------------|--------------------------------------------------------|
 | `amount` *BigInt* | The amount of tokens transferred. |
 | `destination` *string* | Base58Check encoded public key hash of the transaction receiver. |
-| `parameters` *(optional)* | Optional parameters for smart contract calls. |
+| `parameters` *(optional)* | [Transaction paramaters](#transaction-parameters) |
 | `result` | [Transaction Result](#transaction-result) |
 
 ##### Origination
