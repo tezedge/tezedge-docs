@@ -315,7 +315,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `block_reward` *BigInt* | List of values used for block reward calculation. |
+| `baking_reward_per_endorsement` *[BigInt]* | List of values used for block reward calculation. |
 | `block_security_deposit` *BigInt* | Deposit per baked block. |
 | `blocks_per_commitment` *i32* | The number of blocks between 2 nonce-containing blocks for the random seed calculation (commitment == hash of a nonce). |
 | `blocks_per_cycle` *i32* | Number of blocks in a cycle. |
@@ -587,10 +587,10 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `protocol` *string* |  Base58Check encoded protocol hash. |
 | `next_protocol` *string* | Base58Check encoded protocol hash. |
 | `test_chain_status` | [*Test chain status*](#test-chain-status) |
-| `max_operations_ttl` *i31* | 
-| `max_operation_data_length` *i31* | 
-| `max_block_header_length` *i31* | 
-| `max_operation_list_length` *i31* |
+| `max_operations_ttl` *i31* | The "time-to-live" of operation for the next block. | 
+| `max_operation_data_length` *i31* | The maximum size of an operation in bytes. |
+| `max_block_header_length` *i31* | The maximum size of a block header in bytes. |
+| `max_operation_list_length`| [Max operation list lengths](#max-operation-list-lenghts) |
 | `baker` *string* | Base58Check encoded private key hash of the baker (tz1...). |
 | `level` | [Level](#level) |
 | `voting_period_kind` *string* | The voting period the block was baked in. |
@@ -610,8 +610,15 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `hash` *string* | Base58Check encoded operation hash. |
 | `branch` *string* | Base58Check encoded block hash of a branch root block. | 
 | `contents` | [Operation contents](#operation-contents) or [Operation Contents And Result](#operation-contents-and-result) |
-| `signature` *string* | Base58Check encoded signature of the operation. |
+| `signature` *(optional) string* | Base58Check encoded signature of the operation. |
 
+#### Max operation list lengths
+Bounds for the maximum list size or maximum operation count.
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `max_size` *int31* | Maximum size of the list in bytes. |
+| `max_op` *(optional) int31* | Maximum operation count. |
 
 
 #### Test chain status
@@ -643,7 +650,12 @@ Structure encapsulating information about the position of the block in the block
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `level` *i32* | Block level. |
-| `chain_id` *string* | Base58Check encoded chain id. |
+| `level_position` *i32* | The level of the block, relative to the block that starts protocol alpha. This is specific to the protocol alpha. Other protocols might or might not include a similar notion. |
+| `cycle` *i32* | The current cycle's number. Note that cycles are a protocol-specific notion. As a result, the cycle number starts at 0 with the first block of protocol. |
+| `cycle_position ` *i32* | The current level of the block, relative to the first block of the current cycle. |
+| `voting_period ` *i32* | The current voting period's index. Note that cycles are a protocol-specific notion. As a result, the voting period index starts at 0 with the first block of protocol. |
+| `voting_period_position ` *i32* | The current level of the block, relative to the first block of the current voting period. |
+| `expected_commitment ` *bool*| States whether the baker of this block has to commit a seed nonce hash. |
 
 #### Balance update
 Structure representing information about the various balance changes that happened in the included operations.
@@ -690,8 +702,8 @@ The next fields are dependant on the `kind` field.
 ##### double_endorsement_evidence
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `op1` *InlinedEndorsement* | First operation of the evidence. |
-| `op2` *InlinedEndorsement* | Second operation of the evidence. |
+| `op1` | [Inlined Endorsement](#inlined-endorsement) |
+| `op2` | [Inlined Endorsement](#inlined-endorsement) |
 
 The next fields are dependant on the *kind* field.
 
@@ -742,7 +754,7 @@ The next fields are dependant on the *kind* field.
 | `storage_limit` *BigInt* | The set storage limit. |
 | `amount` *BigInt* | The amount of tokens transferred. |
 | `destination` *string* | Base58Check encoded public key hash of the transaction recipient. |
-| `parameters` *optional* | Optional parameters for smart contract calls. |
+| `parameters` *(optional)* | Optional parameters for smart contract calls. |
 
 ##### Origination
 | Field             |                  Description                           |
@@ -753,7 +765,7 @@ The next fields are dependant on the *kind* field.
 | `gas_limit` *BigInt* | The set gas limit. |
 | `storage_limit` *BigInt* | The set storage limit. |
 | `balance`  *BigInt* | Mutez to give the originated account (contract). |
-| `delegate` *Optional String* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
+| `delegate` *(optional) String* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
 | `script` *string* | Hex string encoded michelson script. |
 
 ##### Delegation
@@ -764,16 +776,18 @@ The next fields are dependant on the *kind* field.
 | `counter` *BigInt* | The account’s counter. |
 | `gas_limit` *BigInt* | The set gas limit. |
 | `storage_limit` *BigInt* | The set storage limit. |
-| `delegate` *Optional String* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
+| `delegate` *(optional) string* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-#### InlinedEndorsement:
+#### Inlined Endorsement:
+Inlined endorsement operation
+
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `branch` *string* | Base58Check encoded block hash of a branch root block. | 
 | `operations` | [Endorsement Operation](#endorsement-operation) |
-| `signature` |  Base58Check encoded signature of the operation. |
+| `signature` *(optional string)* |  Base58Check encoded signature of the operation. |
 
 #### Endorsement Operation
 | Field             |                  Description                           |
@@ -795,9 +809,9 @@ Contains metadata about the operation.
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `balance_updates` (Balance_update) | Updates to the contract’s balance that happened in the operation. |
+| `balance_updates` | [Balance update](#balance-update) |
 | `operation_result` | [Reveal Result](#reveal-result) or [Transaction Result](#transaction-result) or [Origination Result]() or [Delegation Result](#delegation-result) |
-| `internal_operation_result` | [Internal Operation Result](#internal-operation-result) |
+| `internal_operation_results` *(optional)* | [Internal Operation Result](#internal-operation-result) |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -825,21 +839,21 @@ The next fields are dependant on the `kind` field.
 |-------------------|--------------------------------------------------------|
 | `amount` *BigInt* | The amount of tokens transferred. |
 | `destination` *string* | Base58Check encoded public key hash of the transaction receiver. |
-| `parameters` *PARAM* | Optional parameters for smart contract calls. |
+| `parameters` *(optional)* | Optional parameters for smart contract calls. |
 | `result` | [Transaction Result](#transaction-result) |
 
 ##### Origination
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `balance` *BigInt* | Mutez to give the originated account (contract). |
-| `delegate` *string* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
+| `delegate` *(optional) string* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
 | `script` *string* |  Hex string encoded michelson script. |
 | `result` | [Origination Result](#origination-result) |
 
 ##### Delegation
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `delegate` *string* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
+| `delegate` *(optional) string* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
 | `result` | [Delegation Result](#delegation-result) |
 
 ---------------------------------------------------------------------------------------------------------------------------
@@ -856,7 +870,7 @@ The next fields are dependant on the *status* field.
 ##### Applied
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `consumed_cas` *BigInt* | The amount of gas the operation consumed. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
 
 ##### Failed
 | Field             |                  Description                           |
@@ -866,8 +880,8 @@ The next fields are dependant on the *status* field.
 ##### Backtracked
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
+| `errors` *(optional) error* | List of errors. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
 
 
 ---------------------------------------------------------------------------------------------------------------------------
@@ -884,7 +898,7 @@ The next fields are dependant on the *status* field.
 ##### Applied
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `consumed_cas` *BigInt* | The amount of gas the operation consumed. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
 
 ##### Failed
 | Field             |                  Description                           |
@@ -894,8 +908,8 @@ The next fields are dependant on the *status* field.
 ##### Backtracked
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
+| `errors` *(optional) error* | List of errors. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -911,15 +925,15 @@ The next fields are dependant on the *status* field.
 ##### Applied
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `storage` *string* | Micheline expression. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
+| `storage` *(optional) string* | Micheline expression. |
 | `big_map_diff` | [Big Map Diff](#big-map-diff) |
 | `balance_updates` | [Balance update](#balance-update) |
-| `originated_contracts` *string* | Originated contracts. |
-| `consumed_gas` *BigInt* | The amount of gas the operation consumed. |
-| `storage_size` *BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *BigInt* | Amount paid for the storage upgrade. |
-| `allocated_destination_contract` *bool* |
+| `originated_contracts` *(optional) string* | Originated contracts. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
+| `storage_size` *(optional) BigInt* | Size of the storage after the operation was applied. |
+| `paid_storage_size_diff` *(optional) BigInt* | Amount paid for the storage upgrade. |
+| `allocated_destination_contract` *(optional) bool* |
 
 ##### Failed
 | Field             |                  Description                           |
@@ -955,12 +969,12 @@ The next fields are dependant on the `status` field.
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `big_map_diff` | [Big Map Diff](#big-map-diff) |
-| `balance_updates` | [Balance update](#balance-update) |
-| `originated_contracts` *string* | Originated contracts. |
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `storage_size` *BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *BigInt* | Amount paid for the storage upgrade. |
+| `big_map_diff` *(optional)* | [Big Map Diff](#big-map-diff) |
+| `balance_updates` *(optional)* | [Balance update](#balance-update) |
+| `originated_contracts` *(optional) string* | Originated contracts. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
+| `storage_size` *(optional) BigInt* | Size of the storage after the operation was applied. |
+| `paid_storage_size_diff` *(optional) BigInt* | Amount paid for the storage upgrade. |
 
 
 
@@ -974,12 +988,12 @@ The next fields are dependant on the `status` field.
 |-------------------|--------------------------------------------------------|
 | `errors` *error* | list of errors. |
 | `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `big_map_diff` | [Big Map Diff](#big-map-diff) |
-| `balance_updates` | [Balance update](#balance-update) |
-| `originated_contracts` *string* | Originated contracts. |
-| `consumed_gas` *BigInt* | The amount of gas the operation consumed. |
-| `storage_size` *BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *BigInt* | Amount paid for the storage upgrade. |
+| `big_map_diff` *(optional)* | [Big Map Diff](#big-map-diff) |
+| `balance_updates` *(optional)* | [Balance update](#balance-update) |
+| `originated_contracts` *(optional) string* | Originated contracts. |
+| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
+| `storage_size` *(optional) BigInt* | Size of the storage after the operation was applied. |
+| `paid_storage_size_diff` *(optional) BigInt* | Amount paid for the storage upgrade. |
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -998,7 +1012,7 @@ The next fields are dependant on the `action` field.
 | `big_map` *BigInt* | Bigmap ID. |
 | `key_hash` *string* | Base58Check encoded hash of the key. |
 | `key` *string* | Micheline expression. |
-| `value` *string* | Micheline expression. |
+| `value` *(optional) string* | Micheline expression. |
 
 ##### Remove
 | Field             |                  Description                           |
