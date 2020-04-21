@@ -4,6 +4,97 @@ sidebar: Docs
 showTitle: false
 ---
 
+# Table of contents
+
+- [Table of contents](#table-of-contents)
+- [Shell](#shell)
+  * [Cycle](#cycle)
+      - [*Request*](#-request-)
+      - [*Response*](#-response-)
+  * [Endorsing Rights](#endorsing-rights)
+      - [*Request*](#-request--1)
+      - [*Optional query arguments*](#-optional-query-arguments-)
+      - [*Response*](#-response--1)
+  * [Baking Rights](#baking-rights)
+      - [*Request*](#-request--2)
+      - [*Optional query arguments*](#-optional-query-arguments--1)
+      - [*Response*](#-response--2)
+  * [Constants](#constants)
+      - [*Request*](#-request--3)
+      - [*Response*](#-response--3)
+  * [Block Header](#block-header)
+      - [*Request*](#-request--4)
+      - [*Response*](#-response--4)
+  * [Commit hash](#commit-hash)
+      - [*Request*](#-request--5)
+      - [*Response*](#-response--5)
+  * [Bootstrapped](#bootstrapped)
+      - [*Request*](#-request--6)
+      - [*Response*](#-response--6)
+  * [Block](#block)
+      - [*Request*](#-request--7)
+      - [*Response*](#-response--7)
+      - [Header](#header)
+      - [Metadata](#metadata)
+      - [Operations](#operations)
+      - [Max operation list lengths](#max-operation-list-lengths)
+      - [Test chain status](#test-chain-status)
+        * [forking](#forking)
+        * [running](#running)
+      - [Level](#level)
+      - [Balance update](#balance-update)
+        * [contract](#contract)
+        * [freezer](#freezer)
+      - [Operation Contents](#operation-contents)
+        * [endorsement](#endorsement)
+        * [seed nonce revelation](#seed-nonce-revelation)
+        * [double_endorsement_evidence](#double-endorsement-evidence)
+        * [Double Baking Evidence](#double-baking-evidence)
+        * [Activate account](#activate-account)
+        * [Proposal](#proposal)
+        * [Ballot](#ballot)
+        * [Reveal](#reveal)
+        * [Transaction](#transaction)
+        * [Origination](#origination)
+        * [Delegation](#delegation)
+      - [Inlined Endorsement:](#inlined-endorsement-)
+      - [Endorsement Operation](#endorsement-operation)
+      - [Transaction parameters](#transaction-parameters)
+      - [Michelson integer expression](#michelson-integer-expression)
+      - [Michelson string expression](#michelson-string-expression)
+      - [Michelson bytes expression](#michelson-bytes-expression)
+      - [Michelson generic prim expression](#michelson-generic-prim-expression)
+      - [Operation Contents And Result](#operation-contents-and-result)
+      - [Operation Contents And Result Metadata](#operation-contents-and-result-metadata)
+      - [Internal Operation Result](#internal-operation-result)
+        * [Reveal](#reveal-1)
+        * [Transaction](#transaction-1)
+        * [Origination](#origination-1)
+        * [Delegation](#delegation-1)
+      - [Reveal Result](#reveal-result)
+        * [Applied](#applied)
+        * [Failed](#failed)
+        * [Backtracked](#backtracked)
+      - [Delegation Result](#delegation-result)
+        * [Applied](#applied-1)
+        * [Failed](#failed-1)
+        * [Backtracked](#backtracked-1)
+      - [Transaction Result](#transaction-result)
+        * [Applied](#applied-2)
+        * [Failed](#failed-2)
+        * [Backtracked](#backtracked-2)
+      - [Origination Result](#origination-result)
+        * [Applied](#applied-3)
+        * [Failed](#failed-3)
+        * [Backtracked](#backtracked-3)
+      - [Big Map Diff](#big-map-diff)
+        * [Update](#update)
+        * [Remove](#remove)
+        * [Copy](#copy)
+        * [Alloc](#alloc)
+
+
+
 # Shell
 
 
@@ -13,7 +104,7 @@ Returns info about the cycle
 
 &nbsp;
 
-### *Request:*
+#### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id> 
@@ -25,7 +116,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 | `chain_id` *string* | Description |
 | `cycle_id` *string* | Description |
 
-### *Response:*
+#### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -35,14 +126,14 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 &nbsp;
 &nbsp;
 
-*Example Request:*
+*Example Request*
 
 
 ```bash
 curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/bytes/cycle
 ```
 
-*Example Response:*
+*Example Response*
 
 
 ```JSON
@@ -74,7 +165,7 @@ Returns the endorsing rights for a level. The default behavior is to return the 
 
 &nbsp;
 
-### *Request:*
+#### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)
@@ -87,7 +178,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `chain_id` *string* | Id of the requested chain |
 
 
-### *Optional query arguments:*
+#### *Optional query arguments*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -95,7 +186,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `delegate` *int32* | Filters the results, showing only the rights for this delegate. |
 | `level` *int32* | Block level at which the rights will be retrieved. |
 
-### *Response*
+#### *Response*
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | The delegates pkh (private key hash, e.g. tz1..) which will perform the endorsement |
@@ -104,7 +195,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `slots` *[i32]* | List of all the endorsing slots the delegate is meant to fill |
 
 
-*Example Request:*
+*Example Request*
 
 
 ```bash
@@ -112,7 +203,7 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/endorsing_ri
 
 ```
 
-*Example Response:*
+*Example Response*
 
 ```JSON
 [
@@ -206,7 +297,7 @@ Returns the baking rights for a level. The default behavior is to return the rig
 
 &nbsp;
 
-### *Request:*
+#### *Request*
 
 ```bash
 GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*&[max_priority=<int>]&[all]
@@ -217,7 +308,7 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | `block_id` *string* | Requested block Id |  
 | `chain_id` *string* | Id of the requested chain |
 
-### *Optional query arguments:*
+#### *Optional query arguments*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -227,7 +318,7 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | `level` *int32* | Block level at which the rights will be retrieved. |
 | `max_priority` *int32* | The maximum priority to calculate. The default is 64.
 
-### *Response*
+#### *Response*
 
 Returns a list of objects with the following fields, sorted by priority:
 
@@ -238,14 +329,14 @@ Returns a list of objects with the following fields, sorted by priority:
 | `level` *int32* | The level of the block to which the rights are calculated. |
 | `priority` *int32* | The priority of the delegate |
 
-*Example Request:*
+*Example Request*
 
 
 ```bash
 curl http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/baking_rights
 ```
 
-*Example Response:*
+*Example Response*
 
 ```JSON
 [
@@ -300,7 +391,7 @@ Returns all the constants specified in the protocol
 
 &nbsp;
 
-### *Request:*
+#### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/context/constants
@@ -311,7 +402,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
-### *Response:*
+#### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -348,14 +439,14 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `tokens_per_roll` *BigInt* | Number of mutez needed for one roll. |
 
 
-*Example Request:*
+*Example Request*
 
 
 ```bash
 curl http://carthage.tezedge.com:18732/chains/main/blocks/45000/context/constants
 ```
 
-*Example Response:*
+*Example Response*
 
 ```JSON
 {
@@ -408,7 +499,7 @@ Retrieves the block header for the requested block_id
 
 &nbsp;
 
-### *Request*
+#### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/header
@@ -419,7 +510,7 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
-### *Response*
+#### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -440,13 +531,13 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 
 
 
-*Example Request:*
+*Example Request*
 
 ```bash
 curl http://carthage.tezedge.com:18732/chains/main/blocks/45000/header
 ```
 
-*Example Response:*
+*Example Response*
 
 ```JSON
 {
@@ -476,26 +567,26 @@ Returns node build information. Specifically the git commit hash.
 
 &nbsp;
 
-### *Request*
+#### *Request*
 
 ```bash
 GET /monitor/commit_hash
 ```
 
-### *Response*
+#### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | *String* |  Git commit hash. |
 
 
-*Example Request:*
+*Example Request*
 
 ```bash
 curl http://carthage.tezedge.com:18732/monitor/commit_hash
 ```
 
-*Example Response:*
+*Example Response*
 
 ```JSON
 "a42d44b30f938a976731367c857a58633386a668"
@@ -507,26 +598,26 @@ Returns bootstrap information.
 
 &nbsp;
 
-### *Request*
+#### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/header
 ```
 
-### *Response*
+#### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `block` *String* |  Base58Check encoded block hash. |
 | `timestamp` *RFC3339 timestamp* | Block baking timestamp. |
 
-*Example Request:*
+*Example Request*
 
 ```bash
 curl http://carthage.tezedge.com:18732/monitor/bootstrapped
 ```
 
-*Example Response:*
+*Example Response*
 
 ```JSON
 {
@@ -541,7 +632,7 @@ Returns all the information about a block for the supplied block_id
 
 &nbsp;
 
-### *Request*
+#### *Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>
@@ -553,7 +644,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `block_id` *string* | Requested block Id |  
 
 
-### *Response*
+#### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -1075,6 +1166,9 @@ The next fields are dependent on the `action` field.
 | `big_map` *BigInt* | Bigmap ID. |
 | `key_type` *string* | Micheline expression for the allocated key type. |
 | `value_type` *string* | Micheline expression for the allocated value type. |
+
+
+
 
 
 
