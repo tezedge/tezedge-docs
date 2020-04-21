@@ -6,7 +6,6 @@ showTitle: false
 
 # Table of contents
 
-- [Table of contents](#table-of-contents)
 - [Shell](#shell)
   * [Cycle](#cycle)
       - [*Request*](#-request-)
