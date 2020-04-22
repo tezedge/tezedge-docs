@@ -4,12 +4,12 @@ sidebar: Docs
 showTitle: false
 ---
 
+# Shell
+
 # Table of contents
 
 - [Commit hash](#commit-hash)
 - [Bootstrapped](#bootstrapped)
-
-# Shell
 
 ## Commit hash
 
