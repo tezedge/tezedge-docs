@@ -9,7 +9,14 @@ const { Link } = Anchor
 
 const filterAnchorDetails = anchors => {
   let last_depth = 0
-  anchors = [].slice.call(anchors).map(anchor => {
+  anchors = [].slice.call(anchors)
+  .filter(anchor => {
+    let depth = parseInt(anchor.parentElement.nodeName[1])
+    if (last_depth !== 0 && depth > last_depth) depth = last_depth + 1
+    last_depth = depth
+    return depth < 4 ? true : false; 
+  })
+  .map(anchor => {
     let depth = parseInt(anchor.parentElement.nodeName[1])
     if (last_depth !== 0 && depth > last_depth) depth = last_depth + 1
     last_depth = depth

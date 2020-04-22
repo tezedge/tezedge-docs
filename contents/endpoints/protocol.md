@@ -26,7 +26,7 @@ Returns info about the cycle
 GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id> 
 ```  
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `block_id` *string* | Id of the requested block |
 | `chain_id` *string* | Id of the requested chain |
@@ -34,7 +34,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 
 *Response*
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `random_seed` *string* |  Athe 32 byte seed generated from the committed nonces |  
 | `roll_snapshot` *i32* |  A randomly selected snapshot for the requested cycle  |
@@ -80,14 +80,14 @@ Returns all the constants specified in the protocol
 GET /chains/<chain_id>/blocks/<block_id>/context/constants
 ```
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
 *Response*
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `baking_reward_per_endorsement` *[BigInt]* | List of values used for block reward calculation. |
 | `block_security_deposit` *BigInt* | Deposit per baked block. |
@@ -200,7 +200,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 ```  
 
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `block_id` *string* | Requested block Id |  
 | `chain_id` *string* | Id of the requested chain |
@@ -208,7 +208,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 
 *Optional query arguments*
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `cycle` *i32* | Retrieve the rights for the entire current cycle. |
 | `delegate` *i32* | Filters the results, showing only the rights for this delegate. |
@@ -216,10 +216,10 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 
 *Response*
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | The delegates pkh (private key hash, e.g. tz1..) which will perform the endorsement |
-| `estimated_time` *rfc3339* | The estimated time when the endorsing will start. For rights requested behind the provided block_id, this field is omitted. |
+| `estimated_time` *rfc3339* | The estimated time when the endorsing will start. For rights requested behind the provided block_id, this  is omitted. |
 | `level` *i32* | Level of the block to be endorsed. |
 | `slots` *[i32]* | List of all the endorsing slots the delegate is meant to fill |
 
@@ -343,14 +343,14 @@ Returns the baking rights for a level. The default behavior is to return the rig
 GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*&[max_priority=<int>]&[all]
 ```
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `block_id` *string* | Requested block Id |  
 | `chain_id` *string* | Id of the requested chain |
 
 *Optional query arguments*
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `all` | Returns all priorities instead of just the best one |
 | `cycle` *i32* | Retrieve the rights for the entire current cycle. |
@@ -360,12 +360,12 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 
 *Response*
 
-Returns a list of objects with the following fields, sorted by priority:
+Returns a list of objects with the following s, sorted by priority:
 
-| Field             |                  Description                           |
+|              |                                             |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | pkh (private key hash, e.g. tz1..) which will perform the endorsement |
-| `estimated_time` *rfc3339* | The estimated time at which the baking will take place. For rights requested behind the provided block_id, this field is omitted |
+| `estimated_time` *rfc3339* | The estimated time at which the baking will take place. For rights requested behind the provided block_id, this  is omitted |
 | `level` *i32* | The level of the block to which the rights are calculated. |
 | `priority` *i32* | The priority of the delegate |
 
