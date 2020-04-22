@@ -99,22 +99,25 @@ The safety deposits ensure that anyone is who is participating in the system (pr
     There is a reason why we wait a minute and not a second. For the system to work, an honest majority is needed, but if people begin delaying blocks, then all of a sudden the honest majority needs to become much larger. If an individual can delay every message by 2 minutes and they control 33% of the network, then they are going to create blocks at a slower speed, but if they can slow the speed of the other bakers (the users who create blocks), then they are going to go at the same speed as everyone else. If an individual can delay the process by 2 minutes, then the network must have a 66% honest majority.
 
 
-## Designing the language of Tezos
+# Smart contract design	
+
+**Correctness** 	
+
+It is crucial to avoid errors. While verifiability is important, it is also necessary to be able to prove to everyone that the smart contracts in Tezos do not have any issues. It's not enough for the developer to be confident, everyone else needs to be confident as well. 	
+
+**Parsimony**	
+
+Space is expensive on the blockchain, it is valued as a premium and everyone needs to keep everything that's on a blockchain on their disk (or even in memory, if efficiency is a priority), therefore it is better to avoid space-intensive smart contracts. 	
+
+**Performance** 	
+
+Performance is not an issue since smart contracts run on simple logic. 	
+
+**Portability** 	
+
+Portability isn’t an issue either, since the smart contracts perform reading on the Tezos blockchain. It is not necessary to run them on a dozen different platforms. 	
 
 
-
-*   **Generic**  
-    It should be generic so that developers are able to do anything they want to. It wouldn't be smart to begin with a domain-specific language for contracts or finance. Smart contracts can be used for many different things and therefore it is not good to have a too strong of a view of what their language will be used for. 
-
-*   **Safe**  
-    The language must be safe, and that means it is at the very least type safe.
-
-*   **Readable**  
-    It must also be really bold because developers and other interested parties will look at the contracts and try to understand what is happening inside them.
-*   **Easy gas accounting**  
-    It is good to be able to count the resources that the contract is using durign its execution.  
-    
-There's a slight conflict here, because some people may be interested in an assembly-like generic language with easy gas accounting — they want the VM approach. However, others may prefer something safe and readable-a high-level functional language.
 
 # Michelson # 
 Michelson is the programming language used to write smart contracts on the Tezos blockchain. 
