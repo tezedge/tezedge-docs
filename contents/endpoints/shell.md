@@ -133,13 +133,14 @@ GET /chains/<chain_id>/blocks/<block_id>
 |-------------------|--------------------------------------------------------|
 | `hash` *String* | Base58Check encoded block hash. |
 | `chain_id` *string* | Base58Check encoded chain id. |
-| `header` | [Header fields](#header) |
+| `header` | [Header fields](#block.header) |
 | `metadata` | [Metadata fields](#metadata) |
 | `operations` | [Operations fields](#operations) |
 | `balance_updates` | List of [Balance update fields](#balance-update) |
 
+&nbsp;
 
-#### Header
+### [header](#block.header)
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -154,19 +155,23 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `protocol_data` | The protocol-specific fragment of the block header. |
 
 
-#### Metadata
+&nbsp;
+&nbsp;
+&nbsp;
+
+### [metadata](#metadata)
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `protocol` *string* |  Base58Check encoded protocol hash. |
 | `next_protocol` *string* | Base58Check encoded protocol hash. |
-| `test_chain_status` | [*Test chain status*](#test-chain-status) |
+| `test_chain_status` | [Test chain status](#metadatatest_chain_status) |
 | `max_operations_ttl` *i31* | The "time-to-live" of operation for the next block. | 
 | `max_operation_data_length` *i31* | The maximum size of an operation in bytes. |
 | `max_block_header_length` *i31* | The maximum size of a block header in bytes. |
-| `max_operation_list_length`| [Max operation list lengths](#max-operation-list-lenghts) |
+| `max_operation_list_length`| [Max operation list lengths](#metadatamax_operation_list_lenghts) |
 | `baker` *string* | Base58Check encoded private key hash of the baker (tz1...). |
-| `level` | [Level](#level) |
+| `level` | [Level](#metadatalevel) |
 | `voting_period_kind` *string* | The voting period the block was baked in. |
 | `nonce_hash` *string* | Base58Check encoded nonce hash. Returns null, if nonce_hash is not present. |
 | `consumed_gas` *BigInt* | Total gas consumed by creating the block and including it in the blockchain. |
@@ -174,28 +179,10 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `balance_updates` | [Balance update](#balance-update) | 
 
 
-
-#### Operations
-
-| Field             |                  Description                           |
-|-------------------|--------------------------------------------------------|
-| `protocol` *string* | Base58Check encoded protocol hash. |
-| `chain_id` *string* | Base58Check encoded chain id of the chain the operation was executed on. |
-| `hash` *string* | Base58Check encoded operation hash. |
-| `branch` *string* | Base58Check encoded block hash of a branch root block. | 
-| `contents` | [Operation contents](#operation-contents) or [Operation Contents And Result](#operation-contents-and-result) |
-| `signature` *(optional) string* | Base58Check encoded signature of the operation. |
-
-#### Max operation list lengths
-Bounds for the maximum list size or maximum operation count.
-
-| Field             |                  Description                           |
-|-------------------|--------------------------------------------------------|
-| `max_size` *int31* | Maximum size of the list in bytes. |
-| `max_op` *(optional) int31* | Maximum operation count. |
+&nbsp;
 
 
-#### Test chain status
+#### [test\_chain\_status](#test_chain_status)
 Structure indicating the status of a forked test chain.
 
 | Field             |                  Description                           |
@@ -204,13 +191,15 @@ Structure indicating the status of a forked test chain.
 
 The next fields are dependent on the `status` field.
 
-##### forking
+&nbsp;
+
+##### [forking](#forking)
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `protocol` *string* | Base58Check encoded protocol hash of the activated protocol on the test chain. |
 | `expiration ` *i32* | Expiration of the test chain, in seconds. |
 
-##### running
+##### [running](#running)
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `protocol` *string* | Base58Check encoded protocol hash of the activated protocol on the test chain. |
@@ -218,7 +207,19 @@ The next fields are dependent on the `status` field.
 | `chain_id` *string* | Base58Check encoded chain id of the running test chain. |
 | `genesis` *string* | Base58Check encoded block hash of the genesis block on the test chain. |
 
-#### Level
+&nbsp;
+
+#### [max\_operation\_list_length](#max_operation_list_length)
+Bounds for the maximum list size or maximum operation count.
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `max_size` *int31* | Maximum size of the list in bytes. |
+| `max_op` *(optional) int31* | Maximum operation count. |
+
+&nbsp;
+
+#### [level](#level)
 Structure encapsulating information about the position of the block in the blockchain.
 
 | Field             |                  Description                           |
@@ -231,7 +232,9 @@ Structure encapsulating information about the position of the block in the block
 | `voting_period_position ` *i32* | The current level of the block, relative to the first block of the current voting period. |
 | `expected_commitment ` *bool*| States whether the baker of this block has to commit a seed nonce hash. |
 
-#### Balance update
+&nbsp;
+
+#### [balance_updates](#balance_updates)
 Structure representing information about the various balance changes that happened in the included operations.
 
 | Field             |                  Description                           |
@@ -241,17 +244,36 @@ Structure representing information about the various balance changes that happen
 
 The next fields are dependent on the `kind` field.
 
-##### contract
+&nbsp;
+
+##### [contract](#contract)
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `contract` *string* | Base58Check encoded private key hash of the contract whose balance was changed. | <!-- check grammar pls --> 
 
-##### freezer
+##### [freezer](#freezer)
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `category` *string* | The category of the frozen balance. |
 | `delegate  ` *string* | Base58Check encoded private key hash of the delegate whose balance was changed. |
 | `cycle` *i32* | The cycle the balance is frozen for. | <!-- check grammar pls -->
+
+
+&nbsp;
+&nbsp;
+&nbsp;
+
+### [operations](#operations)
+
+| Field             |                  Description                           |
+|-------------------|--------------------------------------------------------|
+| `protocol` *string* | Base58Check encoded protocol hash. |
+| `chain_id` *string* | Base58Check encoded chain id of the chain the operation was executed on. |
+| `hash` *string* | Base58Check encoded operation hash. |
+| `branch` *string* | Base58Check encoded block hash of a branch root block. | 
+| `contents` | [Operation contents](#operation-contents) or [Operation Contents And Result](#operation-contents-and-result) |
+| `signature` *(optional) string* | Base58Check encoded signature of the operation. |
+
 
 #### Operation Contents
 The contents of the executed operations.
