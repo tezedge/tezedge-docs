@@ -45,6 +45,12 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 &nbsp;
 &nbsp;
 
+*Example Browser*
+
+<a href="http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/json/cycle/1"
+target="_blank">http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/json/cycle/1
+</a>
+
 *Example Request*
 
 
@@ -65,7 +71,7 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/json/cyc
 
 ## Endorsing Rights
 
-Returns the endorsing rights for a level. The default behavior is to return the rights for the provided block_id.
+Returns the endorsing rights for a level. The default behavior is to return the rights for the provided `block_id`.
 
 
 *Request*
@@ -94,10 +100,19 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | The delegates pkh (private key hash, e.g. tz1..) which will perform the endorsement |
-| `estimated_time` *rfc3339* | The estimated time when the endorsing will start. For rights requested behind the provided block_id, this field is omitted. |
+| `estimated_time` *rfc3339* | The estimated time when the endorsing will start. For rights requested behind the provided `block_id`, this field is omitted. |
 | `level` *i32* | Level of the block to be endorsed. |
 | `slots` *[i32]* | List of all the endorsing slots the delegate is meant to fill |
 
+
+&nbsp;
+&nbsp;
+
+*Example Browser*
+
+<a href="http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/endorsing_rights"
+target="_blank">http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/endorsing_rights
+</a>
 
 *Example Request*
 
@@ -194,11 +209,12 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/endorsing_ri
   }
 ]
 ```
+
 &nbsp;
 
 ## Baking Rights
 
-Returns the baking rights for a level. The default behavior is to return the rights for the successor of the provided block_id (the next block). Delegates that have at least one priority assigned below max_priority (the default is 64) display their best priority.
+Returns the baking rights for a level. The default behavior is to return the rights for the successor of the provided `block_id` (the next block). Delegates that have at least one priority assigned below `max_priority` (the default is 64) display their best priority.
 
 
 *Request*
@@ -233,6 +249,18 @@ Returns a list of objects with the following fields, sorted by priority:
 | `estimated_time` *rfc3339* | The estimated time at which the baking will take place. For rights requested behind the provided block_id, this field is omitted |
 | `level` *i32* | The level of the block to which the rights are calculated. |
 | `priority` *i32* | The priority of the delegate |
+
+
+
+&nbsp;
+&nbsp;
+
+*Example Browser*
+
+<a href="http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/baking_rights"
+target="_blank"> http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/baking_rights
+</a>
+
 
 *Example Request*
 
@@ -289,6 +317,7 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/baking_right
   }
 ]
 ```
+
 &nbsp;
 
 ## Constants
@@ -345,11 +374,22 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `tokens_per_roll` *BigInt* | Number of mutez needed for one roll. |
 
 
+
+&nbsp;
+&nbsp;
+
+*Example Browser*
+
+<a href="http://carthage.tezedge.com:18732/chains/main/blocks/head/context/constants"
+target="_blank">http://carthage.tezedge.com:18732/chains/main/blocks/head/context/constants
+</a>
+
+
 *Example Request*
 
 
 ```bash
-curl http://carthage.tezedge.com:18732/chains/main/blocks/45000/context/constants
+curl http://carthage.tezedge.com:18732/chains/main/blocks/head/context/constants
 ```
 
 *Example Response*
@@ -437,6 +477,17 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 | `signature` *string* | Base58Check encoded digital signature of the shell and protocol headers. |
 | `priority` *u16* | The baking priority of the delegate who baked the block. |
 | `proof_of_work_nonce` *i64* | Nonce used to pass a low-difficulty PoW task for the block. |
+
+
+
+&nbsp;
+&nbsp;
+
+*Example Browser*
+
+<a href="http://carthage.tezedge.com:18732/chains/main/blocks/45000/header"
+target="_blank">http://carthage.tezedge.com:18732/chains/main/blocks/45000/header
+</a>
 
 
 
@@ -1014,6 +1065,17 @@ The next fields are dependent on the `action` field.
 | `big_map` *BigInt* | Bigmap ID. |
 | `key_type` *string* | Micheline expression for the allocated key type. |
 | `value_type` *string* | Micheline expression for the allocated value type. |
+
+
+
+&nbsp;
+&nbsp;
+
+*Example Browser*
+
+<a href="http://carthage.tezedge.com:18732/chains/main/blocks/41000"
+target="_blank">http://carthage.tezedge.com:18732/chains/main/blocks/41000
+</a>
 
 
 *Example Request*
