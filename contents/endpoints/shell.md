@@ -6,9 +6,8 @@ showTitle: false
 
 # Table of contents
 
-- [Shell](#shell)
-  * [Commit hash](#commit-hash)
-  * [Bootstrapped](#bootstrapped)
+- [Commit hash](#commit-hash)
+- [Bootstrapped](#bootstrapped)
 
 # Shell
 

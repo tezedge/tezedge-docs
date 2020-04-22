@@ -5,14 +5,12 @@ showTitle: false
 ---
 
 # Table of contents
-
-- [Shell](#shell)
-  * [Cycle](#cycle)
-  * [Endorsing Rights](#endorsing-rights)
-  * [Baking Rights](#baking-rights)
-  * [Constants](#constants)
-  * [Block Header](#block-header)
-  * [Block](#block)
+- [Cycle](#cycle)
+- [Endorsing Rights](#endorsing-rights)
+- [Baking Rights](#baking-rights)
+- [Constants](#constants)
+- [Block Header](#block-header)
+- [Block](#block)
 
 # Protocol
 
