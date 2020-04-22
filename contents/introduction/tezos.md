@@ -49,7 +49,7 @@ Tezos allows token holders to transfer (“delegate”) validation rights to oth
 *   Another baker comes in and creates a block, repeated until the end of the cycle
 *   For robustness, once a baker create a block they will want to prove that they created it, malicious players do not want to claim the creation of a block.
 *   32 stakeholders are randomly selected (select 32 token values and look up who owns them), these are going to get endorsement rights and are known as endorsers.
-*   Whenever a baker creates a block, there are endorsers waiting to see who made the block and approve it. Once the block is created by the bakers, the endorsers sign the block (submit signatures), and the process is repeated.
+*   Whenever a baker creates a block, there are endorsers waiting to see who made the block and approve it. Once the block is created by the bakers, the endorsers create and submit endorsement operations for the baked block, and the process is repeated.
 *   A baker receives a reward that is proportional to the amount of endorsements included in the created block.
 
 **Generating randomness** 
