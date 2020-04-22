@@ -43,7 +43,8 @@
         "entry": "Endpoints",
         "name": "Endpoints",
         "items": [
-            "endpoints/protocol"
+            "endpoints/protocol",
+            "endpoints/shell"
         ]
     },
     {
