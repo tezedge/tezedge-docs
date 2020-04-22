@@ -6,22 +6,24 @@ showTitle: false
 
 # Protocol
 
-# Table of contents
-- [Cycle](#cycle)
-- [Endorsing Rights](#endorsing-rights)
-- [Baking Rights](#baking-rights)
-- [Constants](#constants)
+* Context ( Blockchain State )
+    - [Cycle](#cycle)
+    - [Constants](#constants)
+    - [Endorsing Rights](#endorsing-rights)
+    - [Baking Rights](#baking-rights)
+
+
 - [Block Header](#block-header)
 - [Block](#block)
 
+&nbsp;
 
-## Cycle 
+## Cycle
 
 Returns info about the cycle
 
-&nbsp;
 
-#### *Request*
+*Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id> 
@@ -33,7 +35,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 | `chain_id` *string* | Id of the requested chain |
 | `cycle_id` *string* | Id of the requested cycle |
 
-#### *Response*
+*Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -59,14 +61,14 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/json/cyc
     "random_seed": "c8db55740733852aa18aa82e108e4475b1abcf3f1f077ac966e9cecca86612ec"
 }
 ```
+&nbsp;
 
 ## Endorsing Rights
 
 Returns the endorsing rights for a level. The default behavior is to return the rights for the provided block_id.
 
-&nbsp;
 
-#### *Request*
+*Request*
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)
@@ -79,7 +81,7 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `chain_id` *string* | Id of the requested chain |
 
 
-#### *Optional query arguments*
+*Optional query arguments*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -87,11 +89,12 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 | `delegate` *i32* | Filters the results, showing only the rights for this delegate. |
 | `level` *i32* | Block level at which the rights will be retrieved. |
 
-#### *Response*
+*Response*
+
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | The delegates pkh (private key hash, e.g. tz1..) which will perform the endorsement |
-| `estimated_time` *rfc3339 timestamp* | The estimated time when the endorsing will start. For rights requested behind the provided block_id, this field is omitted. |
+| `estimated_time` *rfc3339* | The estimated time when the endorsing will start. For rights requested behind the provided block_id, this field is omitted. |
 | `level` *i32* | Level of the block to be endorsed. |
 | `slots` *[i32]* | List of all the endorsing slots the delegate is meant to fill |
 
@@ -191,14 +194,15 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/endorsing_ri
   }
 ]
 ```
+&nbsp;
 
 ## Baking Rights
 
 Returns the baking rights for a level. The default behavior is to return the rights for the successor of the provided block_id (the next block). Delegates that have at least one priority assigned below max_priority (the default is 64) display their best priority.
 
-&nbsp;
 
-#### *Request*
+*Request*
+
 
 ```bash
 GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*&[max_priority=<int>]&[all]
@@ -209,7 +213,7 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | `block_id` *string* | Requested block Id |  
 | `chain_id` *string* | Id of the requested chain |
 
-#### *Optional query arguments*
+*Optional query arguments*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -219,14 +223,14 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | `level` *i32* | Block level at which the rights will be retrieved. |
 | `max_priority` *i32* | The maximum priority to calculate. The default is 64.
 
-#### *Response*
+*Response*
 
 Returns a list of objects with the following fields, sorted by priority:
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | pkh (private key hash, e.g. tz1..) which will perform the endorsement |
-| `estimated_time` *rfc3339 timestamp* | The estimated time at which the baking will take place. For rights requested behind the provided block_id, this field is omitted |
+| `estimated_time` *rfc3339* | The estimated time at which the baking will take place. For rights requested behind the provided block_id, this field is omitted |
 | `level` *i32* | The level of the block to which the rights are calculated. |
 | `priority` *i32* | The priority of the delegate |
 
@@ -285,14 +289,15 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/helpers/baking_right
   }
 ]
 ```
+&nbsp;
 
 ## Constants
 
 Returns all the constants specified in the protocol
 
-&nbsp;
 
-#### *Request*
+*Request*
+
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/context/constants
@@ -303,7 +308,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
-#### *Response*
+*Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -393,6 +398,7 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/45000/context/constant
   "tokens_per_roll": "8000000000"
 }
 ```
+&nbsp;
 
 ## Block Header
 
@@ -400,7 +406,8 @@ Retrieves the block header for the requested block_id
 
 &nbsp;
 
-#### *Request*
+*Request*
+
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>/header
@@ -411,7 +418,8 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 | `chain_id` *string* | Id of the requested chain |
 | `block_id` *string* | Requested block Id |  
 
-#### *Response*
+*Response*
+
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -420,7 +428,7 @@ GET /chains/<chain_id>/blocks/<block_id>/header
 | `level` *i32* | Level (height) of the block. |
 | `proto` *u8* | Protocol number used to bake the block. |
 | `predecessor` *string* | Base58Check encoded block hash of the previous block. |
-| `timestamp` *RFC3339 timestamp* | Block baking timestamp. |
+| `timestamp` *RFC3339* | Block baking timestamp. |
 | `validation_pass` | Number of validation passes. |
 | `operations_hash` *string* | Base58Check encoded hash of a list of root hashes of Merkle trees of operations. |
 | `fitness` *bytes* | A sequence of sequences of unsigned bytes, ordered by length and then lexicographically. It represents the claimed fitness of the chain ending in this block. |
@@ -462,6 +470,7 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/45000/header
 }
 ```
 
+&nbsp;
 
 ## Block
 
@@ -469,7 +478,8 @@ Returns all the information about a block for the supplied block_id
 
 &nbsp;
 
-#### *Request*
+*Request
+
 
 ```bash
 GET /chains/<chain_id>/blocks/<block_id>
@@ -481,7 +491,8 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `block_id` *string* | Requested block Id |  
 
 
-#### *Response*
+*Response*
+
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
@@ -500,7 +511,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `level` *i32* | Block level. |
 | `proto` *u8* | Protocol used to create the block. |
 | `predecessor` *string* | Base58Check encoded block hash. |
-| `timestamp` *RFC3339 timestamp* | Time at which block was baked. |
+| `timestamp` *RFC3339* | Time at which block was baked. |
 | `validation_pass` *u8* | Number of validation passes. |
 | `operations_hash` *string* | Base58Check encoded hash of a list of root hashes of Merkle trees of operations. |
 | `fitness` *string* |  A sequence of sequences of unsigned bytes, ordered by length and then lexicographically. It represents the claimed fitness of the chain ending in this block. |
@@ -1475,3 +1486,4 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/41000
     ]
 }
 ```
+&nbsp;

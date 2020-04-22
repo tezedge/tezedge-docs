@@ -237,7 +237,7 @@ html {
 }
 
 .blog-post {
-    max-width: 700px;
+    min-width: 20vw;
 }
 
 body {
@@ -489,6 +489,15 @@ table {
     width: 100%;
 }
 
+table > thead > tr > th:nth-child(1) {
+    width: 15vw !important;
+    padding-left: 2px !important;
+}
+
+table > thead > tr > th {
+    font-weight: normal !important;
+}
+
 fieldset {
     margin-left: 0;
     margin-right: 0;
@@ -729,9 +738,9 @@ pre tt:after {
 
 td code {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
-    font-size: 1em !important;
+    font-size: 14px !important;
     color: black !important;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
 }
 
 td em { 
@@ -744,4 +753,8 @@ code .token.property{
 
 code .token.operator{
     background: none !important;
+}
+
+code[class*="language-"] {
+    font-size: 14px !important;  
 }
