@@ -99,37 +99,6 @@ The safety deposits ensure that anyone is who is participating in the system (pr
     There is a reason why we wait a minute and not a second. For the system to work, an honest majority is needed, but if people begin delaying blocks, then all of a sudden the honest majority needs to become much larger. If an individual can delay every message by 2 minutes and they control 33% of the network, then they are going to create blocks at a slower speed, but if they can slow the speed of the other bakers (the users who create blocks), then they are going to go at the same speed as everyone else. If an individual can delay the process by 2 minutes, then the network must have a 66% honest majority.
 
 
-## Smart contracts in Tezos
-
-When it comes to smart contracts, the usual approach is to create a virtual machine (VM). Developers program their contracts in a high-level language and then they will compile it down to the VM. 
-
-**Advantages**
-
-It is possible to count the cost very easily by counting the steps in the VM and it's very generic. A developer can simply compile all the languages they want into a very simple and minimal VM.
-
-**Disadvantages**
-
-However, this can be a problem in case a developer wants to really understand what they're doing. First, they need the formal specification of the VM. For a VM, that's not hard to get, but a formal specification of the high-level language is also needed. It is also necessary to have a formally verified compiler that makes sure the contract is performing as intended. This is because these contracts can hold cryptocurrency worth 100s of millions of Euros, so the cost of error in these contracts is very high. It is impossible to change the smart contracts once they're deployed, so the cost of errors can be enormous.
-
-# Smart contract design
-
-**Correctness** 
-
-It is crucial to avoid errors. While verifiability is important, it is also necessary to be able to prove to everyone that the smart contracts in Tezos do not have any issues. It's not enough for the developer to be confident, everyone else needs to be confident as well. 
-
-**Parsimony**
-
-Space is expensive on the blockchain, it is valued as a premium and everyone needs to keep everything that's on a blockchain on their disk (or even in memory, if efficiency is a priority), therefore it is better to avoid space-intensive smart contracts. 
-
-**Performance** 
-
-Performance is not an issue since smart contracts run on simple logic. 
-
-**Portability** 
-
-Portability isn’t an issue either, since the smart contracts perform reading on the Tezos blockchain. It is not necessary to run them on a dozen different platforms. 
-
-
 ## Designing the language of Tezos
 
 
