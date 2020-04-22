@@ -8,96 +8,16 @@ showTitle: false
 
 - [Shell](#shell)
   * [Cycle](#cycle)
-      - [*Request*](#-request-)
-      - [*Response*](#-response-)
   * [Endorsing Rights](#endorsing-rights)
-      - [*Request*](#-request--1)
-      - [*Optional query arguments*](#-optional-query-arguments-)
-      - [*Response*](#-response--1)
   * [Baking Rights](#baking-rights)
-      - [*Request*](#-request--2)
-      - [*Optional query arguments*](#-optional-query-arguments--1)
-      - [*Response*](#-response--2)
   * [Constants](#constants)
-      - [*Request*](#-request--3)
-      - [*Response*](#-response--3)
   * [Block Header](#block-header)
-      - [*Request*](#-request--4)
-      - [*Response*](#-response--4)
-  * [Commit hash](#commit-hash)
-      - [*Request*](#-request--5)
-      - [*Response*](#-response--5)
-  * [Bootstrapped](#bootstrapped)
-      - [*Request*](#-request--6)
-      - [*Response*](#-response--6)
   * [Block](#block)
-      - [*Request*](#-request--7)
-      - [*Response*](#-response--7)
-      - [Header](#header)
-      - [Metadata](#metadata)
-      - [Operations](#operations)
-      - [Max operation list lengths](#max-operation-list-lengths)
-      - [Test chain status](#test-chain-status)
-        * [forking](#forking)
-        * [running](#running)
-      - [Level](#level)
-      - [Balance update](#balance-update)
-        * [contract](#contract)
-        * [freezer](#freezer)
-      - [Operation Contents](#operation-contents)
-        * [endorsement](#endorsement)
-        * [seed nonce revelation](#seed-nonce-revelation)
-        * [double_endorsement_evidence](#double-endorsement-evidence)
-        * [Double Baking Evidence](#double-baking-evidence)
-        * [Activate account](#activate-account)
-        * [Proposal](#proposal)
-        * [Ballot](#ballot)
-        * [Reveal](#reveal)
-        * [Transaction](#transaction)
-        * [Origination](#origination)
-        * [Delegation](#delegation)
-      - [Inlined Endorsement:](#inlined-endorsement-)
-      - [Endorsement Operation](#endorsement-operation)
-      - [Transaction parameters](#transaction-parameters)
-      - [Michelson integer expression](#michelson-integer-expression)
-      - [Michelson string expression](#michelson-string-expression)
-      - [Michelson bytes expression](#michelson-bytes-expression)
-      - [Michelson generic prim expression](#michelson-generic-prim-expression)
-      - [Operation Contents And Result](#operation-contents-and-result)
-      - [Operation Contents And Result Metadata](#operation-contents-and-result-metadata)
-      - [Internal Operation Result](#internal-operation-result)
-        * [Reveal](#reveal-1)
-        * [Transaction](#transaction-1)
-        * [Origination](#origination-1)
-        * [Delegation](#delegation-1)
-      - [Reveal Result](#reveal-result)
-        * [Applied](#applied)
-        * [Failed](#failed)
-        * [Backtracked](#backtracked)
-      - [Delegation Result](#delegation-result)
-        * [Applied](#applied-1)
-        * [Failed](#failed-1)
-        * [Backtracked](#backtracked-1)
-      - [Transaction Result](#transaction-result)
-        * [Applied](#applied-2)
-        * [Failed](#failed-2)
-        * [Backtracked](#backtracked-2)
-      - [Origination Result](#origination-result)
-        * [Applied](#applied-3)
-        * [Failed](#failed-3)
-        * [Backtracked](#backtracked-3)
-      - [Big Map Diff](#big-map-diff)
-        * [Update](#update)
-        * [Remove](#remove)
-        * [Copy](#copy)
-        * [Alloc](#alloc)
+
+# Protocol
 
 
-
-# Shell
-
-
-## Cycle
+## Cycle 
 
 Returns info about the cycle
 
@@ -111,16 +31,16 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `block_id` *string* | Description |
-| `chain_id` *string* | Description |
-| `cycle_id` *string* | Description |
+| `block_id` *string* | Id of the requested block |
+| `chain_id` *string* | Id of the requested chain |
+| `cycle_id` *string* | Id of the requested cycle |
 
 #### *Response*
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `random_seed` *string* |  Athe 32 byte seed generated from the committed nonces |  
-| `roll_snapshot` *string* |  A randomly selected snapshot for the requested cycle  |
+| `roll_snapshot` *i32* |  A randomly selected snapshot for the requested cycle  |
 
 &nbsp;
 &nbsp;
@@ -129,7 +49,7 @@ GET /chains/<chain_id>/blocks/<block_id>/context/raw/json/cycle/<cycle_id>
 
 
 ```bash
-curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/bytes/cycle
+curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/json/cycle/1
 ```
 
 *Example Response*
@@ -137,24 +57,8 @@ curl http://carthage.tezedge.com:18732/chains/main/blocks/1/context/raw/bytes/cy
 
 ```JSON
 {
-    "16": {
-        "last_roll": {
-            "6": 100,
-            "7": "00000502",
-            "1": ["aa",12],
-            "0": "00000502",
-            "3": "00000502",
-            "5": "00000502",
-            "2": "00000502",
-            "4": "00000502"
-        },
-        "roll_snapshot": "0008"
-    },
-    "12": {
-        "last_roll": {
-            "1": "000003c7"
-        }
-    }
+    "roll_snapshot": 0,
+    "random_seed": "c8db55740733852aa18aa82e108e4475b1abcf3f1f077ac966e9cecca86612ec"
 }
 ```
 
@@ -181,16 +85,16 @@ GET /chains/<chain_id>/blocks/<block_id>/helpers/endorsing_rights?(level=<block_
 
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
-| `cycle` *int32* | Retrieve the rights for the entire current cycle. |
-| `delegate` *int32* | Filters the results, showing only the rights for this delegate. |
-| `level` *int32* | Block level at which the rights will be retrieved. |
+| `cycle` *i32* | Retrieve the rights for the entire current cycle. |
+| `delegate` *i32* | Filters the results, showing only the rights for this delegate. |
+| `level` *i32* | Block level at which the rights will be retrieved. |
 
 #### *Response*
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | The delegates pkh (private key hash, e.g. tz1..) which will perform the endorsement |
 | `estimated_time` *rfc3339 timestamp* | The estimated time when the endorsing will start. For rights requested behind the provided block_id, this field is omitted. |
-| `level` *int32* | Level of the block to be endorsed. |
+| `level` *i32* | Level of the block to be endorsed. |
 | `slots` *[i32]* | List of all the endorsing slots the delegate is meant to fill |
 
 
@@ -312,10 +216,10 @@ GET /chains/:chain_id/blocks/:block_id/helpers/baking_rights?(level=<block_level
 | Field             |                  Description                           |
 |-------------------|--------------------------------------------------------|
 | `all` | Returns all priorities instead of just the best one |
-| `cycle` *int32* | Retrieve the rights for the entire current cycle. |
+| `cycle` *i32* | Retrieve the rights for the entire current cycle. |
 | `delegate` *string* | Filters the results, showing only the rights for this delegate. |
-| `level` *int32* | Block level at which the rights will be retrieved. |
-| `max_priority` *int32* | The maximum priority to calculate. The default is 64.
+| `level` *i32* | Block level at which the rights will be retrieved. |
+| `max_priority` *i32* | The maximum priority to calculate. The default is 64.
 
 #### *Response*
 
@@ -325,8 +229,8 @@ Returns a list of objects with the following fields, sorted by priority:
 |-------------------|--------------------------------------------------------|
 | `delegate` *string* | pkh (private key hash, e.g. tz1..) which will perform the endorsement |
 | `estimated_time` *rfc3339 timestamp* | The estimated time at which the baking will take place. For rights requested behind the provided block_id, this field is omitted |
-| `level` *int32* | The level of the block to which the rights are calculated. |
-| `priority` *int32* | The priority of the delegate |
+| `level` *i32* | The level of the block to which the rights are calculated. |
+| `priority` *i32* | The priority of the delegate |
 
 *Example Request*
 
@@ -430,8 +334,8 @@ GET /chains/<chain_id>/blocks/<block_id>/context/constants
 | `preserved_cycles` *u8*  | Number of preserved cycles. |
 | `proof_of_work_nonce_size` *u8* | Size (in bytes) of the lightweight proof-of-work nonce. |
 | `proof_of_work_threshold` *i64* | The threshold of a hash generated in a lightweight proof of work (PoW) task. |
-| `quorum_max` (int32) | Maximum value a quorum can reach expressed in percentage multiplied by 100. |
-| `quorum_min` *int32* | Minimum quorum for a voting period to be successful, expressed in percentage multiplied by 100. |
+| `quorum_max` (i32) | Maximum value a quorum can reach expressed in percentage multiplied by 100. |
+| `quorum_min` *i32* | Minimum quorum for a voting period to be successful, expressed in percentage multiplied by 100. |
 | `seed_nonce_revelation_tip` *BigInt* | The amount of mutez awarded for including a nonce reveal operation |
 | `test_chain_duration` *i64* | Lifetime of the testchain in seconds. |
 | `time_between_blocks` *i64* | Used for calculating estimated timestamps. |
