@@ -132,11 +132,11 @@ GET /chains/<chain_id>/blocks/<block_id>
 |-------------------|--------------------------------------------------------|
 | `hash` *string* | Base58Check encoded block hash. |
 | `chain_id` *string* | Base58Check encoded chain id. |
-| `header` | [Header s](#block.header) |
-| `metadata` | [Metadata s](#metadata) |
-| `operations` | [Operations s](#operations) |
-| `balance_updates` | List of [Balance update s](#balance-update) |
-
+| `protocol` *string* | Base58Check encoded protocolhash. |
+| `header` | [Header](#block.header) |
+| `metadata` | [Metadata](#metadata) |
+| `operations` | [Operations](#operations) |
+  
 &nbsp;
 
 ### [header](#block.header)
@@ -145,6 +145,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 |-------------------|--------------------------------------------------------|
 | `level` *i32* | Block level. |
 | `proto` *u8* | Protocol used to create the block. |
+| `priority` *i32* | Baking priority. |
 | `predecessor` *string* | Base58Check encoded block hash. |
 | `timestamp` *RFC3339* | Time at which block was baked. |
 | `validation_pass` *u8* | Number of validation passes. |
@@ -152,6 +153,7 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `fitness` *string* |  A sequence of sequences of unsigned bytes, ordered by length and then lexicographically. It represents the claimed fitness of the chain ending in this block. |
 | `context` *string* | Base58Check encoded hash of the state of context, after application of this block. |
 | `protocol_data` | The protocol-specific fragment of the block header. |
+| `signature` | Base58Check encoded signature. |
 
 
 &nbsp;
@@ -168,14 +170,14 @@ GET /chains/<chain_id>/blocks/<block_id>
 | `max_operations_ttl` *i31* | The "time-to-live" of operation for the next block. | 
 | `max_operation_data_length` *i31* | The maximum size of an operation in bytes. |
 | `max_block_header_length` *i31* | The maximum size of a block header in bytes. |
-| `max_operation_list_length`| [Max operation list lengths](#metadatamax_operation_list_lenghts) |
+| `max_operation_list_length`| [Max operation list lengths](#metadatamax_operation_list_length) |
 | `baker` *string* | Base58Check encoded private key hash of the baker (tz1...). |
 | `level` | [Level](#metadatalevel) |
 | `voting_period_kind` *string* | The voting period the block was baked in. |
 | `nonce_hash` *string* | Base58Check encoded nonce hash. Returns null, if nonce_hash is not present. |
 | `consumed_gas` *BigInt* | Total gas consumed by creating the block and including it in the blockchain. |
 | `deactivated` *string* | List of Base58Check encoded public key hashes (tz1....) which baking was deactivated. |
-| `balance_updates` | [Balance update](#balance-update) | 
+| `balance_updates` | [Balance update](#metadatabalance_updates) |
 
 
 &nbsp;
@@ -192,13 +194,13 @@ The next fields are dependent on the `status` .
 
 &nbsp;
 
-#### metadata.test\_chain\_status.[forking](#forking)
+#### metadata.test\_chain\_status.status.[forking](#forking)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `protocol` *string* | Base58Check encoded protocol hash of the activated protocol on the test chain. |
 | `expiration ` *i32* | Expiration of the test chain, in seconds. |
 
-#### metadata.test\_chain\_status.[running](#running)
+#### metadata.test\_chain\_status.status.[running](#running)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `protocol` *string* | Base58Check encoded protocol hash of the activated protocol on the test chain. |
@@ -233,7 +235,7 @@ Structure encapsulating information about the position of the block in the block
 
 &nbsp;
 
-#### [balance_updates](#balance_updates)
+#### metadata.[balance_updates](#balance_updates)
 Structure representing information about the various balance changes that happened in the included operations.
 
 |              |                                             |
@@ -245,12 +247,12 @@ The next fields are dependent on the `kind` .
 
 &nbsp;
 
-##### [contract](#contract)
+#### metadata.balance_updates.kind.[contract](#contract)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `contract` *string* | Base58Check encoded private key hash of the contract whose balance was changed. | <!-- check grammar pls --> 
 
-##### [freezer](#freezer)
+#### metadata.balance_updates.kind.[freezer](#freezer)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `category` *string* | The category of the frozen balance. |
@@ -270,11 +272,12 @@ The next fields are dependent on the `kind` .
 | `chain_id` *string* | Base58Check encoded chain id of the chain the operation was executed on. |
 | `hash` *string* | Base58Check encoded operation hash. |
 | `branch` *string* | Base58Check encoded block hash of a branch root block. | 
-| `contents` | [Operation contents](#operation-contents) or [Operation Contents And Result](#operation-contents-and-result) |
+| `contents` | [Operation contents](#operationscontents) or [Operation Contents And Result](#operation-contents-and-result) |
 | `signature` *(optional) string* | Base58Check encoded signature of the operation. |
 
+&nbsp;
 
-#### Operation Contents
+#### operations.[contents](#contents)
 The contents of the executed operations.
 
 |              |                                             |
@@ -283,18 +286,23 @@ The contents of the executed operations.
 
 The next fields are dependent on the `kind` .
 
-##### endorsement
+&nbsp;
+
+#### operations.contents.kind.[endorsement](#endorsement)
+
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `level` *i32* | Level of the endorsed block. |
 
-##### seed nonce revelation
+#### operations.contents.kind.[seed\_nonce\_revelation](#seed_nonce_revelation)
+ 
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `level` *i32* | Level of the block containing the nonce. |
 | `nonce` *string* | Nonce for the random seed generation. |
 
-##### double_endorsement_evidence
+#### operations.contents.kind.[double\_endorsement\_evidence](#double_endorsement_evidence)
+
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `op1` | [Inlined Endorsement](#inlined-endorsement) |
