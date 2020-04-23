@@ -136,8 +136,3 @@ If you are running OSX you can use docker version:
 ./run.sh docker
 ```
 
-Listening for updates. Node emits statistics on the websocket server, which can be changed by `--websocket-address` argument, for example:
-
-```
-./run.sh node --websocket-address 0.0.0.0:12345
-```
