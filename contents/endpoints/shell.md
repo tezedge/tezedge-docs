@@ -308,28 +308,27 @@ The next fields are dependent on the `kind` .
 | `op1` | [Inlined Endorsement](#inlined-endorsement) |
 | `op2` | [Inlined Endorsement](#inlined-endorsement) |
 
-The next fields are dependent on the *kind* .
+#### operations.contents.kind.[double\_baking\_evidence](#double_baking_evidence)
 
-##### Double Baking Evidence 
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `bh1` *FullHeader* | First header of the double baked block. | 
 | `bh2` *FullHeader* | Second header of the double baked block evidence. |
 
-##### Activate account
+#### operations.contents.kind.[active\_account](#active_account)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `pkh` *string* | Base58Check encoded public key hash of the activated account. |
 | `secret` *string* | The secret of the activated account. |
 
-##### Proposal
+#### operations.contents.kind.[proposal](#proposal)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `source` *string* | Base58Check encoded public key hash of the proposer. |
 | `period` *i32* | The voting period expressed in a number. | 
 | `proposals` *string* | A list of the proposed protocol Base58Check encoded hashes. |
 
-##### Ballot
+#### operations.contents.kind.[ballot](#ballot)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 |`source` *string* | Base58Check encoded public key hash of the ballot submitter. |
@@ -337,7 +336,7 @@ The next fields are dependent on the *kind* .
 |`proposal` *string* | Base58Check encoded hash of the protocol to which the ballot is submitted. |
 |`ballot` *string* | The ballot to submit. |
 
-##### Reveal
+#### operations.contents.kind.[reveal](#reveal)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `source` *string* | Base58Check encoded public key hash of the revealed account. |
@@ -347,7 +346,7 @@ The next fields are dependent on the *kind* .
 | `storage_limit` *BigInt* | The set storage limit. |
 | `public_key` *string* | Base58Check encoded public key of the revealing account. |
 
-##### Transaction
+#### operations.contents.kind.[transaction](#transactiion)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `source` *string* | Base58Check encoded public key hash of the transaction sender. |
@@ -359,7 +358,7 @@ The next fields are dependent on the *kind* .
 | `destination` *string* | Base58Check encoded public key hash of the transaction recipient. |
 | `parameters` *(optional)* | [Transaction paramaters](#transaction-parameters) |
 
-##### Origination
+#### operations.contents.kind.[orignaton](#origination)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `source` *string* | Base58Check encoded public key hash of the implicit account performing the origination. |
@@ -371,7 +370,7 @@ The next fields are dependent on the *kind* .
 | `delegate` *(optional) String* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
 | `script` *string* | Hex string encoded michelson script. |
 
-##### Delegation
+#### operations.contents.kind.[delegation](#delegatioin)
 |              |                                             |
 |-------------------|--------------------------------------------------------|
 | `source` *string* | Base58Check encoded public key hash of the implicit account performing the delegation (delegator). |
@@ -380,305 +379,6 @@ The next fields are dependent on the *kind* .
 | `gas_limit` *BigInt* | The set gas limit. |
 | `storage_limit` *BigInt* | The set storage limit. |
 | `delegate` *(optional) string* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Inlined Endorsement:
-Inlined endorsement operation
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `branch` *string* | Base58Check encoded block hash of a branch root block. | 
-| `operations` | [Endorsement Operation](#endorsement-operation) |
-| `signature` *(optional string)* |  Base58Check encoded signature of the operation. |
-
-#### Endorsement Operation
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `kind` *string* | The type or “kind” of the operation. |
-| `level` *i32* | Level (height) of endorsed block. |
-
----------------------------------------------------------------------------------------------------------------------------
-#### Transaction parameters
-Optional parameters for smart contract calls
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `entrypoint` *string* | Named entrypoint to a Michelson smart contract. |
-| `value` | One of the following michelson expressions: [Michelson int](#michelson-integer-expression), [Michelson string](#michelson-string-expression), [Michelson bytes](#michelson-bytes-expression), [Michelson generic prim](#michelson-generic-prim-expression). |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Michelson integer expression
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `int` *BigInt* | Expression value. |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Michelson string expression
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `string` *string* | Expression value. |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Michelson bytes expression
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `bytes` *string* | Expression value. Bytes in string format.  |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Michelson generic prim expression
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `prim` *string* | Michelson primitive. |
-| `args` *(optional)* | List containing a variation of the following michelson expressions: [Michelson int](#michelson-integer-expression), [Michelson string](#michelson-string-expression), [Michelson bytes](#michelson-bytes-expression), [Michelson generic prim](#michelson-generic-prim-expression). |
-| `annots` *(optional) [string]* | List of annotations. |
-
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Operation Contents And Result
-The contents and results of the executed operations. Same s as in Operation Contents above with and additional metadata 
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `metadata` | [Operation Contents And Result Metadata](#operation-contents-and-result-metadata) |
-
-#### Operation Contents And Result Metadata
-Contains metadata about the operation.
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `balance_updates` | [Balance update](#balance-update) |
-| `operation_result` | [Reveal Result](#reveal-result) or [Transaction Result](#transaction-result) or [Origination Result]() or [Delegation Result](#delegation-result) |
-| `internal_operation_results` *(optional)* | [Internal Operation Result](#internal-operation-result) |
-
----------------------------------------------------------------------------------------------------------------------------
-
-
-#### Internal Operation Result
-
-Result of an internal operation.
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `kind` *string* | The operation type or “kind”. |
-| `source` *string* | Base58Check encoded public key hash of the account initializing the operation. |
-| `nonce` *positive i16* |   |
-
-The next fields are dependent on the `kind` .
-
-##### Reveal
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `public_key` *string* |  Base58Check encoded public key of the revealing account. |
-| `result` | [Reveal Result](#reveal-result) |
-
-##### Transaction
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `amount` *BigInt* | The amount of tokens transferred. |
-| `destination` *string* | Base58Check encoded public key hash of the transaction receiver. |
-| `parameters` *(optional)* | [Transaction paramaters](#transaction-parameters) |
-| `result` | [Transaction Result](#transaction-result) |
-
-##### Origination
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `balance` *BigInt* | Mutez to give the originated account (contract). |
-| `delegate` *(optional) string* | Deprecated in 005 and later protocols, Delegate to whom the originated account delegates to. |
-| `script` *string* |  Hex string encoded michelson script. |
-| `result` | [Origination Result](#origination-result) |
-
-##### Delegation
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `delegate` *(optional) string* | Base58Check encoded public key hash of the implicit account receiving the delegation (delegate). |
-| `result` | [Delegation Result](#delegation-result) |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Reveal Result
-Result of the reveal operation.
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `status` *string* | The operation result status. |
-
-The next fields are dependent on the *status* .
-
-##### Applied
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
-
-##### Failed
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-
-##### Backtracked
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *(optional) error* | List of errors. |
-| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
-
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Delegation Result
-Result of the delegation operation.
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `status` *string* | The operation result status. |
-
-The next fields are dependent on the *status* .
-
-##### Applied
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
-
-##### Failed
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-
-##### Backtracked
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *(optional) error* | List of errors. |
-| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Transaction Result
-Result of the transaction operation.
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `status` *string* | The operation result status: applied / failed / skipped / backtracked. |
-
-The next fields are dependent on the *status* .
-
-##### Applied
-|              |                                             |
-|-------------------|--------------------------------------------------------
-| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
-| `storage` *(optional) string* | Micheline expression. |
-| `big_map_diff` | [Big Map Diff](#big-map-diff) |
-| `balance_updates` | [Balance update](#balance-update) |
-| `originated_contracts` *(optional) string* | Originated contracts. |
-| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
-| `storage_size` *(optional) BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *(optional) BigInt* | Amount paid for the storage upgrade. |
-| `allocated_destination_contract` *(optional) bool* |
-
-##### Failed
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-
-##### Backtracked
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-| `consumed_gas` *BigInt* | The amount of gas the operation consumed. |
-| `storage` *string* | Micheline expression. |
-| `big_map_diff` | [Big Map Diff](#big-map-diff) |
-| `balance_updates` | [Balance update](#balance-update) |
-| `originated_contracts` *string* | Originated contracts. |
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `storage_size` *BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *BigInt* | Amount paid for the storage upgrade. |
-| `allocated_destination_contract` *bool* |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Origination Result
-Result of the origination operation.
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `status` *string* | The operation result status. |
-
-The next fields are dependent on the `status` .
-
-##### Applied
-|              |                                             |
-|-------------------|--------------------------------------------------------
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `big_map_diff` *(optional)* | [Big Map Diff](#big-map-diff) |
-| `balance_updates` *(optional)* | [Balance update](#balance-update) |
-| `originated_contracts` *(optional) string* | Originated contracts. |
-| `consumed_gas` *(optional) BigInt* | The amount of gas consumed by the operation. |
-| `storage_size` *(optional) BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *(optional) BigInt* | Amount paid for the storage upgrade. |
-
-
-
-##### Failed
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *error* | List of errors. |
-
-##### Backtracked
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `errors` *error* | list of errors. |
-| `consumed_gas` *BigInt* | The amount of gas consumed by the operation. |
-| `big_map_diff` *(optional)* | [Big Map Diff](#big-map-diff) |
-| `balance_updates` *(optional)* | [Balance update](#balance-update) |
-| `originated_contracts` *(optional) string* | Originated contracts. |
-| `consumed_gas` *(optional) BigInt* | The amount of gas the operation consumed. |
-| `storage_size` *(optional) BigInt* | Size of the storage after the operation was applied. |
-| `paid_storage_size_diff` *(optional) BigInt* | Amount paid for the storage upgrade. |
-
----------------------------------------------------------------------------------------------------------------------------
-
-#### Big Map Diff
-List of the actions executed over the big map
-
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `action` *string* | The action applied to the BigMap. |
-
-The next fields are dependent on the `action` .
-
-##### Update
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `big_map` *BigInt* | Bigmap ID. |
-| `key_hash` *string* | Base58Check encoded hash of the key. |
-| `key` *string* | Micheline expression. |
-| `value` *(optional) string* | Micheline expression. |
-
-##### Remove
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `big_map` *BigInt* | Bigmap ID. |
-
-##### Copy
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `source_big_map` *BigInt* | ID of the source Bigmap. |
-| `destination_big_map` *BigInt* | ID of the destination Bigmap. |
-
-##### Alloc
-|              |                                             |
-|-------------------|--------------------------------------------------------|
-| `big_map` *BigInt* | Bigmap ID. |
-| `key_type` *string* | Micheline expression for the allocated key type. |
-| `value_type` *string* | Micheline expression for the allocated value type. |
-
 
 
 &nbsp;
