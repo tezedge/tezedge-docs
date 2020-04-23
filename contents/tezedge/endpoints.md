@@ -48,22 +48,3 @@ There are two methods that can be implemented:
 We chose the second method because data stored in blockchain can take a considerable amount of space and duplicating it multiple times would take too much space. For most RPC requests the latency introduced by retrieving the data from commit log is very small and can even be improved by loading data in bulks. This helped us to achieve very low latencies and to support huge workloads.
 
 Although we did not utilize the actor model in the RPC module, it is used in other parts of the node and remains to be an integral part of our software architecture. We are preparing an article in which we will describe the actor model and its usefulness in concurrent programming. In the meantime, you can read more about Tezos and the TezEdge node by subscribing to our Medium, giving us a follow on Twitter or visiting our GitHub.
-
-**We currently support the following RPCs:**
-
-```
-/chains/main/blocks/head 
-
-/chains/main/blocks/{block_id}  
-
-/chains/main/blocks/{block_id}/header
-
-/chains/main/blocks/{block_id}/helpers/baking_rights
-
-/chains/main/blocks/{block_id}/helpers/endorsing_rights
-
-/chains/main/blocks/{block_id}/context/raw/json/cycle/{cycle_id}
-
-/chains/main/blocks/{block_id}/context/constants
-```
-
