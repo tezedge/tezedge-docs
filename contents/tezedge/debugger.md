@@ -7,9 +7,11 @@ However, when you are working with an encrypted network, such as the Tezos peer 
 
 During the development of the TezEdge node, we wanted to have a debugger tool that could operate equally well with OCaml as well as Rust. In order to thoroughly debug and simulate any state in the node, we need to access the P2P network, RPC endpoints and the storage.
 
-For this purpose, we’ve created the TezEdge Debugger, a tool that records messages sent and received by your Tezos node via the P2P and RPC layers, decrypts and (if necessary) deserializes them, and finally providing them in a human-readable format in its own user interface (UI), which is known as the TezEdge Explorer. The Debugger forms the back end of this system, while the Explorer constitutes its front end.
+For this purpose, we’ve created the TezEdge Debugger, a tool that records messages sent and received by your Tezos node via the P2P and RPC layers, decrypts and (if necessary) deserializes them, and finally providing them in a human-readable format in its own user interface (UI), which is known as the TezEdge Explorer. 
 
-Through the TezEdge Debugger’s UI, users can view:
+The Debugger forms the back end of this system, while the Explorer constitutes its front end.
+
+Through the TezEdge Explorer, users can view:
 
 
 
