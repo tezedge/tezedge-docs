@@ -27,8 +27,6 @@ As this is an early version, certain features, including full text search and pa
 
 ### **How it works**
 
-### **How it works**
-
 The core function of the debugger is to intercept all network communication made between the node (local) and the rest of the network (remote). We want to have a tool that is capable of capturing all of communication intended for the local node.
 
 There are multiple methods of intercepting network communication. In our case, we chose to 
