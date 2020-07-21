@@ -27,21 +27,39 @@ As this is an early version, certain features, including full text search and pa
 
 ### **How it works**
 
-The core function of the debugger is to intercept all network communication made between the node (local) and the rest of the network (remote). We want to have a system that is capable of intercepting all of the data that is being sent across the network or part of the network, in our case, from a blockchain node.
+### **How it works**
 
-There are multiple methods of intercepting network communication. In our case, we chose to use a _tun device_ because it allows us to simulate an entire network, removing the need to run the network, or even be connected to the internet.
+The core function of the debugger is to intercept all network communication made between the node (local) and the rest of the network (remote). We want to have a tool that is capable of capturing all of communication intended for the local node.
 
-**The tun device**
+There are multiple methods of intercepting network communication. In our case, we chose to 
+a raw TCP socket.
 
-A tun device (shorthand for tunnel device) is essentially a virtual network card. The kernel creates a virtual interface that acts as a network card, despite lacking a physical component. Instead of sending data into the internet, the tun device sends it into an application — in our case, the TezEdge Debugger.
+The internet operates as a "layered" system, with multiple protocols on each layer. Internet protocol (IP) is protocol of the 3rd layer while user datagram protocol (UDP) and the transmission control protocol (TCP) belong to the 4th layer of the TCP/IP model.
 
-The tun device operates on the 3rd layer (the network/internet layer), utilizing internet protocol (IP) and transmission control protocol (TCP) headers.
+Peer to peer (P2P) communication between Tezos nodes operates under the aforementioned TCP protocol. The internal node uses a TCP socket. From the point of view of the application, the TCP socket works as a channel, as you input data, they are released on the other end in the order that they were received. Everything else is handled by the operating system. 
 
-We utilize two tun devices, placing one within the docker container of the local TezEdge node and the other is placed on the side of the network. The first tun device intercepts all incoming communication (to the user) while the second tun device intercepts all outgoing communication. Since every packet sent across the network is either incoming or outgoing, the two tun devices are sufficient to capture all communication made between the node and the network.
+A Raw TCP socket works differently-it captures packets with headers, but you have to compose the message yourself and make sure it's in the right order. However, it allows you to capture all of the communication, not just the one that is intended for your application.
+
+Applications commonly use standard TCP sockets, with the TCP stack being held internally by the operating system. We, on the other hand, use a “raw” TCP socket, which is received from the operating system and operates on TCP packets (instead of already processed bytes) but does not contain a TCP stack. 
+
+This allows it to capture all TCP packets, including their TCP and IP headers. Using the raw socket, you can intercept all of the packets that constitute TCP communication. Based on the data in the packet headers, you can then filter the packets that are used in communication with the Tezos node. 
+
+**The raw TCP socket**
+
+In addition to the message, a TCP header contains two more items: an IP header and the TCP header itself.
+
+The IP header contains the IP address, which informs us about the packet’s sender and receiver.
+The TCP header provides us with the TCP port, which informs us which application the packet belongs to. 
+
+Using Docker, you can create a shared network - there were two containers on the same network, with one running a Tezos node and the other running the Debugger. Since all of the communication is contained within this network, you can use the Debugger to analyze it. This removes the obligation to set up a tun device, which makes it a more user-friendly experience. 
 
 **Simulating network traffic**
 
-A major advantage of the tun device is that you can simulate transmission across a network, and therefore you can simulate an entire network without having to run it, even without being connected to the internet. The tun device also opens up interesting possibilities into the future, such as message replay or simulating multiple hosts simultaneously.
+In order to perform replay, we need to simulate a running node by literally connecting the node onto another node. Now that you have a local node running, you launch the Debugger
+If you want to perform replay on the running node, you need to open another TCP socket locally. In this case, it is a common TCP socket (not raw). Through this socket, the Debugger communicates with the node as if it were another node, sending messages based on what is stored in its database.
+
+In order to perform replay, we need to create a snapshot of communication we want to simulate (by using the debugger). Using the snapshot and plain TCP socket, we can use the debugger as if it is a node itself, but instead of actual P2P communication logic, it uses the created snapshot as a guide to drive the P2P communication.
+
 
 **Operating within the Tezos network**
 
