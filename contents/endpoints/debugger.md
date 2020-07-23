@@ -252,8 +252,8 @@ curl "carthage.tezedge.com:11000/v2/rpc"
     "message": {
       "type": "request",
       "method": "GET",
-      "path": "",
-      "payload": "/network/self"
+      "path": "/network/self",
+      "payload": ""
     } 
   }
 ]
