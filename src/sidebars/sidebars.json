@@ -44,7 +44,8 @@
         "name": "Endpoints",
         "items": [
             "endpoints/protocol",
-            "endpoints/shell"
+            "endpoints/shell",
+            "endpoints/debugger"
         ]
     },
     {
