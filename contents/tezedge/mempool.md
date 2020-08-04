@@ -5,7 +5,7 @@ showTitle: false
 ---
 
 
-### **TezEdge Node — A deep dive into the mempool, part 1**
+## **The mempool**
 
 Nodes are the pillars of a blockchain network. Each node plays its part in maintaining the network and ensuring consensus about the blockchain’s state. Managing the constant stream of unconfirmed operations that flow across the network is one of a node’s most important duties.
 
@@ -96,11 +96,9 @@ _[Click here to see the results](http://ci.tezedge.com/simplestaking/tezedge/808
 
 ![Image](../../static/images/screengrab2.gif)
 
+### Adding operations via RPCs and broadcasting them across the network
 
-
-### **The TezEdge node — A deep dive into the mempool, part 2**
-
-**The blockchain sandbox**
+#### **The blockchain sandbox**
 
 The blockchain is a high stakes environment. Once smart contracts are deployed on the live network, there is no turning back, and faulty code or errors may cause enormous financial damage or other serious real world consequences.
 
