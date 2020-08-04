@@ -119,7 +119,7 @@ to await enough chunks to deserialize message.
 The primary feature of the Debugger is the ability to decrypt all messages while having access only to the single identity of the local
 node.
 
-##### Tezos "handshake"
+#### Tezos "handshake"
 To establish encrypted connection, Tezos nodes exchange `ConnectionMessages` which contain information about the nodes themselves,
 including public keys, nonces, proof-of-stake and node running protocol version(s). The public key is static and is part of
 a node's identity, as is proof-of-stake. Nonces are generated randomly for each connection message. After the `ConnectionMessage`
@@ -141,7 +141,7 @@ keys which were used for encryption, thus the Debugger "just" needs the:
 * Remote node's public key - which is part of the received `ConnectionMessage` and was captured.
 * Local node's nonce - which is part of the sent `ConnectionMessage` and was captured.
 
-#### System architecture
+### System architecture
 
 The basic concept of the whole system is based on the premise that captured data are moved through a pipeline of steps, which allows for easier
 data processing. The basic pipeline for P2P messages consists of Producer - Orchestrator - Parsers and Processors:
@@ -152,26 +152,26 @@ data processing. The basic pipeline for P2P messages consists of Producer - Orch
 
 All parts of system are defined in the [system module](./src/system)
 
-##### Producers
+#### Producers
 The purpose of producers is to only capture and filter interesting network data.
 `RawSocketProducer` captures all networking traffic on a specific networking interface, filtering all the non-TCP packets 
 (as Tezos communication works only on TCP packets) and sends them further down the line into the Orchestrator
 
-##### Orchestrator
+#### Orchestrator
 Receives packets from the producer and orchestrates them into "logical streams", each stream of packets has its own parser.
 The responsibility of the orchestrator is to manage and clean up parsers.
 `PacketOrchestrator` Receives TCP packets, determines which address is the remote address, as that is the determining factor of 
 which parser should process the packet. If no parser for the specific remote address exists, a new one is created instead.
 If a packet denotes the end of communication with a remote address, the parser is stopped and cleaned. 
 
-##### Parser
+#### Parser
 Receives packets which belong to some "logical stream", and processes them into the messages (parses packets into messages).
 Parsed messages are forwarded into the processor.
 `P2PParser` is responsible for aggregating packets into chunks and buffers chunks for final deserialization.
 If `ConnectionMessages` are exchanged, parser also decrypts the data first.
 
 
-##### Processors
+#### Processors
 All processors reside inside the single primary processor, which calls individual processors to process parsed data.
 Currently, the only processor which is used is the database processor, which stores and indexes parsed messages.
 
