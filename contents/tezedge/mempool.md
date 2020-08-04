@@ -17,7 +17,7 @@ As the number of operations increases, the mempool must manage a greater volume 
 
 To improve overall resiliency, the node uses the actor model, a conceptual model for software architecture in which tasks are performed by individual actors. An actor is a primitive unit of computation that is capable of performing tasks, but is completely separated from other actors and can use various strategies to automatically recover from failure.
 
-**How operations are processed inside the mempool**
+### **How operations are processed inside the mempool**
 
 To understand what happens inside the mempool, here is a scenario in which an operation enters and exits the mempool, starting when it is received from the network and ending when it has been baked into a block.
 
@@ -72,7 +72,7 @@ The _MempoolPrevalidator_ then handles the pending operations.
 
 We will take a closer look at how operations and blocks are validated in a future article.
 
-**Ensuring consistency between the Rust and OCaml nodes’ mempool**
+### **Ensuring consistency between the Rust and OCaml nodes’ mempool**
 
 _We want to be able to test whether operations are successfully and correctly propagated from the native OCaml node’s mempool into the TezEdge node’s mempool. To do this, we run the following test:_
 
@@ -96,9 +96,9 @@ _[Click here to see the results](http://ci.tezedge.com/simplestaking/tezedge/808
 
 ![Image](../../static/images/screengrab2.gif)
 
-### Adding operations via RPCs and broadcasting them across the network
+## Adding operations via RPCs
 
-#### **The blockchain sandbox**
+### **The blockchain sandbox**
 
 The blockchain is a high stakes environment. Once smart contracts are deployed on the live network, there is no turning back, and faulty code or errors may cause enormous financial damage or other serious real world consequences.
 
