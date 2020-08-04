@@ -199,6 +199,3 @@ You can see the results of the entire process here:
 
 [http://ci.tezedge.com/simplestaking/tezedge/955/2/1](http://ci.tezedge.com/simplestaking/tezedge/955/2/1)
 
-We appreciate your interest in learning more about Tezos and thank you for the time spent reading this article. If you have any questions, feedback or comments, you are welcome to send us an email. To read more about Tezos and the TezEdge node, please subscribe to our[ Medium](https://medium.com/simplestaking), view our[ documentation](http://docs.tezedge.com) or visit our[ GitHub](https://github.com/simplestaking/tezedge-docs).
-
-
