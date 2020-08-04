@@ -92,11 +92,11 @@ _Now that the TezEdge debugger has received the public keys and nonces, it is re
 
 ![Image](../../static/images/Debugger2.svg "Decrypting and deserializing messages")
 
-### **Detailed Architecture**
-#### Packets, Chunks and Messages
+## **Detailed Architecture**
+### Packets, Chunks and Messages
 Tezos nodes communicate by exchanging chunked P2P messages over the internet. Each part uses its own "blocks" of data.
 
-##### Packet
+#### Packets
 Packets are used by the higher layers of TCP/IP models to transport application communication over the internet 
 (there are more type of data blocks on lower levels of the model, like ethernet frames, but we do not work with those).
 The Debugger captures TCP packets containing IPv4 or IPv6 headers and a TCP header. Those headers are required to determine
@@ -108,13 +108,13 @@ first two bytes representing the size of the block. Chunks are send over interne
 chunk per packet. When receiving a new packet, the first two bytes represent how many bytes there should be in the whole chunk,
 but not how many packets the chunk is split into.
 
-#### Message
+#### Messages
 A message is parsed representation of some node command, but to be able to send them over internet, they must first be serialized into binary blocks of data, which are then converted into Binary Chunks and finally split into packets to be sent over internet. Again, it is not necessary, that single message is split into single binary chunk. It is required
 to await enough chunks to deserialize message. 
 
 ![Message visualization](./docs/messages.svg)
 
-#### Encryption
+### Encryption
 
 The primary feature of the Debugger is the ability to decrypt all messages while having access only to the single identity of the local
 node.
