@@ -14,7 +14,6 @@ The Debugger forms the back end of this system, while the Explorer constitutes i
 Through the TezEdge Explorer, users can view:
 
 
-
 *   Who sent the P2P message(s) to your node
 *   The content of the message(s)
 *   The time when they were made
@@ -22,12 +21,13 @@ Through the TezEdge Explorer, users can view:
 
 All of this information is recorded in the storage, allowing users to examine all of the aforementioned details whenever they want to.
 
-The TezEdge Debugger is node-agnostic, meaning that it will run on any kind of Tezos node, whether it is the native OCaml version, the Rust-based TezEdge node or other alternatives.
-
 As this is an early version, certain features, including full text search and pagination, have yet to be developed. We plan on adding them in future releases.
 
 
 ### **How it works**
+
+The TezEdge Debugger is node-agnostic, meaning that it will run on any kind of Tezos node, whether it is the native OCaml version, the Rust-based TezEdge node or other alternatives.
+
 
 The core function of the debugger is to intercept all network communication made between the node (local) and the rest of the network (remote). We want to have a tool that is capable of capturing all of communication intended for the local node.
 
@@ -92,33 +92,172 @@ _Now that the TezEdge debugger has received the public keys and nonces, it is re
 
 ![Image](../../static/images/Debugger2.svg "Decrypting and deserializing messages")
 
-**How to run the TezEdge Debugger**
+**Requirements**
 
-**1.** Open shell and type this code into the command line and then press Enter
+* Docker
+* (**RECOMMENDED**)  Steps described in Docker [Post-Installation](https://docs.docker.com/engine/install/linux-postinstall/). 
 
-git clone[ https://github.com/simplestaking/tezedge-debugger.git](https://github.com/simplestaking/tezedge-debugger.git)
+**How to run**
 
-**cd[ tezedge-debugger](https://github.com/simplestaking/tezedge-debuger)**
+The easiest way to launch the Debugger is by running it with the included docker-compose files. There are two separate files: 
+* one for our Rust Tezedege Light Node (docker-compose.rust.yml) and the other for the original OCaml node (docker-compose.ocaml.yml).
+A guide on how to change ports is included inside the docker-compose files.
+```bash
+docker-compose -f docker-compose.rust.yml pull
+docker-compose -f docker-compose.rust.yml up
+```
 
-**2.** Download and install Docker and Docker Compose
+**(WIP) Debugger API**
 
-Open shell and type this code into the command line and then press Enter:
+The RPC endpoint of the Debugger is split into two parts: P2P messages on `/p2p/*` endpoints and RPC messages on `/rpc/*` endpoint.
 
-**sudo ./docker.sh**
+### P2P
+#### `/v2/p2p`
+##### Description
+Endpoint for checking all P2P communication on running node. 
+Messages are always sorted from newest to oldest.
+##### Query arguments
+* `cursor_id : 64bit integer value` - Cursor offset, used for easier navigating in messages. Default is the last message.
+* `limit : 64bit integer value` - Maximum number of messages returned by the RPC. Default is 100 messages.
+* `remote_addr : String representing socket address in format "<IP>:<PORT>"` - Filter message belonging to communication with given remote node.
+* `incoming : Boolean` - Filter messages by their direction
+* `types : comma separated list of types` - Filter messages by given types
+* `source_type: "local" or "remote"` - Filter messages by source of the message
+##### Example
+* `/v2/p2p` - Return last 100 P2P messages
+* `/v2/p2p?cursor_id=100&types=connection_message,metadata` - Return all connection and metadata messages from first 100 messages.
 
-**3.** Open the TezEdge Explorer in your browser
+### RPC
+#### `/v2/rpc`
+##### Description
+Endpoint for checking all RPC Requests/Responses on running node.
+Messages are always sorted from newest to oldest.
+##### Query
+* `cursor_id : 64bit integer value` - Cursor offset, used for easier navigating in messages. Default is the last message.
+* `limit : 64bit integer value` - Maximum number of messages returned by the RPC. Default is 100 messages.
+* `remote_addr : String representing socket address in format "<IP>:<PORT>"` - Filter message belonging to communication with given remote node.
+##### Example
+* `/v2/rpc?remote_addr=192.168.1.1:4852` - Show all requests made by the client with address 192.168.1.1:4852
 
-You can view the status of the debugger in your browser by entering this address into your browser’s URL bar:
+### Logs
+#### `/v2/log`
+##### Description
+Endpoint for checking all captured logs on running node
+Messages are always sorted from newest to oldest.
+##### Query arguments
+* `cursor_id : 64bit integer value` - Cursor offset, used for easier navigating in messages. Default is the last message.
+* `limit : 64bit integer value` - Maximum number of messages returned by the RPC. Default is 100 messages.
+* `level : string` - Log level, should be on of `trace, debug, info, warn, error`
+* `timestamp : string` - Unix timestamp representing time from which the logs are shown.
+##### Example
+* `/v2/log?level=error` - Return all errors in last one hundred logs,
 
-**[http://localhost:8080](http://localhost:8080/)**
+Detailed Architecture
+=====================
+#### Packets, Chunks and Messages
+Tezos nodes communicate by exchanging chunked P2P messages over the internet. Each part uses its own "blocks" of data.
+
+##### Packet
+Packets are used by the higher layers of TCP/IP models to transport application communication over the internet 
+(there are more type of data blocks on lower levels of the model, like ethernet frames, but we do not work with those).
+The Debugger captures TCP packets containing IPv4 or IPv6 headers and a TCP header. Those headers are required to determine
+source and destination addresses for each packet.
+
+#### Chunks
+A binary chunk is a Tezos construct, which represents some sized binary block. Each chunk is a continuous memory, with the
+first two bytes representing the size of the block. Chunks are send over internet in TCP Packets, but not necessarily one
+chunk per packet. When receiving a new packet, the first two bytes represent how many bytes there should be in the whole chunk,
+but not how many packets the chunk is split into.
+
+#### Message
+A message is parsed representation of some node command, but to be able to send them over internet, they must first be serialized into binary blocks of data, which are then converted into Binary Chunks and finally split into packets to be sent over internet. Again, it is not necessary, that single message is split into single binary chunk. It is required
+to await enough chunks to deserialize message. 
+
+![Message visualization](./docs/messages.svg)
+
+#### Encryption
+
+The primary feature of the Debugger is the ability to decrypt all messages while having access only to the single identity of the local
+node.
+
+##### Tezos "handshake"
+To establish encrypted connection, Tezos nodes exchange `ConnectionMessages` which contain information about the nodes themselves,
+including public keys, nonces, proof-of-stake and node running protocol version(s). The public key is static and is part of
+a node's identity, as is proof-of-stake. Nonces are generated randomly for each connection message. After the `ConnectionMessage`
+exchange, each node remembers the node it received and the nonce it sent, and creates the "precomputed" key (for speedups), which is
+calculated from the local node's private key and remote node's public key. The nonce is a number incremented after each use.
+
+* To encrypt a message, the node uses the nonce sent in its own `ConnectionMessage` and a precomputed key.
+* To decrypt a message, the node uses the received nonce and a precomputed key.
+
+For the Debugger to decrypt a message that is coming from a remote node to the local running node. It needs to know:
+* The local node's private key - which is part of its local identity to which the Debugger has access.
+* The remote node's public key - which is part of the received `ConnectionMessage` and was captured.
+* The remote node's nonce - which is part of the received `ConnectionMessage` and was captured.
+
+But to decrypt a message sent by the local node, it would be necessary to know the private key of the remote node, to which it does not have
+access. Fortunately, Tezos is internally using the Curve5519 method, which allows to decrypt a message with the same 
+keys which were used for encryption, thus the Debugger "just" needs the:
+* Local node's private key - which is part of its local identity, to which the Debugger has access.
+* Remote node's public key - which is part of the received `ConnectionMessage` and was captured.
+* Local node's nonce - which is part of the sent `ConnectionMessage` and was captured.
+
+#### System architecture
+
+The basic concept of the whole system is based on the premise that captured data are moved through a pipeline of steps, which allows for easier
+data processing. The basic pipeline for P2P messages consists of Producer - Orchestrator - Parsers and Processors:
 
 
-#### **The TezEdge Explorer**
+![P2P System description](./docs/system.svg)
 
+
+All parts of system are defined in the [system module](./src/system)
+
+##### Producers
+The purpose of producers is to only capture and filter interesting network data.
+`RawSocketProducer` captures all networking traffic on a specific networking interface, filtering all the non-TCP packets 
+(as Tezos communication works only on TCP packets) and sends them further down the line into the Orchestrator
+
+##### Orchestrator
+Receives packets from the producer and orchestrates them into "logical streams", each stream of packets has its own parser.
+The responsibility of the orchestrator is to manage and clean up parsers.
+`PacketOrchestrator` Receives TCP packets, determines which address is the remote address, as that is the determining factor of 
+which parser should process the packet. If no parser for the specific remote address exists, a new one is created instead.
+If a packet denotes the end of communication with a remote address, the parser is stopped and cleaned. 
+
+##### Parser
+Receives packets which belong to some "logical stream", and processes them into the messages (parses packets into messages).
+Parsed messages are forwarded into the processor.
+`P2PParser` is responsible for aggregating packets into chunks and buffers chunks for final deserialization.
+If `ConnectionMessages` are exchanged, parser also decrypts the data first.
+
+
+##### Processors
+All processors reside inside the single primary processor, which calls individual processors to process parsed data.
+Currently, the only processor which is used is the database processor, which stores and indexes parsed messages.
+
+
+#### Node Logs
+To capture node logs, the Debugger utilizes the "syslog" protocol (which can be easily enabled in the Docker), which,
+instead of printing the log into the console, wraps them into the UDP packet and sends them to the server. This should
+be handled by the application or the administrator of the application. The Debugger runs a syslog server inside, to simply process the generated
+logs. This system allows to decouple the Debugger from the node, which prevents the debugger from failing if the running node fails, 
+preserving all of the captured logs, and potentially information about the failure of the node.
+
+#### Storage
+Storage is based on RocksDB, utilizing custom [indexes](./src/storage/secondary_index.rs), which
+allows field filtering and cursor pagination.
+
+#### RPC server
+RPC server is based on the [warp crate](https://crates.io/crates/warp). All endpoints are based on cursor-pagination, 
+meaning it is simple to paginate real-time data. All data are from local storage
+
+
+## **The TezEdge Explorer**
 
 ### **Filtering and visualizing the data**
 
-When a Tezos node is up and running, there is a large amount of data flowing between the node and the rest of the network. Although we can record the data, browsing through it is difficult due to its sheer volume.
+When a Tezos node is up and running, there is a large amount of data flowing between the node and the rest of the network. Although we can record the data using the TezEdge Debugger, browsing through it is difficult due to its sheer volume.
 
 We want to be able to quickly find certain events or items within the data. For example, when the node exchanges messages with other peers via the P2P network, we want to know which peers sent a connection message to our node, as well as the message details in its metadata.
 
@@ -164,5 +303,7 @@ In the lower left corner of the interface, you can select from a drop-down menu 
 
 
 To try out the aforementioned features, visit the[ TezEdge.com](http://tezedge.com) website.
+
+
 
 
