@@ -180,7 +180,7 @@ This is done by the tezos-client (via RPCs)
 
 **5.4** Injecting the transaction
 
-**5.5 **After injection, inside the node:
+**5.5** After injection, inside the node:
 
 **5.5.1** Messaging the shell channel
 
