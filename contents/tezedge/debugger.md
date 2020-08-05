@@ -153,22 +153,22 @@ data processing. The basic pipeline for P2P messages consists of Producer - Orch
 All parts of system are defined in the [system module](./src/system)
 
 #### Producers
-The purpose of producers is to only capture and filter interesting network data.
-`RawSocketProducer` captures all networking traffic on a specific networking interface, filtering all the non-TCP packets 
+The purpose of the producers is to capture and filter 'interesting' network data.
+The `RawSocketProducer` captures all networking traffic on a specific networking interface, filtering all the non-TCP packets 
 (as Tezos communication works only on TCP packets) and sends them further down the line into the Orchestrator
 
 #### Orchestrator
 Receives packets from the producer and orchestrates them into "logical streams", each stream of packets has its own parser.
 The responsibility of the orchestrator is to manage and clean up parsers.
-`PacketOrchestrator` Receives TCP packets, determines which address is the remote address, as that is the determining factor of 
-which parser should process the packet. If no parser for the specific remote address exists, a new one is created instead.
+The `PacketOrchestrator` receives TCP packets and determines which address is the remote address, as that is the determining factor of 
+which parser should process the packet. If no parser exists for the specific remote address, a new one is created instead.
 If a packet denotes the end of communication with a remote address, the parser is stopped and cleaned. 
 
 #### Parser
 Receives packets which belong to some "logical stream", and processes them into the messages (parses packets into messages).
 Parsed messages are forwarded into the processor.
-`P2PParser` is responsible for aggregating packets into chunks and buffers chunks for final deserialization.
-If `ConnectionMessages` are exchanged, parser also decrypts the data first.
+The `P2PParser` is responsible for aggregating packets into chunks and buffers chunks for final deserialization.
+If `ConnectionMessages` are exchanged, the parser also decrypts the data first.
 
 
 #### Processors
@@ -179,17 +179,17 @@ Currently, the only processor which is used is the database processor, which sto
 #### Node Logs
 To capture node logs, the Debugger utilizes the "syslog" protocol (which can be easily enabled in the Docker), which,
 instead of printing the log into the console, wraps them into the UDP packet and sends them to the server. This should
-be handled by the application or the administrator of the application. The Debugger runs a syslog server inside, to simply process the generated
-logs. This system allows to decouple the Debugger from the node, which prevents the debugger from failing if the running node fails, 
+be handled by the application or the administrator of the application. The Debugger runs a syslog server inside to simply process the generated
+logs. This system allows to decouple the Debugger from the node, which prevents the Debugger from failing if the running node fails, 
 preserving all of the captured logs, and potentially information about the failure of the node.
 
 #### Storage
-Storage is based on RocksDB, utilizing custom [indexes](./src/storage/secondary_index.rs), which
+The storage is based on RocksDB, utilizing custom [indexes](./src/storage/secondary_index.rs), which
 allows field filtering and cursor pagination.
 
 #### RPC server
-RPC server is based on the [warp crate](https://crates.io/crates/warp). All endpoints are based on cursor-pagination, 
-meaning it is simple to paginate real-time data. All data are from local storage
+The RPC server is based on the [warp crate](https://crates.io/crates/warp). All endpoints are based on cursor-pagination, 
+meaning it is simple to paginate real-time data. All data are from the local storage.
 
 
 ## **How to launch the Debugger**
