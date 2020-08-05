@@ -47,7 +47,7 @@ The operation is[ stored](https://github.com/simplestaking/tezedge/blob/v0.1.0/s
 
 **3. Checking operations from peers**
 
-This triggers a[ CheckMempoolCompleteness](https://github.com/simplestaking/tezedge/blob/v0.1.0/shell/src/chain_manager.rs#L174) which checks whether all mempool operations were received from peers. If they were not received, Alice’s node sends a _GetOperations _message.
+This triggers a[ CheckMempoolCompleteness](https://github.com/simplestaking/tezedge/blob/v0.1.0/shell/src/chain_manager.rs#L174) which checks whether all mempool operations were received from peers. If they were not received, Alice’s node sends a _GetOperations_ message.
 
 **4. Notifying peers of received operation**
 
@@ -68,7 +68,7 @@ The _MempoolPrevalidator_ then handles the pending operations.
 
 
 *   The operation is sent to the protocol for validation.
-*   The result is then handled and, if needed, the current mempool state is changed, removing the operation from pending and moving it to _applied_, _refused_, _branch_delayed_ or _branch_refused_. The applied operations are also known as “known_valid” operations (in the context of peer messages).
+*   The result is then handled and, if needed, the current mempool state is changed, removing the operation from pending and moving it to _applied_, _refused_, *branch_delayed* or *branch_refused*. The applied operations are also known as “known_valid” operations (in the context of peer messages).
 
 We will take a closer look at how operations and blocks are validated in a future article.
 
@@ -84,9 +84,9 @@ Using the Tezos-client, we activate a protocol inside the OCaml node, thus creat
 
 We wait until TezEdge synchronizes with the OCaml node.
 
-We call each node with the _pending_operations _RPC and compare the return values. We want both values to be empty, which means their mempools are empty.
+We call each node with the *pending_operations* RPC and compare the return values. We want both values to be empty, which means their mempools are empty.
 
-Using a Tezos client, we inject a valid transaction into the OCaml node. We call each node with the _pending_operations _RPC again and compare the return values.
+Using a Tezos client, we inject a valid transaction into the OCaml node. We call each node with the *pending_operations* RPC again and compare the return values.
 
 Again, we should see the same value from calling both nodes, but this time it will not be empty. We can see operation in the _applied_ field. This means that the transaction has been successfully propagated from the OCaml node into the TezEdge node.
 
@@ -143,18 +143,18 @@ Here you can see the aforementioned CI tests:
 
 This test is similar to the one we described in our previous article. The difference is that now we can demonstrate the injection of the first block and an operation into the TezEdge node.
 
-**1.**First, we run two nodes; the TezEdge node (_[tezedge-node-sandbox-run](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L119)_) and the OCaml node(_[ocaml-node-sandbox-run](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L146)_) , both are run in sandbox mode. This is done in the first four steps in the CI pipeline. After each run step there is a so-called _wait-for _step which ensures that the pipeline is held until each node has started successfully.
+**1.** First, we run two nodes; the TezEdge node (_[tezedge-node-sandbox-run](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L119)_) and the OCaml node(_[ocaml-node-sandbox-run](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L146)_) , both are run in sandbox mode. This is done in the first four steps in the CI pipeline. After each run step there is a so-called *wait-for* step which ensures that the pipeline is held until each node has started successfully.
 
 **2.** Using the Tezos-admin-client, we create a connection between the two nodes. You can see this in the_[ connect-ocaml-and-rust step](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L167)_
 
-**3. **In the[ next step](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L180), we prepare the tezos-client. This means including the accounts used in the protocol activation and the transfer operation. Then, using the Tezos-client, we activate a protocol inside the TezEdge node, thus creating the first block. This is a distinct block that contains a block header and the field “content” in which there are subfields such as “command”, “hash”, “fitness” and “protocol_parameters”.
+**3.** In the[ next step](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L180), we prepare the tezos-client. This means including the accounts used in the protocol activation and the transfer operation. Then, using the Tezos-client, we activate a protocol inside the TezEdge node, thus creating the first block. This is a distinct block that contains a block header and the field “content” in which there are subfields such as “command”, “hash”, “fitness” and “protocol_parameters”.
 
 
 ![Image](../../static/images/screengrab3.gif)
 
 [http://ci.tezedge.com/simplestaking/tezedge/955/2/6](http://ci.tezedge.com/simplestaking/tezedge/955/2/6)
 
-In step[ wait-for-sync-on-level-1](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L193)_ _we wait until the OCaml node synchronizes with the TezEdge node which has the newly injected block on level 1.
+During the step [*wait-for-sync-on-level-1*](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L193), we wait until the OCaml node synchronizes with the TezEdge node which has the newly injected block on level 1.
 
 **4.** The next step is a check to ensure that both nodes have an empty mempool. We call each node with the pending_operations RPC and compare the return values. We want both return values to be empty, which means their mempools are empty.
 
@@ -188,7 +188,7 @@ This is done by the tezos-client (via RPCs)
 
 **5.5.4** Broadcasting the new mempool state
 
-**6.** In the step[ check-mempool-after-transfer](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L231),_ _we call each node with the pending_operations RPC again and compare the return values. Again, we should see the same value from calling both nodes, but this time it will not be empty. We can see the operation in the applied field. This means that the transaction has been successfully propagated from the TezEdge node into the OCaml node.
+**6.** In the step[*check-mempool-after-transfer*](https://github.com/simplestaking/tezedge/blob/master/.drone.yml#L231), we call each node with the pending_operations RPC again and compare the return values. Again, we should see the same value from calling both nodes, but this time it will not be empty. We can see the operation in the applied field. This means that the transaction has been successfully propagated from the TezEdge node into the OCaml node.
 
 
 ![Image](../../static/images/screengrab5.gif)
