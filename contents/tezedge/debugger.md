@@ -31,9 +31,9 @@ The TezEdge Debugger is node-agnostic, meaning that it will run on any kind of T
 
 The core function of the debugger is to intercept all network communication made between the node (local) and the rest of the network (remote). We want to have a tool that is capable of capturing all of communication intended for the local node.
 
-There are multiple methods of intercepting network communication. In our case, we chose to use a raw TCP socket.
+There are multiple methods of intercepting network communication. In our case, we chose to use a raw transmission control protocol (TCP) socket.
 
-The internet operates as a "layered" system, with multiple protocols on each layer. Internet protocol (IP) is protocol of the 3rd layer while user datagram protocol (UDP) and the transmission control protocol (TCP) belong to the 4th layer of the TCP/IP model.
+The internet operates as a "layered" system, with multiple protocols on each layer. Internet protocol (IP) is protocol of the 3rd layer while user datagram protocol (UDP) and the TCP belong to the 4th layer of the TCP/IP model.
 
 Peer to peer (P2P) communication between Tezos nodes operates under the aforementioned TCP protocol. The internal node uses a TCP socket. From the point of view of the application, the TCP socket works as a channel, as you input data, they are released on the other end in the order that they were received. Everything else is handled by the operating system. 
 
