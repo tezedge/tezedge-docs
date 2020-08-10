@@ -1,3 +1,8 @@
+---
+title: Debugger
+sidebar: Docs
+showTitle: false
+---
 
 # **The TezEdge Debugger**
 
