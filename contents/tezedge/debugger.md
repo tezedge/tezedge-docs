@@ -117,7 +117,7 @@ but not how many packets the chunk is split into.
 A message is parsed representation of some node command, but to be able to send them over internet, they must first be serialized into binary blocks of data, which are then converted into Binary Chunks and finally split into packets to be sent over internet. Again, it is not necessary, that single message is split into single binary chunk. It is required
 to await enough chunks to deserialize message. 
 
-![Image](../../static/images/messages.svg)
+![Image](../../public/static/images/messages.svg)
 
 ### Encryption
 
@@ -152,7 +152,7 @@ The basic concept of the whole system is based on the premise that captured data
 data processing. The basic pipeline for P2P messages consists of Producer - Orchestrator - Parsers and Processors:
 
 
-![Image](../../static/images/system.svg)
+![Image](../../public/static/images/system.svg)
 
 
 All parts of system are defined in the [system module](./src/system)
