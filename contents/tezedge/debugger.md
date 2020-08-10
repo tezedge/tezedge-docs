@@ -213,6 +213,10 @@ A guide on how to change ports is included inside the docker-compose files.
 docker-compose -f docker-compose.rust.yml pull
 docker-compose -f docker-compose.rust.yml up
 ```
+### **Endpoints**
+
+See our detailed [list of endpoints.](https://docs.tezedge.com/endpoints/debugger)
+
 
 ## **The TezEdge Explorer**
 
