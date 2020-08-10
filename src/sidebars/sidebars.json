@@ -36,6 +36,7 @@
             "tezedge/network",
             "tezedge/endpoints",
             "tezedge/explorer",
+            "tezedge/debugger",
             "tezedge/contribution"
         ]
     },
