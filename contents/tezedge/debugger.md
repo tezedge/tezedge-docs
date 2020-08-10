@@ -209,53 +209,6 @@ docker-compose -f docker-compose.rust.yml pull
 docker-compose -f docker-compose.rust.yml up
 ```
 
-**(WIP) Debugger API**
-
-The RPC endpoint of the Debugger is split into two parts: P2P messages on `/p2p/*` endpoints and RPC messages on `/rpc/*` endpoint.
-
-#### P2P
-##### `/v2/p2p`
-###### Description
-Endpoint for checking all P2P communication on running node. 
-Messages are always sorted from newest to oldest.
-###### Query arguments
-* `cursor_id : 64bit integer value` - Cursor offset, used for easier navigating in messages. Default is the last message.
-* `limit : 64bit integer value` - Maximum number of messages returned by the RPC. Default is 100 messages.
-* `remote_addr : String representing socket address in format "<IP>:<PORT>"` - Filter message belonging to communication with given remote node.
-* `incoming : Boolean` - Filter messages by their direction
-* `types : comma separated list of types` - Filter messages by given types
-* `source_type: "local" or "remote"` - Filter messages by source of the message
-###### Example
-* `/v2/p2p` - Return last 100 P2P messages
-* `/v2/p2p?cursor_id=100&types=connection_message,metadata` - Return all connection and metadata messages from first 100 messages.
-
-#### RPC
-##### `/v2/rpc`
-###### Description
-Endpoint for checking all RPC Requests/Responses on running node.
-Messages are always sorted from newest to oldest.
-###### Query
-* `cursor_id : 64bit integer value` - Cursor offset, used for easier navigating in messages. Default is the last message.
-* `limit : 64bit integer value` - Maximum number of messages returned by the RPC. Default is 100 messages.
-* `remote_addr : String representing socket address in format "<IP>:<PORT>"` - Filter message belonging to communication with given remote node.
-###### Example
-* `/v2/rpc?remote_addr=192.168.1.1:4852` - Show all requests made by the client with address 192.168.1.1:4852
-
-#### Logs
-##### `/v2/log`
-###### Description
-Endpoint for checking all captured logs on running node
-Messages are always sorted from newest to oldest.
-###### Query arguments
-* `cursor_id : 64bit integer value` - Cursor offset, used for easier navigating in messages. Default is the last message.
-* `limit : 64bit integer value` - Maximum number of messages returned by the RPC. Default is 100 messages.
-* `level : string` - Log level, should be on of `trace, debug, info, warn, error`
-* `timestamp : string` - Unix timestamp representing time from which the logs are shown.
-###### Example
-* `/v2/log?level=error` - Return all errors in last one hundred logs,
-
-
-
 ## **The TezEdge Explorer**
 
 ### **Filtering and visualizing the data**
