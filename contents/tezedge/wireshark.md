@@ -65,9 +65,7 @@ For instruction on how to build and install, see the[ Tezos dissector readme fil
 
 To launch Wireshark, please enter the correct path to the identity.json file.
 
-```wireshark -o tezos.identity_json_file:~/.tezos-node/identity.json
-
-
+```wireshark -o tezos.identity_json_file:~/.tezos-node/identity.json```
 
 *   The dissector cannot decrypt communication without the appropriate identity.json file. By default, the identity.json can be found in this home directory: ~/.tezos-node/identity.json
 *   If Wireshark is launched after the node is already running, then it cannot intercept the handshake message, without which it cannot decrypt communication. Therefore it is crucial that you launch Wireshark before you launch the node.
