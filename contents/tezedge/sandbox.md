@@ -57,7 +57,8 @@ To reach the required state of the node, which is the sandbox mode, we need to l
 
 
 ![Image](../../static/images/sandbox1.gif "Parameters")
-There are many parameters here. You can find their descriptions in the front end. The categories are: Node, Networking, P2P, Database, Interop with Protocol, Sandbox, Logging
+
+*There are many parameters here. You can find their descriptions in the front end. The categories are: Node, Networking, P2P, Database, Interop with Protocol, Sandbox, Logging*
 
 Here, two things are happening: we are launching the sandbox itself and setting the parameters of the node._ _In the beginning we do not have any blocks and the storage is empty. We need to add the first block (the genesis block) with an activator key. We use this activator key to sign the next block, which activates the protocol.
 
@@ -69,7 +70,7 @@ Since we want to ensure that the TezEdge node uses the same endpoints and functi
 
 ![Image](../../static/images/sandbox2.gif)
 
-We will now add wallet and keys into the chain by using the init_client endpoint.
+*We will now add wallet and keys into the chain by using the init_client endpoint.*
 
 **Important: **The keys, even the secret key, are sent in plaintext format. Adversaries can access the private keys from the wallets created in the sandbox.
 
@@ -86,7 +87,7 @@ Once the parameters are set, they are sent to the back end, where the launcher a
 ![Image](../../static/images/sandbox3.gif)
 
 
-On this screen, you can see the parameters specific for the Tezos protocol. The categories are: Chain, Blocks, Smart Contract , Baking, Governance. Smart Contract
+*On this screen, you can see the parameters specific for the Tezos protocol. The categories are: Chain, Blocks, Smart Contract , Baking, Governance. Smart Contract*
 
 The node is now running in sandbox mode and the protocol has been activated. Now we can verify whether the activated protocol is working as intended:
 
@@ -99,7 +100,7 @@ When we click on send, the transaction is injected into the node. We can confirm
 
 ![Image](../../static/images/sandbox4.gif)
 
-Above, you can see how we created an operation and how we verified its existence in the mempool.
+*Above, you can see how we created an operation and how we verified its existence in the mempool.*
 
 
 #### **Baking**
@@ -111,7 +112,7 @@ All applied operations are collected from the mempool and a new block is created
 ![Image](../../static/images/sandbox5.gif)
 
 
-Here you can see how the block was baked from all applied transactions. After the block has been successfully baked, the mempool clears itself.
+*Here you can see how the block was baked from all applied transactions. After the block has been successfully baked, the mempool clears itself.*
 
 
 #### **Storage**
@@ -123,7 +124,7 @@ This is particularly useful for developers who need to debug their smart contrac
 
 ![Image](../../static/images/sandbox6.gif)
 
-Here you can select a baked block and see how the protocol interacted with the storage.
+*Here you can select a baked block and see how the protocol interacted with the storage.*
 
 
 
