@@ -72,7 +72,7 @@ Since we want to ensure that the TezEdge node uses the same endpoints and functi
 
 *We will now add wallet and keys into the chain by using the init_client endpoint.*
 
-**Important: **The keys, even the secret key, are sent in plaintext format. Adversaries can access the private keys from the wallets created in the sandbox.
+**Important:** The keys, even the secret key, are sent in plaintext format. Adversaries can access the private keys from the wallets created in the sandbox.
 
 **Please do not use the keypairs used in the sandbox node on a live network**.
 
