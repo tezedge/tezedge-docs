@@ -34,9 +34,12 @@
             "tezedge/architecture",
             "tezedge/synchronization",
             "tezedge/network",
+            "tezedge/mempool",
             "tezedge/endpoints",
             "tezedge/explorer",
             "tezedge/debugger",
+            "tezedge/sandbox",
+            "tezedge/wireshark",
             "tezedge/contribution"
         ]
     },
