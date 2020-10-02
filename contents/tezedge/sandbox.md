@@ -1,3 +1,10 @@
+---
+title: Sandbox
+sidebar: Docs
+showTitle: false
+---
+
+
 ### **The TezEdge Sandbox: a fully offline Tezos chain simulator that reveals all interactions between the protocol and the storage.**
 
 As blockchain developers, we want to be able to test our smart contracts, apps and protocols in an environment that behaves in the same way as the network where they will be deployed eventually. However, we can’t work directly with the live network as it can have serious consequences. Should an error or bug arise, it can spread to the rest of the blockchain, affect other users and cause considerable financial losses.
