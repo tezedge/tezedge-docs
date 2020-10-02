@@ -1,3 +1,10 @@
+---
+title: Wireshark
+sidebar: Docs
+showTitle: false
+---
+
+
 ### **Using Wireshark to intercept, analyze and display network data in Tezos**
 
 For a developer who is working directly with a Tezos node, it is very useful to be able to view the traffic of data that moves through the network. Among developers, **Wireshark** is one of the most popular tools for the analysis of network traffic.
