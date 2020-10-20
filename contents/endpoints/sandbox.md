@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: false
 ---
 
-# Protocol
+# Sandbox
 
 * Sandbox
     - [Start](#cycle)
