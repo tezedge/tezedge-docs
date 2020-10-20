@@ -49,7 +49,8 @@
         "items": [
             "endpoints/protocol",
             "endpoints/shell",
-            "endpoints/debugger"
+            "endpoints/debugger",
+            "endpoints/sandbox"
         ]
     },
     {
