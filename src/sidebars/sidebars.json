@@ -38,6 +38,7 @@
             "tezedge/endpoints",
             "tezedge/explorer",
             "tezedge/debugger",
+            "tezedge/record-replay",
             "tezedge/sandbox",
             "tezedge/wireshark",
             "tezedge/contribution"

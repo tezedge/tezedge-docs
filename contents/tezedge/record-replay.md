@@ -1,3 +1,9 @@
+---
+title: Record & replay
+sidebar: Docs
+showTitle: false
+---
+
 
 # Recording and replaying messages in the TezEdge Debugger
 
