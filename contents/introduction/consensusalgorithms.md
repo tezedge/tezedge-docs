@@ -149,7 +149,7 @@ As you can imagine, the delegates have considerable power in this system. This i
 *   The past history of the delegates is also considered during the selection process. If they had been guilty of malicious acts in the past, they could get looked over.
 *   A delegate could be asked to show commitment by depositing their funds into a time-locked smart contract. The funds locked could be confiscated in the event of malpractice.
 
-**4. Liquid Proof of Stake **
+**4. Liquid Proof of Stake**
 
 Liquid Proof of Stake (LPoS) is the consensus algorithm used by Tezos and is the meeting point of traditional PoS and DPoS implementations. The concept of LPoS is rooted in the principles of liquid democracy.
 
