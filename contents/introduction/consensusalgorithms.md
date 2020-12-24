@@ -22,7 +22,7 @@ Consensus is a decision-making process in which the participants develop and dec
 
 Decentralized networks that deal with transactions carrying significant financial value need to utilize a consensus mechanism that brings in something extra apart from its core fundamentals. 
 
-Our consensus algorithm of choice needs to be completely robust and failsafe. It needs to work even in the extreme situation where a large portion of its participants is rendered useless. This is why we need our consensus algorithm to answer the Byzantine Generals Problem successfully. \
+Our consensus algorithm of choice needs to be completely robust and failsafe. It needs to work even in the extreme situation where a large portion of its participants is rendered useless. This is why we need our consensus algorithm to answer the Byzantine Generals Problem successfully.
 
 
 
