@@ -58,11 +58,11 @@ The underlying model that the consensus algorithm needs to make certain assumpti
 
 There are three main types of timing models that you can use – synchronous, asynchronous, and partially synchronous. These three models make some guarantees about the latency between the exchange of messages amongst nodes during protocol execution.
 
-**#1 Synchronous model** 
+**Synchronous model** 
 
 This model has a known upper bound when it comes to the amount of time it takes for messages to be delivered between nodes. There is also an upper bound on the relative difference in speed between the nodes. Achieving consensus in a synchronous system is significantly less complex since everyone involved has a time guarantee. When someone sends a message, the receiver will get it within a specific time frame. This allows protocol creators to build a system wherein they get a message within a fixed time frame. However, this environment is not really practical in a real-world distributed system because we can’t expect all the nodes in a wide area network to be online at the same time.
 
-**#2 Asynchronous model**
+**Asynchronous model**
 
 The asynchronous model is more practical than the synchronous version. In this model, the upper bounds of both the time of propagation and the relative speed between the nodes don't exist. Messages can take a long time to reach their destination and the nodes may take an arbitrarily long time to respond. During real-time execution, nodes fail and messages drop off all the time. This is why this model is a lot more realistic. \
 
@@ -96,7 +96,7 @@ Nakamoto consensus introduces a metric called "difficulty" into the network, whi
 
 Now let’s examine several of the most common and  well-known consensus protocols:
 
-**#1 Proof-of-Work**
+**1. Proof-of-Work**
 
 Proof-of-work (PoW) is currently the most well-known consensus algorithm. First introduced in the Bitcoin whitepaper, PoW enables specialized nodes, called miners, to use their computational resources to solve difficult cryptographic puzzles. To better understand this, here is  a quick overview of how the process works.
 
@@ -115,7 +115,7 @@ For each mining cycle a metric known as difficulty (D) is predetermined by the n
 
 Upon successfully meeting these conditions, the miner receives the block reward. 
 
-**#2 Proof of Stake**
+**2. Proof of Stake**
 
 Following PoW, the most well-known consensus algorithm is proof-of-stake (PoS). Not only is Ethereum going to adopt the PoS protocol as it moves into Ethereum 2.0, but several other projects like Cosmos and Dash, have already adopted the consensus algorithm. So, how does it work and what makes it different from PoW?
 
@@ -137,7 +137,7 @@ Another system of PoS is coin age-based. Coin age is the product of the number o
 
 Overall, there are two huge advantages that PoS has over PoW – It’s more scalable and exponentially less wasteful. 
 
-**#3 Delegated Proof of Stake**
+**3. Delegated Proof of Stake**
 
 Delegated proof of stake (DPoS) is a generic term that describes a particular class of PoS algorithms. These algorithms are used in protocols like EOS, BitShares, and Tron. The core philosophy behind DPoS is that the blocks are produced by a predetermined set of validators. Along with mining the blocks, these validators are responsible for taking care of overall network health and verify the validity of the generated block.
 
@@ -149,7 +149,7 @@ As you can imagine, the delegates have considerable power in this system. This i
 *   The past history of the delegates is also considered during the selection process. If they had been guilty of malicious acts in the past, they could get looked over.
 *   A delegate could be asked to show commitment by depositing their funds into a time-locked smart contract. The funds locked could be confiscated in the event of malpractice.
 
-**#4 Liquid Proof of Stake **
+**4. Liquid Proof of Stake **
 
 Liquid Proof of Stake (LPoS) is the consensus algorithm used by Tezos and is the meeting point of traditional PoS and DPoS implementations. The concept of LPoS is rooted in the principles of liquid democracy.
 
@@ -163,7 +163,7 @@ Different protocols have different LPoS implementations. This is a brief overvie
 *   A random validator bakes a new block and must get it endorsed by 32 other random validators.
 *   Tezos rewards its bakers and endorsers with transaction fees and a share of its inflationary growth. Tezos has an annual inflation of ~5.5%.
 
-**#5 Practical Byzantine Fault Tolerance**
+**5. Practical Byzantine Fault Tolerance**
 
 Practical Byzantine Fault Tolerance or pBFT is another well known consensus protocol that’s often used in conjunction with PoS. Nodes in a pBFT-enabled distributed system are sequentially ordered, with one node being the primary (or the leader node) and others referred to as secondary (or the backup nodes). Traditional, pBFT takes place over five phases 1.request 2.re-prepare 3.prepare 4.commit and 5.reply:
 
@@ -176,7 +176,7 @@ Practical Byzantine Fault Tolerance or pBFT is another well known consensus prot
 *   In the commit phase, each node multi-casts to every other node a commit message. 
 *   If 2f +1 matching commit messages are received, it shows that the 2f+1 nodes are confirming the request. As such, the request gets executed.
 
-**#6 Hybrid PoW/PoS**
+**6. Hybrid PoW/PoS**
 
 The hybrid PoW/PoS aims to capture the benefits and mask the deficiencies of both the approaches. Decred is one of the more well known cryptocurrencies that utilizes both PoW and PoS algorithms to create a hybrid system. 
 
@@ -186,7 +186,7 @@ In Decred's PoS-PoW system, stakeholders have three distinct roles to play – b
 
 An advantage of the hybrid PoW/PoS system is that it drastically increases the costs of attacking the network since there are two different systems that must be circumvented by the attacker.
 
-**#7 Paxos**
+**7. Paxos**
 
 Paxos was the first consensus algorithm that was extensively tested and peer-reviewed. The algorithm has three entities – Proposers, Acceptors, and Leaners. Their roles are as follows:
 
@@ -212,7 +212,7 @@ This is how the consensus works:
 *   If the ID still remains the largest they have seen, the Acceptors accept the value and send it to all the Learners.
 *   If the Learners receive a positive message from the majority of the Acceptors, they accept the Value and the consensus is reached.
 
-**#8 Federated Byzantine Agreement **
+**8. Federated Byzantine Agreement **
 
 In the Federated Byzantine Agreement (FBA) algorithm, each byzantine general is responsible for their own blockchain. While this algorithm was pioneered by Ripple, Stellar has further refined the system by adopting the first ever provably safe FBA protocol. The nodes have to be known and verified ahead of time. 
 
