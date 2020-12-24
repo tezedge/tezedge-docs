@@ -64,7 +64,7 @@ This model has a known upper bound when it comes to the amount of time it takes 
 
 **Asynchronous model**
 
-The asynchronous model is more practical than the synchronous version. In this model, the upper bounds of both the time of propagation and the relative speed between the nodes don't exist. Messages can take a long time to reach their destination and the nodes may take an arbitrarily long time to respond. During real-time execution, nodes fail and messages drop off all the time. This is why this model is a lot more realistic. \
+The asynchronous model is more practical than the synchronous version. In this model, the upper bounds of both the time of propagation and the relative speed between the nodes don't exist. Messages can take a long time to reach their destination and the nodes may take an arbitrarily long time to respond. During real-time execution, nodes fail and messages drop off all the time. This is why this model is a lot more realistic.
 
 
 
