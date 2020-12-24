@@ -5,7 +5,7 @@ A distributed system consists of multiple separate devices that need to coordina
 
 In blockchain, consensus is reached through a consensus algorithm, a set of rules to be followed when agreeing on the contents of new blocks. Various chains utilize a variety of consensus protocols. 
 
-Consensus algorithms are the backbone of decentralized networks. Simply put, a consensus algorithm allows a decentralized network to make decisions and, in general, get things done in the ecosystem. So, to understand how consensus algorithms work, let’s first look at how consensus decision-making works.
+Consensus algorithms are the backbone of decentralized networks. Simply put, a consensus algorithm allows a decentralized network to make decisions and, in general, get things done in the ecosystem. In order to understand how consensus algorithms work, let us first look at how consensus decision-making works.
 
 
 ## **What is consensus decision-making?**
@@ -81,11 +81,11 @@ There are two ways to circumvent the FLP impossibility:
 *   Using timeouts
 *   Using the Nakamoto consensus
 
-**#1 Using timeouts**
+**Using timeouts**
 
 Looking into our consensus model, the FLP impossibility result clearly states that we cannot make progress in a system if there is no progress made wrt message propagation. So, if messages are delivered asynchronously, termination can't be guaranteed. One way to circumvent is to use timeouts. If a particular consensus step hasn't been executed then the protocol waits until there is a timeout. Following that, the whole process starts all over again. Paxos is a well-known consensus algorithm that uses this method.
 
-**#2 Using Nakamoto consensus**
+**Using Nakamoto consensus**
 
 Using a Nakamoto consensus method over a traditional consensus method is another way to overcome the hurdles of an asynchronous system. Traditional consensus doesn't scale well since it requires you to know every single node in the network. In Nakamoto consensus, instead of selecting a leader and coordinating with other nodes, the consensus is based on which node finds a new block the fastest.
 
