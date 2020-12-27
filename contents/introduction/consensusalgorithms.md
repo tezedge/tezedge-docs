@@ -230,9 +230,6 @@ This is how the process works:
 *   Each validating node collates the transactions with at least 80% UNL agreement into a block. They calculate the block hash, sign them, and broadcast the result to the network.
 *   The validating nodes now compare the block hash. A block gets validated when at least 80% of the validating nodes have signed off on the same hash.
 
-
-## **Conclusion**
-
 The methods by which blockchains reach consensus are still evolving and new consensus algorithms are constantly emerging. This aforementioned is not an exhaustive list of all consensus algorithms, but rather a list of the popular ones that are widely used by a majority of cryptocurrencies. 
 
 **Bibliography**
