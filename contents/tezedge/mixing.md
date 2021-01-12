@@ -1,5 +1,5 @@
 ---
-title: Mixing Rust and OCaml
+title: Rust-OCaml interop
 sidebar: Docs
 showTitle: false
 ---
