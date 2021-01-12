@@ -199,3 +199,77 @@ You can see the results of the entire process here:
 
 [http://ci.tezedge.com/simplestaking/tezedge/955/2/1](http://ci.tezedge.com/simplestaking/tezedge/955/2/1)
 
+
+### **Using multiple CPU cores to pre-validate operations in Tezos**
+
+When networks handle financial movements or other data that affects items of value, they must have an accurate, fast and efficient system for either approving valid messages or rejecting invalid ones. Without such a system in place, the network would be unable to reliably assess data, making it unsuitable for handling such information.
+
+1. First and foremost, the validation system must be accurate, with no room for error as approving a malicious or erroneous message can lead to serious real-world consequences, including financial loss.
+2. Second, it must be fast. Speed is of the essence — when a network expands, the number of actions requiring validation increases, but waiting times must be kept short in order to provide satisfactory service to users.
+3. Third, it needs to be efficient in the use of its resources in order to handle an ever-expanding volume of data. It should be able to prevent accidental overloading or intentional flooding by adversaries.
+
+In the Tezos blockchain, all messages sent across the peer to peer (P2P) network (including transactions) are known as operations. The **mempool** plays a central role in the validation of new operations. The mempool manages and holds operations before they are validated and baked into blocks.
+
+**Validation layer for operation injection**
+
+New operations are injected into the mempool’s pending operations section, either from:
+
+
+
+1. the node itself, via dedicated remote procedure calls (RPCs) that are called with the wallet or the tezos-client, or
+2. other peers (Tezos nodes), via the P2P network.
+
+_Note that operations can arrive **parallelly** from the RPC/P2P._
+
+The mempool contains the accumulated state of all operations that have been subjected to (protocol) validation, which is known as the `validation_state`.
+
+Operations are sorted into each of these categories `applied`, `refused`, `branch_refused`, `branch_delayed`, all of which are based on the results of their validation with the protocol. Note that the mempool also contains `unprocessed`, however, this category does not influence the `validation_state`.
+
+In the background, the mempool uses one instance of the [OCaml FFI runtime](https://caml.inria.fr/pub/docs/manual-ocaml/runtime.html), which contains the accumulated `validation_state`. The current state of the mempool can be viewed via this RPC:
+```
+/chains/main/mempool/pending_operations
+```
+**Scaling pre-validation performance via multiple CPU cores**
+
+We want to scale up our validation system, improve its performance and avoid flooding the mempool.
+
+To achieve that, we needed to be capable of scaling and parallelizing **validations** by utilizing multiple CPU cores.
+
+We have performed pre-validations on operations (from both RPC and P2P). When an operation arrives at either the[ RPC](https://github.com/simplestaking/tezedge/blob/v0.7.0/rpc/src/services/mempool_services.rs#L145) or[ P2P](https://github.com/simplestaking/tezedge/blob/v0.7.0/shell/src/chain_manager.rs#L604), we first send it into **pre-validation**. The[` pre-validation`](https://github.com/simplestaking/tezedge/blob/v0.7.0/shell/src/validation/mod.rs#L161) calls `begin_construction` and `apply_operation` on the OCaml FFI runtime. Each operation is individually validated with the protocol against the context. The context is dependent on the current mempool’s block.
+
+Following this pre-validation, the mempool then validates operations. From the RPCs, only `applied` operations are allowed to pass to mempool validation, while from the P2P, all of the other categories may pass except for `refused`. This may change in future versions.
+
+The main feature is that we can parallelize the pre-validations thanks to having parallelized access to the **OCaml FFI runtime** through dedicated **OCaml FFI runtime pools.** This is achieved by using the `ocaml-interop` (which we described in our[ previous article](https://medium.com/simplestaking/safely-mixing-rust-and-ocaml-in-the-tezedge-node-a2089cbef590?source=collection_home---6------0-----------------------)), as well as the dedicated pool `tezos_readonly_prevalidation_api`. For the pools, we implemented a[ version](https://github.com/simplestaking/tezedge/blob/v0.7.0/tezos/wrapper/src/pool.rs#L140) that uses the [r2d2 library](https://crates.io/crates/r2d2).
+
+**Try out multi-CPU core support for the pre-validation layer**
+
+1. Checkout git & go to directory
+```
+git clone[ https://github.com/simplestaking/tezedge.git](https://github.com/simplestaking/tezedge.git)
+
+cd tezedge
+```
+2. Please open this link, follow the instructions and check that you have all the prerequisites necessary for building the node from the source.
+
+[https://github.com/simplestaking/tezedge#building-from-source](https://github.com/simplestaking/tezedge#building-from-source)
+
+4. Start the sandbox launcher. We use the launcher to remotely manage the sandbox node. Wait until the launcher is ready.
+
+`./run.sh sandbox`
+
+5. Start the node in sandbox mode.
+
+`./test.sh start_sandbox_node`
+
+6. Run a stress test. We create several accounts (wallets) that inject multiple transactions to stress test the pre-validation layer.
+
+`./test.sh send_transactions`
+
+7. You can now see how the sub-processes are scaled on multiple CPU cores:
+
+`htop`
+
+
+![Image](../../static/images/multicpu1.gif)
+
+
