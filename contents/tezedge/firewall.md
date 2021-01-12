@@ -79,7 +79,7 @@ cd tezedge-firewall
 ```
 
 2. We can run the firewall with either the OCaml or the Rust node. We’ve prepared two commands with which you can run it on either node.
-3. 
+
 ```
 docker-compose -f docker-compose.firewall.ocaml.yml pull
 docker-compose -f docker-compose.firewall.ocaml.yml up
