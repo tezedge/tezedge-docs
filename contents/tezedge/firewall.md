@@ -18,7 +18,9 @@ In blockchain, securing the node against malicious peers is of prime importance 
 We wanted to create a firewall for the TezEdge node that would recognize inbound traffic and filter it out before it enters the node itself. For this purpose, we’re utilizing an eXpress Data Path / Extended Berkeley Packet Filters (XDP/eBPF) module that acts as a layer outside of the node itself. This module allows us to run an application in the kernel that acts as a firewall, filtering incoming messages.
 
 ![Image](../../static/images/firewall1.png)
-Note that the packet flows through XDP eBPF (the small icon on the bottom left) before entering any part of the networking stack. Source: Wikipedia.org
+
+_Note that the packet flows through XDP eBPF (the small icon on the bottom left) before entering any part of the networking stack. Source: Wikipedia.org_
+
 
 The firewall acts as the TezEdge node’s first line of defense. When a peer first connects to a node, it begins the bootstrapping process, with the first message being the connection message.
 
