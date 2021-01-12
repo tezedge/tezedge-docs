@@ -111,11 +111,6 @@ Consider the following example (borrowed and adapted from caml-oxide’s paper).
 
 A Rust function that takes an OCaml string s and returns an OCaml triplet (s, (s, s)):
 
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![Image](../../static/images/mixing1.png)
 
 
@@ -128,11 +123,6 @@ Most of the time this program will work correctly. But sooner or later this bug 
 But the program above does not compile. Because of the rules[ ocaml-interop](https://github.com/simplestaking/ocaml-interop) encodes using Rust’s type-system an error is produced at compile-time by Rust’s borrow-checker.
 
 This version compiles and behaves correctly:
-
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![Image](../../static/images/mixing2.png)
 
