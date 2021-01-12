@@ -86,15 +86,19 @@ Here is for example a speed comparison between round trips passing an instance o
 
 The old version performs encoding and decoding of both requests and responses:
 
-```Benchmarking apply_block_request_encoded_bytes_roundtrip:
-```Collecting 100 samples in
-```time: [61.899 us 62.947 us 64.262 us]
+`Benchmarking apply_block_request_encoded_bytes_roundtrip:`
+
+`Collecting 100 samples in`
+
+`time: [61.899 us 62.947 us 64.262 us]`
 
 The new version converts Rust values directly into OCaml values and vice versa:
 
-```Benchmarking apply_block_request_structs_roundtrip:
-```Collecting 100 samples
-```time: [27.658 us 28.170 us 28.789 us]
+`Benchmarking apply_block_request_structs_roundtrip:`
+
+`Collecting 100 samples`
+
+`time: [27.658 us 28.170 us 28.789 us]`
 
 **_Here are more examples of[ ocaml-interop](https://github.com/simplestaking/ocaml-interop) usage in TezEdge codebase:_**
 
