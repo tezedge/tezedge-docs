@@ -200,7 +200,7 @@ You can see the results of the entire process here:
 [http://ci.tezedge.com/simplestaking/tezedge/955/2/1](http://ci.tezedge.com/simplestaking/tezedge/955/2/1)
 
 
-### **Using multiple CPU cores to pre-validate operations in Tezos**
+### **Using multiple CPU cores to pre-validate operations**
 
 When networks handle financial movements or other data that affects items of value, they must have an accurate, fast and efficient system for either approving valid messages or rejecting invalid ones. Without such a system in place, the network would be unable to reliably assess data, making it unsuitable for handling such information.
 
