@@ -244,28 +244,30 @@ The main feature is that we can parallelize the pre-validations thanks to having
 **Try out multi-CPU core support for the pre-validation layer**
 
 1. Checkout git & go to directory
+
 ```
-git clone[ https://github.com/simplestaking/tezedge.git](https://github.com/simplestaking/tezedge.git)
+git clone [https://github.com/simplestaking/tezedge.git](https://github.com/simplestaking/tezedge.git)
 
 cd tezedge
 ```
+
 2. Please open this link, follow the instructions and check that you have all the prerequisites necessary for building the node from the source.
 
 [https://github.com/simplestaking/tezedge#building-from-source](https://github.com/simplestaking/tezedge#building-from-source)
 
-4. Start the sandbox launcher. We use the launcher to remotely manage the sandbox node. Wait until the launcher is ready.
+3. Start the sandbox launcher. We use the launcher to remotely manage the sandbox node. Wait until the launcher is ready.
 
 `./run.sh sandbox`
 
-5. Start the node in sandbox mode.
+4. Start the node in sandbox mode.
 
 `./test.sh start_sandbox_node`
 
-6. Run a stress test. We create several accounts (wallets) that inject multiple transactions to stress test the pre-validation layer.
+5. Run a stress test. We create several accounts (wallets) that inject multiple transactions to stress test the pre-validation layer.
 
 `./test.sh send_transactions`
 
-7. You can now see how the sub-processes are scaled on multiple CPU cores:
+6. You can now see how the sub-processes are scaled on multiple CPU cores:
 
 `htop`
 
