@@ -289,7 +289,7 @@ In order to generate statistics, run these commands:
 _Prepare setup:_
 
 ```
-git clone -b fb_storage_extended_actions[ https://github.com/simplestaking/tezedge](https://github.com/simplestaking/tezedge)
+git clone -b fb_storage_extended_actions https://github.com/simplestaking/tezedge
 
 cd tezedge
 
