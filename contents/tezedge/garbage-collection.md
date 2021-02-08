@@ -293,7 +293,7 @@ git clone -b fb_storage_extended_actions[ https://github.com/simplestaking/tezed
 
 cd tezedge
 
-wget [https://tezedge.fra1.digitaloceanspaces.com/actions-testnet.bin](https://tezedge.fra1.digitaloceanspaces.com/actions-testnet.bin)
+wget https://tezedge.fra1.digitaloceanspaces.com/actions-testnet.bin
 ```
 
 _Generate statistics for mark-sweep:_
