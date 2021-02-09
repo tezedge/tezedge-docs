@@ -1,5 +1,12 @@
+---
+title: Garbage collection
+sidebar: Docs
+showTitle: false
+---
 
-### **Implementing garbage collection into the storage of the TezEdge node**
+
+
+## **Implementing garbage collection into the storage of the TezEdge node**
 
 Every kind of software needs to store the data that it uses in order to operate correctly. There are two options where to store this data; either on a hard disk, or in memory. While hard disks offer much greater capacity for storing data, their drawback is slower performance as the data must be read and processed from the disk. On the other hand, memory has very limited capacities, but offers better performance as data can be quickly retrieved and used.
 
