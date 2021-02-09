@@ -1,4 +1,11 @@
-### **How the blockchain state is stored in the TezEdge node**
+---
+title: Merkle storage
+sidebar: Docs
+showTitle: false
+---
+
+
+## **How the blockchain state is stored in the TezEdge node**
 
 In a distributed network like blockchain, we want to be able to quickly verify that the data distributed from node to node remains the same. We want to avoid inconsistencies between each node’s version of the blockchain data, whether they happen accidentally or are intentionally created by adversaries.
 
