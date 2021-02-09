@@ -25,7 +25,7 @@ In order to be efficient, we need to:
 1. Validate large bodies of data without requiring too much memory.
 2. Know which parts of the data that have been changed and only verify those.
 
-One way of achieving this is through a** Merkle tree** (also known as a hash tree), a method of structuring data that utilizes hash functions to create a tree-like system of referencing.
+One way of achieving this is through a **Merkle tree** (also known as a hash tree), a method of structuring data that utilizes hash functions to create a tree-like system of referencing.
 
 
 ### **Hash functions**
