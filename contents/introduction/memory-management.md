@@ -1,21 +1,17 @@
 
 ---
-
 title: Memory management
-
 sidebar: Docs
-
 showTitle: false
-
 ---
 
   
 
-# Garbage Collection
+# Memory Management
 
   
 
-Garbage collection is an automatic memory management technique employed to periodically clear objects in order to free up the memory formerly allocated to them. Memory management is one of the most crucial aspects of programming since it controls the way a software application accesses computer memory. A software requires access to the computer's random access memory (RAM) to:
+Memory management is one of the most crucial aspects of programming since it controls the way a software application accesses computer memory. A software requires access to the computer's random access memory (RAM) to:
 
   
 
