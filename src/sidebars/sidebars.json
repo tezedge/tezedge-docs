@@ -21,8 +21,10 @@
         "items": [
             "introduction/money",
             "introduction/cryptocurrency",
+            "introduction/consensusalgorithms",
             "introduction/proof-of-work",
             "introduction/forking",
+            "introduction/memory-management",
             "introduction/tezos"
         ]
     },
@@ -42,6 +44,9 @@
             "tezedge/sandbox",
             "tezedge/firewall",
             "tezedge/wireshark",
+            "tezedge/mixing",
+            "tezedge/merkle-storage",
+            "tezedge/garbage-collection",
             "tezedge/contribution"
         ]
     },
