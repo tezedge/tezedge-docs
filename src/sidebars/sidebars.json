@@ -24,7 +24,6 @@
             "introduction/consensusalgorithms",
             "introduction/proof-of-work",
             "introduction/forking",
-            "introduction/memory-management",
             "introduction/tezos"
         ]
     },
@@ -45,6 +44,7 @@
             "tezedge/firewall",
             "tezedge/wireshark",
             "tezedge/mixing",
+            "tezedge/memory",
             "tezedge/merkle-storage",
             "tezedge/garbage-collection",
             "tezedge/contribution"
