@@ -1,12 +1,8 @@
-
 ---
 title: Memory management
 sidebar: Docs
 showTitle: false
 ---
-
-  
-
 # Memory Management
 
   
