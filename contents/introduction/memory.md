@@ -1,12 +1,11 @@
 ---
-title: Memory management
+title: Memory
 sidebar: Docs
 showTitle: false
 ---
-# Memory Management
+# Memory
 
   
-
 Memory management is one of the most crucial aspects of programming since it controls the way a software application accesses computer memory. A software requires access to the computer's random access memory (RAM) to:
 
   
