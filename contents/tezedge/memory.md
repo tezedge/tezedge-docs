@@ -82,7 +82,7 @@ Based on this list, the GC creates a graph that contains all the objects that ar
 
   
 
-********What happens during garbage collection?********
+**What happens during garbage collection?**
 
   
 
