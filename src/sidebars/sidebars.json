@@ -44,8 +44,8 @@
             "tezedge/firewall",
             "tezedge/wireshark",
             "tezedge/mixing",
-            "tezedge/memory",
-            "tezedge/merkle-storage",
+            "tezedge/storagememory",
+            "tezedge/storage",
             "tezedge/garbage-collection",
             "tezedge/contribution"
         ]
