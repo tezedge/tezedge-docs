@@ -1,4 +1,8 @@
-
+---
+title: Consensus algorithms
+sidebar: Docs
+showTitle: false
+---
 # Consensus algorithms
 
 A distributed system consists of multiple separate devices that need to coordinate their actions in order to achieve their goal(s).  One of the fundamental problems of distributed systems is the issue of agreeing on shared data that is used in computation. This is known as reaching consensus. 
