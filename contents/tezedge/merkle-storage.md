@@ -1,9 +1,9 @@
 ---
-title: Merkle storage
+title: Storage
 sidebar: Docs
 showTitle: false
 ---
-
+# **Storage**
 
 ## **How the blockchain state is stored in the TezEdge node**
 
