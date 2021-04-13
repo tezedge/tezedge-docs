@@ -179,37 +179,37 @@ Current smart contract analysis includes a wide array of options including stati
 
 While fuzzing in blockchain tries to identify exploits among its semantics and components, fuzz tests in smart contracts aim to recognize exploits and vulnerabilities with common smart contract functionalities. A high-level overview of fuzzing a smart contract can be represented as follows:
 
- 1. The user provides the initial state S0 that include one or more contracts accounts
+ **1. The user provides the initial state S0 that include one or more contracts accounts**
  
- 2. Then provides correctness properties (optionally)
+ **2. Then provides correctness properties (optionally)**
 
- 3. All sequences commence from S0. The fuzzer generates the sequence of transactions that invoke the contract under test, simulating a transaction to a new state; i.e. n different transactions from _n_ senders.
+ **3. All sequences commence from S0. The fuzzer generates the sequence of transactions that invoke the contract under test, simulating a transaction to a new state; i.e. n different transactions from _n_ senders.**
  
- 4. the fuzzer mutates the transaction data or inputs, or the entire sequence itself.
+ **4. The fuzzer mutates the transaction data or inputs, or the entire sequence itself.**
 
 Testing a contract functionality can go from general functionalities to very specific contract semantics. Among common functionalities that may result in exploits or vulnerabilities include: 
 
-**Runtime values** 
+* **Runtime values** 
  
 Runtime values are recorded to evaluate reactive arguments and variables. Blank seeds are passed as arguments for each function. Based on executed tests, seeds are updated adding runtime values and function arguments. Updated seeds are set as arguments so the resulting variables become the arguments for measuring next executing transactions. This way, the output reflects the execution history and state of the contract, helping to identify potential exploits. 
     
-**Hash values** 
+* **Hash values** 
  
 Based on the previous test, with the hash input recorded in the seed set, a validity check of the hash value can be implemented. 
     
-**Balance Increment** 
+* **Balance Increment** 
  
 Simulate a contract sending value to a random address and ensure that the receiver contract does not create any window to be exploited. 
     
-**Code Injection** 
+* **Code Injection** 
 
 Test operations in which a contract may be involved in executing code that originates in a different contract. Objective is to ensure that the external contract does not gain full control on the contract host.
 
-**Unchecked Transfer Value** 
+* **Unchecked Transfer Value** 
 
 It describes the amount of currency transfer without being constraint including two types of implementations.
 
-**Vulnerable Access Control** 
+* **Vulnerable Access Control** 
 
 It represents that an attacker can bypass access control or grant privileges to conduct sensitive operations, such as currency transfer and self-destruction.
 
