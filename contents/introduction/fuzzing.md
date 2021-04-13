@@ -136,8 +136,7 @@ One of the more common approaches taken to fuzzing is to define lists of “know
 *   For binary: Random inputs.** **
 
 
-## ** \
-Fuzzing in blockchain **
+## **Fuzzing in blockchain**
 
 When talking about blockchain, vulnerabilities could be present at the network level or at a smart contract level. While there are several options for testing besides fuzzing, a fuzz test is more flexible since it can proactively identify additional vulnerabilities. An important difference from other tests is that fuzzing might point out situations that a human may not include. Moreover, since blockchains are productive environments, the potential impact of an issue is higher.
 
