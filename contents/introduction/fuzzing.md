@@ -94,9 +94,9 @@ Generation fuzzing is generally a lot deeper than mutation because it can constr
 
 
 
-1. **Memory Leaks: **Fuzzing is most used by large applications to hunt out bugs affecting the safety of memory.
-2. **Invalid Input: **Fuzzers may generate invalid inputs that can be used to test error-handling routines. This is especially useful in detecting the robustness of dynamic run-time, wherein the software doesn’t have power over its inputs.
-3. **Correctness Bugs: **Fuzzing also helps you in detecting and funneling out "correctness" bugs, in other words flaws that detect issues in the correctness of the outcome. Examples of these include corrupted databases, poor search results, etc.
+1. **Memory Leaks:** Fuzzing is most used by large applications to hunt out bugs affecting the safety of memory.
+2. **Invalid Input:** Fuzzers may generate invalid inputs that can be used to test error-handling routines. This is especially useful in detecting the robustness of dynamic run-time, wherein the software doesn’t have power over its inputs.
+3. **Correctness Bugs:** Fuzzing also helps you in detecting and funneling out "correctness" bugs, in other words flaws that detect issues in the correctness of the outcome. Examples of these include corrupted databases, poor search results, etc.
 
 
 ## **Examples of fuzz testing tools**
