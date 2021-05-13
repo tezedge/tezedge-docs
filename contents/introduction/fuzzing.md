@@ -6,7 +6,7 @@ showTitle: false
 
 # Fuzzing
 
-Fuzzing or fuzz testing is one of the most effective, automated ways to identify software vulnerabilities. Fuzzing involves providing invalid, unexpected, or random data as inputs to a computer program to test it for different bugs and vulnerabilities. An experienced fuzzer usually tests the software with inputs that are *semi valid.* In other words, the inputs are valid enough that they don’t get directly rejected, but are invalid enough to trigger issues deep into runtime. Let’s take a closer look to see what’s going on behind the scenes.
+**Fuzzing** or fuzz testing is one of the most effective, automated ways to identify software vulnerabilities. Fuzzing involves providing invalid, unexpected, or random data as inputs to a computer program to test it for different bugs and vulnerabilities. An experienced fuzzer usually tests the software with inputs that are *semi valid.* In other words, the inputs are valid enough that they don’t get directly rejected, but are invalid enough to trigger issues deep into runtime. Let’s take a closer look to see what’s going on behind the scenes.
 
 Fuzz testing ensures that error-handling routines catch nonsensical and incorrect inputs. It also makes sure that all possible eventualities have been accounted for in web developmental environments.
 
