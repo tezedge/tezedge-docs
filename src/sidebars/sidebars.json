@@ -21,11 +21,13 @@
         "items": [
             "introduction/money",
             "introduction/cryptocurrency",
+            "introduction/tezos",
             "introduction/consensus-algorithms",
             "introduction/proof-of-work",
             "introduction/forking",
             "introduction/fuzzing",
-            "introduction/tezos"
+            "introduction/formal-verification"
+            
         ]
     },
     {
