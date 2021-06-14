@@ -164,7 +164,7 @@ Ali, S., Wang, G., White, B., & Cottrell, R. L. (2018, August). ‘A blockchain-
 
  (pp. 1303-1308). IEEE.
 
-A. M. Antonopoulos. Andreas M. Antonopoulos. _MasteringBitcoin - Programming the Open Blockchain_, O’Reilly Media (2017)
+A. M. Antonopoulos. Andreas M. Antonopoulos. _MasteringBitcoin - Programming the Open Blockchain_, O’Reilly Media(2017)
 
 Nakamoto, S. (2008). _Bitcoin: A peer-to-peer electronic cash system_. Retrieved from [https://nakamotoinstitute.org/bitcoin](https://nakamotoinstitute.org/bitcoin)
 
