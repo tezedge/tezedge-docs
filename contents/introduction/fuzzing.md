@@ -130,7 +130,7 @@ One of the more common approaches taken to fuzzing is to define lists of “know
 
 *   For integers: 0, negative, or very large numbers.
 *   For character type: Escaped, interpretable characters / instructions (ex: For SQL Requests, quotes / commands…)
-*   For binary: Random inputs.** **
+*   For binary: Random inputs.
 
 
 ## **Fuzzing in blockchain**
