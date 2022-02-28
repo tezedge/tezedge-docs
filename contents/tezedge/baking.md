@@ -52,9 +52,9 @@ $ tezos-endorser-011-PtHangz2 \
 
 Hardware wallets/ledgers add safety to your crypto accounts as such accounts cannot be copied or digitally stolen from, and in some cases, are inaccessible from outside of the wallet. Tezos baking/endorsing binaries support the Ledger Nano S wallet.
 
-For more details on using Ledger Nano S, see https://ledger.com/start. For more information on Tezos binaries support for it, see http://tezos.gitlab.io/user/key-management.html#ledger-support.
+For more details on how to use the Ledger Nano S, see https://ledger.com/start. For more information on the Tezos binaries support for it, see http://tezos.gitlab.io/user/key-management.html#ledger-support.
 
-To bake/endorse using an account stored on your Ledger Nano S, you need to install the Tezos Baking application on it. For more details, see https://github.com/obsidiansystems/ledger-app-tezos.
+To bake/endorse with an account stored on your Ledger Nano S, you need to install the Tezos Baking application onto your Ledger device. For more details, see https://github.com/obsidiansystems/ledger-app-tezos.
 
 To list connected Ledgers that are available for Tezos binaries, execute this command:
 
