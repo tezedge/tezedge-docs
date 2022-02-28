@@ -6,15 +6,15 @@ showTitle: false
 
 # Baking
 
-In Tezos network, **Baking** is the process of creating, or _baking_ a next block for the blockchain.
+In the Tezos network, **Baking** is the process of creating, or _baking_ the next block for the blockchain.
 
-After a baker bakes a block, other stakeholders in the network should validate, or _endorse_ it. Submitting endorsement operation to the blockchain is called **Endorsing**.
+After a baker bakes a block, other stakeholders in the network validate, or _endorse_ it. Submitting an endorsement operation to the blockchain is known as **Endorsing**.
 
-Currently Tezedge node supports baking using Octez baker executable called `tezos-baker`.
+Currently, the TezEdge node supports baking using the Octez baker executable called `tezos-baker`.
 
 ## Importing Delegate Address
 
-In order to bake/endorse blocks, you need to have a Tezos accout that is eligible for baking. To make Tezos programs, like `tezos-baker` and `tezos-endorser` aware of it, you need to import it using the following command:
+In order to bake/endorse blocks, you need to have a Tezos account that is eligible for baking. To make Tezos programs, like `tezos-baker` and `tezos-endorser` aware of it, you need to import it using the following command:
 
 ```
 $ tezos-client \
@@ -23,11 +23,11 @@ $ tezos-client \
    import secret key <delegate_alias> <delegate_secret_key>
 ```
 
-## Launching Tezos Baker.
+## Launching the Tezos Baker.
 
-Before you can launch Tezos baker, you need to have Tezedge node running and provigind RPC functionality, see [Quick Start](../get-started/quick-start).
+Before you can launch the Tezos baker, you need to have the TezEdge node running and providing an RPC functionality, see the [Quick Start](../get-started/quick-start) guide for more information.
 
-Assuming the the Tezedge node uses port 18732 for RPC, and directory `/tmp/tezos-data` as its context storage, use the following command to launch `tezos-baker`:
+Assuming that the TezEdge node uses port 18732 for RPC, and directory `/tmp/tezos-data` as its context storage, use the following command to launch the `tezos-baker`:
 
 ```
 $ tezos-baker-011-PtHangz2 \
@@ -37,9 +37,10 @@ $ tezos-baker-011-PtHangz2 \
 
 ## Launching Tezos Endorser
 
-Before you can launch Tezos baker, you need to have Tezedge node running and provigind RPC functionality, see [Quick Start](../get-started/quick-start).
+Before you can launch the Tezos baker, you need to have Tezedge node running and providing an RPC functionality, see [Quick Start](../get-started/quick-start) guide for more information.
 
-Assuming the the Tezedge node uses port 18732 for RPC, use the following command to launch `tezos-baker`:
+
+Assuming that the TezEdge node uses port 18732 for RPC, use the following command to launch `tezos-baker`:
 
 ```
 $ tezos-endorser-011-PtHangz2 \
@@ -49,13 +50,13 @@ $ tezos-endorser-011-PtHangz2 \
 
 ## Using Ledger Stored Tezos Address
 
-Hardware wallets/ledgers add safety to your crypto accounts as such accounts cannot be copied or digitally stolen, and in some cases private case just inaccessible from the outside of the wallet. Tezos baking/endorsing binaries support Ledger Nano S wallet.
+Hardware wallets/ledgers add safety to your crypto accounts as such accounts cannot be copied or digitally stolen from, and in some cases, are inaccessible from outside of the wallet. Tezos baking/endorsing binaries support the Ledger Nano S wallet.
 
 For details, see [https://ledger.com/start].
 
-To bake/endorse using an account stored on Ledger Nano S, you need to install Tezos Baking application on it. For more details, see [https://github.com/obsidiansystems/ledger-app-tezos].
+To bake/endorse using an account stored on your Ledger Nano S, you need to install the Tezos Baking application on it. For more details, see [https://github.com/obsidiansystems/ledger-app-tezos].
 
-To list connected ledgers available to Tezos binaries, execute this command:
+To list connected Ledgers that are available for Tezos binaries, execute this command:
 
 ```
 $ tezos-client \
@@ -77,9 +78,9 @@ tezos-client import secret key ledger_username "ledger://major-squirrel-thick-he
 tezos-client import secret key ledger_username "ledger://major-squirrel-thick-hedgehog/P-256/0h/0h"
 ```
 
-For each Tezos account stored on the ledger this will report four kinds of commands to import this address, for 4 different private keys formats (Ed25519, Secp256k1, P256 and Bip25519 respectively).
+For each Tezos account stored on the Ledger, this will report four kinds of commands to import this address, for 4 different private key formats (Ed25519, Secp256k1, P256 and Bip25519 respectively).
 
-Then you need to import corresponding key:
+Then you need to import the corresponding key:
 
 ```
 $ tezos-client \
@@ -87,7 +88,7 @@ $ tezos-client \
    import secret key <delegate_alias> "ledger://major-squirrel-thick-hedgehog/ed25519/0h/0h"
 ```
 
-And finally the _Tezos Baking_ application on the ledger should be configured for baking:
+And finally, the _Tezos Baking_ application on the Ledger should be configured for baking:
 
 ```
 $ tezos-client \
@@ -95,11 +96,11 @@ $ tezos-client \
    setup ledger to bake for <delegate_alias> 
 ```
 
-After that, you can use commands mentioned above to run baker/endorser daemons with that alias _<delegate\_alias>_. Note that you need to have your ledger connected and _Tezos Baking_ application active on it.
+After that, you can use the commands mentioned above to run baker/endorser daemons with the alias _<delegate\_alias>_. Note that you need to have your Ledger connected and the _Tezos Baking_ application active on it.
 
 ## Using Remote Signing
 
-To keep your private keys at home while running Tezedge node on a VPS, or to use ledger provided keys, _remote signer_ application can be used.
+To keep your private keys at home while running the TezEdge node on a VPS, or to use the keys provided by Ledger, the _remote signer_ application can be used.
 
 In this basic setup, there is a VPS server running Tezedge node and Tezos baker/endorser daemons, and the home server accessible from it via address `home`. This home server should have access to the Tezos address that should be used.
 
@@ -111,7 +112,7 @@ home$ tezos-signer \
    launch http signer --address 0.0.0.0 -p 17732
 ```
 
-Then you need to import the address provided by this `tezos-signer` server to your VPS:
+Then you need to import the address provided by the `tezos-signer` server to your VPS:
 
 ```
 $ tezos-client \
@@ -120,5 +121,6 @@ $ tezos-client \
    import secret key <delegate_alias> http://home:17732/<delegate_address>
 ```
 
-Now you can start baking and endorsing daemons on your VPS using the command above. In case of ledger based account, the ledger should be connected to the _home_ server, and _Tezos Baking_ application should be active on it, otherwise blocks/endorsement operations will not be signed and thus won't be parts of the blockchain._
+Now you can start baking and endorsing daemons on your VPS using the command above. In case of a Ledger-based account, the Ledger should be connected to the _home_ server, and _Tezos Baking_ application should be active on it, otherwise, the blocks/endorsement operations will not be signed and thus won't be parts of the blockchain._
+
 
