@@ -114,7 +114,7 @@ These are followed by 4 columns of time statistics.
 
     When we receive a block from the **network**, this value represents the delay since we first saw this block. This means that one of the rows will contain a 0 value. This means that the node first saw this block when this peer sent it to the node.  \
  \
-When the baker **injects** a block this value represents the delay between baking the block and receiving the block back from the peers.
+When the baker **injects** a block this value represents the delay between sending the baked block's header to the network and receiving the block back from the peers.
 
 2. `HEADER SENT` - The time delay between the application of the block and it being sent to the network. 
 3. `OP REQUESTED` - The time between sending the block to the network and the time we receive a request for the content of the block. 
