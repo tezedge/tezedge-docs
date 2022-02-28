@@ -36,7 +36,7 @@
         "items": [
             "tezedge/diversity",
             "tezedge/baking",
-            "tezedge/baking-monitoring"
+            "tezedge/baking-monitoring",
             "tezedge/architecture",
             "tezedge/synchronization",
             "tezedge/baking",
