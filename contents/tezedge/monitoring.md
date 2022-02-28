@@ -1,5 +1,5 @@
 ---
-title: Baking
+title: Monitoring
 sidebar: Docs
 showTitle: false
 ---
