@@ -154,15 +154,15 @@ Also, it is important to mention that the aforementioned history modes are still
 As previously mentioned, one of the ubiquitous blockchain challenges is that the chain is increasingly growing every moment, increasing the difficulty of the data retrieval process from the chain to a peer. Taking advantage of the history mode storage requirements, it is now feasible to download a snapshot to get a full node running. Thus, a snapshot in Tezos consists in the process of  extracting the necessary data to bootstrap a node from a single data entry. Importing/exporting a snapshot usually takes about 2GB of data, completing in a matter of minutes rather than taking even full days to fully synchronize a node.
 
 
-### **Select context storage using tezedge**
+### **Select context storage using TezEdge**
 
-Tezedge supports 3 different implementations for the context storage, the implementation can be specified with the `--tezos-context-storage=` parameter:
+TezEdge supports 3 different implementations for the context storage. The implementation can be specified with the `--tezos-context-storage=` parameter:
 - `irmin` (default): Uses the same implementation as Octez
-- `tezedge`: Uses a Rust based implementation.  
-Tezedge supports 2 contexts: on-disk and in-memory.  
+- `tezedge`: Uses a Rust-based implementation.  
+TezEdge supports 2 contexts: on-disk and in-memory.  
 In addition to `--tezos-context-storage=tezedge`, `--context-kv-store` specifies which context to use:
-  - `inmem`: Store the blockchain state in RAM. It's fast but requires a machine with lots of memory
-  - `ondisk` (default): Store the blockchain on disk
+  - `inmem`: Stores the blockchain state in RAM. It's fast but requires a machine with lots of memory
+  - `ondisk` (default): Stores the blockchain on disk
 
 
 
