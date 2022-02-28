@@ -52,9 +52,9 @@ $ tezos-endorser-011-PtHangz2 \
 
 Hardware wallets/ledgers add safety to your crypto accounts as such accounts cannot be copied or digitally stolen from, and in some cases, are inaccessible from outside of the wallet. Tezos baking/endorsing binaries support the Ledger Nano S wallet.
 
-For details, see [https://ledger.com/start].
+For more details on using Ledger Nano S, see https://ledger.com/start. For more information on Tezos binaries support for it, see http://tezos.gitlab.io/user/key-management.html#ledger-support.
 
-To bake/endorse using an account stored on your Ledger Nano S, you need to install the Tezos Baking application on it. For more details, see [https://github.com/obsidiansystems/ledger-app-tezos].
+To bake/endorse using an account stored on your Ledger Nano S, you need to install the Tezos Baking application on it. For more details, see https://github.com/obsidiansystems/ledger-app-tezos.
 
 To list connected Ledgers that are available for Tezos binaries, execute this command:
 
@@ -101,6 +101,8 @@ After that, you can use the commands mentioned above to run baker/endorser daemo
 ## Using Remote Signing
 
 To keep your private keys at home while running the TezEdge node on a VPS, or to use the keys provided by Ledger, the _remote signer_ application can be used.
+
+See here for more details: http://tezos.gitlab.io/user/key-management.html#signer
 
 In this basic setup, there is a VPS server running Tezedge node and Tezos baker/endorser daemons, and the home server accessible from it via address `home`. This home server should have access to the Tezos address that should be used.
 
