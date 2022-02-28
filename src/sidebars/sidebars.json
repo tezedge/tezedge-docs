@@ -37,6 +37,7 @@
             "tezedge/diversity",
             "tezedge/architecture",
             "tezedge/synchronization",
+            "tezedge/baking",
             "tezedge/network",
             "tezedge/mempool",
             "tezedge/endpoints",
