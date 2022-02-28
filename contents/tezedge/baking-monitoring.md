@@ -43,17 +43,17 @@ In the same row, on the far right end, the time until your ``Next baking`` and `
 
 Below the topmost row, on the left side, there is a summary that displays all of the endorsement slots currently inside of the mempool and their respective statuses:
 
-``Missing``
+``Missing`` - The endorsement operation is missing from the mempool.
 
-``Broadcast``
+``Broadcast`` - The endorsement operation was broadcast to the network.
 
-``Applied`` 
+``Applied`` - The endorsement operation was preapplied by the protocol.
 
-``Prechecked`` 
+``Prechecked`` - The endeorsement operation was prechecked by the shell.
 
-``Decoded`` 
+``Decoded`` - The endorsement operation's contents were successfully decoded.
 
-``Received`` 
+``Received`` - The endorsement operation was successfully received from the network.
 
 In the screenshot, there are 56 slots that are missing and 200 slots that are prechecked. The other statuses display 0. When we add up all of these values together (in this case, 200 + 56), we get 256, which is the number of endorsement slots for a block.
 
