@@ -120,8 +120,5 @@ $ tezos-client \
    import secret key <delegate_alias> http://home:17732/<delegate_address>
 ```
 
-Now you can start baking and endorsing daemons on your VPS using the command above.
+Now you can start baking and endorsing daemons on your VPS using the command above. In case of ledger based account, the ledger should be connected to the _home_ server, and _Tezos Baking_ application should be active on it, otherwise blocks/endorsement operations will not be signed and thus won't be parts of the blockchain._
 
-```
-
-```
