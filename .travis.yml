@@ -5,7 +5,6 @@ addons:
   apt:
     packages:
       - g++-4.8
-      - nasm
     sources:
       - ubuntu-toolchain-r-test
 env:
@@ -14,7 +13,6 @@ branches:
   only:
     - master
 before_script:
-  - "apt add make zlib autoconf automake libtool dpkg pkgconfig libpng libpng-dev g++"
   - "yarn global add firebase-tools"
   - "yarn global add gatsby"
 script:
