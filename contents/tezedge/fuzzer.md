@@ -1,3 +1,9 @@
+---
+title: Action Fuzzer
+sidebar: Docs
+showTitle: false
+---
+
 
 # The Action Fuzzer
  This fuzzer is closely related to the new _state-machine_ architecture of the TezEdge node, so let's start by describing it.
