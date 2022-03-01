@@ -14,7 +14,7 @@ branches:
   only:
     - master
 before_script:
-  - "apk add make zlib autoconf automake libtool dpkg pkgconfig libpng libpng-dev g++"
+  - "apt add make zlib autoconf automake libtool dpkg pkgconfig libpng libpng-dev g++"
   - "yarn global add firebase-tools"
   - "yarn global add gatsby"
 script:
