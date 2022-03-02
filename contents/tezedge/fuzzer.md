@@ -48,4 +48,5 @@ Once running, the container will accept GET requests to http://127.0.0.1:8080/st
 - Rebuild and run `TezEdge`.
 - Rebuild and run the fuzzer.
 
+Generated coverage reports can be visualized with a web browser from http://127.0.0.1:8080/. Keep in mind that to generate reports for the first time two requests to http://127.0.0.1:8080/start are needed, since the reports for the first request are generated when the first fuzzer is stopped by the second request.
 
