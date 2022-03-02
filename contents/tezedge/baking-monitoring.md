@@ -129,12 +129,12 @@ The panel only takes into consideration the highest priority right (priority 0).
 1. `Injected` -  The time it took to inject the block according to the minimum block delay in the network. Each level has its precise minimum time it can be included in the chain according to priorities and endorsing power.
 2. `Load data` - The time it took to fetch the data from the database for block application
 3. `Protocol Apply Block` - The duration of the whole block application, including the time it spent inside the protocol.
-  &nbsp;&nbsp;&nbsp;  a) `Apply` - The application duration inside the protocol
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i. `Begin application` - The duration of the `begin_application` function inside the protocol
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii. `Decoding operations` - The time it took to decode the operations inside the protocol
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii. `Encoding operations metadata` - The time it took to encode the metadata of the operations 
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iv. `Collecting new rolls` - The time it took to collect the new rolls on a cycle change. This value will be 0 most of the time.
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      v. `Commit` - The time it took to commit the new block into the context
+    1. `Apply` - The application duration inside the protocol
+        1. `Begin application` - The duration of the `begin_application` function inside the protocol
+        2. `Decoding operations` - The time it took to decode the operations inside the protocol
+        3. `Encoding operations metadata` - The time it took to encode the metadata of the operations 
+        4. `Collecting new rolls` - The time it took to collect the new rolls on a cycle change. This value will be 0 most of the time.
+        5. `Commit` - The time it took to commit the new block into the context
 4. `Store application result` - The time it took to store the application result in the database we received from the protocol.
 5. `Block Header Sent` - The time it took to send the baked block’s header to the network
 6. `Block Header Received Back` - The time it took to receive the baked block’s header back from the first peer
