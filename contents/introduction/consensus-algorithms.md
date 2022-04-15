@@ -215,7 +215,7 @@ This is how the consensus works:
 *   If the ID still remains the largest they have seen, the Acceptors accept the value and send it to all the Learners.
 *   If the Learners receive a positive message from the majority of the Acceptors, they accept the Value and the consensus is reached.
 
-**8. Federated Byzantine Agreement **
+**8. Federated Byzantine Agreement**
 
 In the Federated Byzantine Agreement (FBA) algorithm, each byzantine general is responsible for their own blockchain. While this algorithm was pioneered by Ripple, Stellar has further refined the system by adopting the first ever provably safe FBA protocol. The nodes have to be known and verified ahead of time. 
 
