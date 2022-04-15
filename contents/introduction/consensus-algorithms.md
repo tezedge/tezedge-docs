@@ -192,7 +192,7 @@ An advantage of the hybrid PoW/PoS system is that it drastically increases the c
 
 **7. Paxos**
 
-Paxos was the first consensus algorithm that was extensively tested and peer-reviewed. The algorithm has three entities – Proposers, Acceptors, and Leaners. Their roles are as follows:
+Paxos was the first consensus algorithm that was extensively tested and peer-reviewed. The algorithm has three entities – Proposers, Acceptors, and Learners. Their roles are as follows:
 
 
 
