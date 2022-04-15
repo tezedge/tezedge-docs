@@ -205,8 +205,7 @@ This is how the consensus works:
 
 
 *   A client sends a request to any of the Proposer nodes.
-*   Upon receiving the request, the proposer 
-*   The Proposer runs a two-phase protocol with the acceptors. The two phases are – Prepare and Commit.
+*   Upon receiving the request, the proposer runs a two-phase protocol with the acceptors. The two phases are – Prepare and Commit.
 *   In the Prepare phase, the Proposer assigns a proposal number to the request. This number must be unique and no two proposers can come up with the same number.
 *   This number must be bigger than any previously used number in the system. This can be achieved by either using an incrementing counter or a nanosecond-level timestamp. If this number isn't bigger, the proposal will be instantly rejected.
 *   In the Prepare phase, the Proposer attaches a proposal number and sends the message to the majority of the Acceptors
