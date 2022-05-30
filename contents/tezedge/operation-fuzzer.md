@@ -1,7 +1,7 @@
 ---
 title: Operations fuzzer
 sidebar: Docs
-showTitle: true
+showTitle: false
 ---
 
 # Operations fuzzer
