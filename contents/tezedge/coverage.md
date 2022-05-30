@@ -1,7 +1,7 @@
 ---
 title: Coverage
 sidebar: Docs
-showTitle: false
+showTitle: true
 ---
 
 # Coverage
