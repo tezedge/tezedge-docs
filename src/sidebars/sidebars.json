@@ -44,6 +44,8 @@
             "tezedge/endpoints",
             "tezedge/explorer",
             "tezedge/fuzzer",
+            "tezedge/coverage",
+            "tezedge/operation-fuzzer",
             "tezedge/debugger",
             "tezedge/record-replay",
             "tezedge/sandbox",
