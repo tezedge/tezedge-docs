@@ -1,10 +1,8 @@
-
 ---
 title: Baker
 sidebar: Docs
 showTitle: false
 ---
-
 
 # The TezEdge Baker — a daemon for creating, signing and injecting endorsements and blocks
 
