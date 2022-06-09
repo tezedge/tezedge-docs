@@ -37,6 +37,8 @@
             "tezedge/diversity",
             "tezedge/baking",
             "tezedge/baking-monitoring",
+            "tezedge/baker",
+
             "tezedge/architecture",
             "tezedge/synchronization",
             "tezedge/network",
@@ -44,6 +46,7 @@
             "tezedge/endpoints",
             "tezedge/explorer",
             "tezedge/fuzzer",
+            "tezedge/protocol-fuzzing",
             "tezedge/coverage",
             "tezedge/operation-fuzzer",
             "tezedge/debugger",
@@ -54,6 +57,7 @@
             "tezedge/mixing",
             "tezedge/storage-memory",
             "tezedge/storage",
+            "tezedge/rust-storage",
             "tezedge/garbage-collection",
             "tezedge/contribution"
         ]
