@@ -41,7 +41,7 @@ The common problem here is how to automate the repayment of rewards to delegator
 
 ### Try out the new baker
 
-1. Make sure you satisfy TezEdge prerequisites: [https://github.com/tezedge/tezedge#prerequisites-installation](https://github.com/tezedge/tezedge#prerequisites-installation) \
+1. Make sure you satisfy TezEdge prerequisites: [https://github.com/tezedge/tezedge#prerequisites-installation](https://github.com/tezedge/tezedge#prerequisites-installation) 
 2. Clone and Build Tezedge source code: 
 ``` 
 git clone --depth 1 https://github.com/tezedge/tezedge
