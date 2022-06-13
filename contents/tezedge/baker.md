@@ -125,11 +125,11 @@ cargo build -p light-node -p protocol-runner --release
 
 Open the page [Snapshots](http://snapshots.tezedge.com), choose the network either mainnet or testnet. Choose Storage: tezedge, and Type: Full.
 
-![Snapshot page](../../static/images/screenshot-snapshot-page.png)
+![Snapshot page](master/public/static/images/screenshot-snapshot-page.png)
 
 You will see blocks, each block is a snapshot, the top-most block is most recent snapshot. Every day, a new link to the snapshot will appear. Copy the link.
 
-![Link](../../static/images/screenshot-snapshot-link.png)
+![Link](master/public/static/images/screenshot-snapshot-link.png)
 
 To run the node on testnet use the following commands, replace `...` with the actual link copied on previous step:
 ```
