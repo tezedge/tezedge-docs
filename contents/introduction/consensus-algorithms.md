@@ -192,7 +192,7 @@ An advantage of the hybrid PoW/PoS system is that it drastically increases the c
 
 **7. Paxos**
 
-Paxos was the first consensus algorithm that was extensively tested and peer-reviewed. The algorithm has three entities – Proposers, Acceptors, and Leaners. Their roles are as follows:
+Paxos was the first consensus algorithm that was extensively tested and peer-reviewed. The algorithm has three entities – Proposers, Acceptors, and Learners. Their roles are as follows:
 
 
 
@@ -205,8 +205,7 @@ This is how the consensus works:
 
 
 *   A client sends a request to any of the Proposer nodes.
-*   Upon receiving the request, the proposer 
-*   The Proposer runs a two-phase protocol with the acceptors. The two phases are – Prepare and Commit.
+*   Upon receiving the request, the proposer runs a two-phase protocol with the acceptors. The two phases are – Prepare and Commit.
 *   In the Prepare phase, the Proposer assigns a proposal number to the request. This number must be unique and no two proposers can come up with the same number.
 *   This number must be bigger than any previously used number in the system. This can be achieved by either using an incrementing counter or a nanosecond-level timestamp. If this number isn't bigger, the proposal will be instantly rejected.
 *   In the Prepare phase, the Proposer attaches a proposal number and sends the message to the majority of the Acceptors
@@ -216,7 +215,7 @@ This is how the consensus works:
 *   If the ID still remains the largest they have seen, the Acceptors accept the value and send it to all the Learners.
 *   If the Learners receive a positive message from the majority of the Acceptors, they accept the Value and the consensus is reached.
 
-**8. Federated Byzantine Agreement **
+**8. Federated Byzantine Agreement**
 
 In the Federated Byzantine Agreement (FBA) algorithm, each byzantine general is responsible for their own blockchain. While this algorithm was pioneered by Ripple, Stellar has further refined the system by adopting the first ever provably safe FBA protocol. The nodes have to be known and verified ahead of time. 
 
